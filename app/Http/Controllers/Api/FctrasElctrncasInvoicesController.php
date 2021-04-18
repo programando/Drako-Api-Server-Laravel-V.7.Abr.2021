@@ -15,7 +15,7 @@ use App\Helpers\GeneralHelper  ;
 use App\Models\FctrasElctrnca   ;
 use App\Models\FctrasElctrncasMcipio;
  
-//use App\Events\InvoiceWasCreatedEvent;
+use App\Events\InvoiceWasCreatedEvent;
 //use App\Events\InvoiceWasCreatedEventEmailCopy;
 
 Use Storage;
@@ -35,11 +35,11 @@ class FctrasElctrncasInvoicesController
             //print_r ( $Documentos )     ;
               foreach ($Documentos as $Documento ) {
                 $this->invoicesToSend ( $Documento) ;
-                //$response = $this->ApiSoenac->postRequest( $URL, $this->jsonObject ) ;
-                //return  $response   ;
-                //$this->traitUpdateJsonObject ( $Documento );
-                //$this->documentsProcessReponse( $Documento, $response ) ;
-                 return $this->jsonObject ;
+                $response = $this->ApiSoenac->postRequest( $URL, $this->jsonObject ) ;
+                $this->traitUpdateJsonObject ( $Documento );
+                $this->documentsProcessReponse( $Documento, $response ) ;
+                return  $response   ;
+                //return $this->jsonObject ;
             }   
         }
 
