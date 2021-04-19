@@ -84,7 +84,7 @@ class FctrasElctrncasInvoicesController
     }
 
        public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
-           return 'prueba...' . env('FACTURA_ELECT_URL_BASE') . ' ' . getenv('FACTURA_ELECT_TOKEN');
+           return 'prueba...' . env('FACTURA_ELECT_URL_BASE') . ' ' . getenv('DB_CONNECTION');
           $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
           InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
           return $Factura ;
