@@ -16,7 +16,7 @@ use App\Models\FctrasElctrnca   ;
 use App\Models\FctrasElctrncasMcipio;
  
 use App\Events\InvoiceWasCreatedEvent;
-//use App\Events\InvoiceWasCreatedEventEmailCopy;
+
 
 Use Storage;
 Use Carbon;
@@ -86,7 +86,7 @@ class FctrasElctrncasInvoicesController
        public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
           $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
           InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
-          //InvoiceWasCreatedEventEmailCopy::dispatch ( $Factura );
+          return $Factura ;
        }
 
 

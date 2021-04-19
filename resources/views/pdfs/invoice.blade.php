@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>BALQUIMIA S.A.S.</title>
+    <title>DRAKO-AUTOPARTES</title>
    <style>
     @page           { size:1910pt 2467pt; }
     *               { margin:0; padding:0; }
@@ -10,7 +10,7 @@
     table, tr, td   { margin:0; padding:0; border:0; border-spacing:0; }
     .pagion         { padding:55pt 75pt 0 75pt; }
     .colorfff       { color:#fff; }
-    .bAzul          { background-color:#1c3e87; }
+    .bAzul          { background-color:#dd0000; }
     .h60            { height:60pt;}
     .taC            { text-align:center;}
     .taR            { text-align:right;}
@@ -53,20 +53,21 @@
         <table width="100%" class="mb40">
             <tr>
                 <td width="30%">
-                   <img src="https://api.balquimia.com/storage/images/balquimia/logo.jpg" alt="">              
+                   <img src="https://drako.api.plusoft.co/storage/images/balquimia/logo.jpg" alt="">              
                 </td>
               
                 <td width="40%" class="taC">
-                    <div class="t38 tB"> BALQUIMIA S.A.S </div>
-                    <div class="t24">PBX: (+57-2) 488 1616</div>
-                    <div class="t24 mb15">Calle 35 # 4-31 - Cali - Colombia</div>
-                    <div >Visita nuestro sitio web:</div>
-                    <div class="tB"> <a href="http://www.balquimia.com"> www.balquimia.com</a></div>
+                    <div class="t38 tB"> EDGAR CALVO GARCÍA </div>
+                    <div class="t24">311 747 09 55</div>
+                    <div class="t24 mb15">CRA 13 9 19 BARRIO PANAMERICANO, Stader. de Quilichao, Cauca,Colombia</div>
+                    <div > </div>
+                    <div class="tB">  </div>
                 </td>
                 <td width="30%" class="taR">
-                    <div class="t24">NIT: 900.755.214-4</div>
+                    <div class="t24">NIT: 10.485.950-1</div>
                      
-                    <div >RÉGIMEN IMPUESTOS SOBRE LAS VENTAS - IVA</div>
+                    <div >RÉGIMEN IMPUESTOS SOBRE LAS VENTAS - IVA </div>
+                    <div >Persona Natural </div>
                     <div >Resolución DIAN N°.: {{ $Resolution['resolution'] }}</div>
                     <div >Fecha:  {{ $Resolution['resolution_date'] }}</div>  
                     <div >Vigencia:  {{ $Resolution['date_to'] }}</div>  
@@ -154,7 +155,7 @@
             </table>
         </div>
 
-        <div class="bS1 bRad mb40">
+<!--         <div class="bS1 bRad mb40">
             <table width="100%">
                 <tr>
                     <td width="15%" class="p105 tB bAzul colorfff bRS1">N° Orden de compra:</td>
@@ -163,13 +164,14 @@
                     <td width="35%" class="p105">{{ $Additionals['nom_vnddor'] }}</td>
                 </tr>
             </table>
-        </div>
+        </div> -->
 
         <div class="bS1 bRad mb40">
             <table width="100%" class="bAzul taC colorfff tB">
                 <tr>
                     <td width="15%" class="p8 bRS1">CANT</td>
-                    <td width="55%" class="p8 bRS1">DESCRIPCIÓN</td>
+                    <td width="15%" class="p8 bRS1">CÓDIGO</td>
+                    <td width="40%" class="p8 bRS1">DESCRIPCIÓN</td>
                     <td width="15%" class="p8 bRS1">VR UNIT.</td>
                     <td width="15%" class="p8 bRS1">TOTAL</td>
                 </tr>
@@ -178,7 +180,8 @@
                 @foreach($Products as $Product )
                     <tr>
                         <td width="15%" class="p128 bRS1 taC">  {{ $Product['invoiced_quantity']                             }} </td>
-                        <td width="55%" class="p128 bRS1">      {{ $Product['description']                                   }}</td>
+                        <td width="15%" class="p128 bRS1 taC">  {{ $Product['code']                             }} </td>
+                        <td width="40%" class="p128 bRS1">      {{ $Product['description']                                   }}</td>
                         <td width="15%" class="p128 bRS1 taR">  {{ Numbers::invoiceFormat($Product['price_amount'])          }}</td>
                         <td width="15%" class="p128 taR">       {{ Numbers::invoiceFormat($Product['line_extension_amount']) }}</td>
                     </tr>
@@ -187,7 +190,8 @@
                 @for ($i = 1; $i <= $CantFaltante; $i++)
                      <tr>
                         <td width="15%" class="p128 bRS1"></td>
-                        <td width="55%" class="p128 bRS1"></td>
+                        <td width="15%" class="p128 bRS1"></td>
+                        <td width="40%" class="p128 bRS1"></td>
                         <td width="15%" class="p128 bRS1 taR"></td>
                         <td width="15%" class="p128 taR"></td>
                     </tr>       
@@ -271,19 +275,19 @@
         <div class="h60"></div>
 
         <div class="bS1 bRad p8 taC">
-            <div class="t24 tB mb10">NO ACEPTAMOS DEVOLUCIONES DESPUÉS DE 15 DÍAS DE RECIBIDO(S) EL(LOS) PRODUCTO(S).</div>
+<!--             <div class="t24 tB mb10">NO ACEPTAMOS DEVOLUCIONES DESPUÉS DE 15 DÍAS DE RECIBIDO(S) EL(LOS) PRODUCTO(S).</div>
             <div class="mb10">
                 ELABORAMOS Y COMERCIALIZAMOS PRODUCTOS QUÍMICOS CONCENTRADOS Y ESPECIALIZADOS PARA LA LIMPIEZA, LA DESINFECCIÓN PROFUNDA Y EL
                 MANTENIMIENTO PREVENTIVO O CORRECTIVO EN LOS SECTORES: INDUSTRIAL, INSTITUCIONAL, TEXTIL, AUTOMOTRIZ, ARTES GRÁFICAS, MATERIAS PRIMAS Y LA
                 INDUSTRIA ALIMENTARIA. PRODUCTOS QUE RESPETAN LAS NORMAS DE SEGURIDAD INDUSTRIAL Y AL MEDIO AMBIENTE. CONSÚLTENOS Y DENOS LA OPORTUNIDAD
                 DE PRESENTAR NUESTRO PORTAFOLIO Y PROPUESTA DE VALOR.
-            </div>
+            </div> -->
             <div class="tB">Esta factura es un título valor de acuerdo al art. 774 del C.C. y una vez aceptada declara haber recibido los bienes y servicios a satisfacción</div>
             <br>
             <br>
             <div >
             <small>
-                Factura electrónica generada por BALQUIMIA S.A.S. Nit: 900.755.214-4  Software: COMPUTRON <br>
+                Factura electrónica generada por DRAKO AUTOPARTES Nit: 10.485.950-1  <br>
                 Envío facturación directa a través de servicio Web dispuesto por la DIAN. ( No aplica proveedor tecnológico)
                 </small>
             </div>

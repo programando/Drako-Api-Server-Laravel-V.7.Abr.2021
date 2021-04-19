@@ -14,18 +14,20 @@ trait ApiSoenac {
       }
 
       public function traitSoenacResolutions() {
-         $Resoluciones = Cache::tags('ResolucOctubre2020')
+         return $this->ApiSoenac->getRequest('config/resolutions' ) ; 
+        
+  /*        $Resoluciones = Cache::tags('ResolucOctubre2020')
                     ->rememberForEver('ResolucOctubre2020', function() {
                              return $this->ApiSoenac->getRequest('config/resolutions' ) ; 
-                   }
-           );
+                   } 
+           );*/
          return  $Resoluciones  ;
       }
       
       public function traitSoenacResolutionsInvoice() {
          $Resolutions =   $this->traitSoenacResolutions();  
          foreach ($Resolutions as $Resolution) {
-            if ( $Resolution['id'] === 7 ){
+            if ( $Resolution['id'] === 1 ){
                return $Resolution;
             }
          }
