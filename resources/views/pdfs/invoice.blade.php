@@ -10,7 +10,7 @@
     table, tr, td   { margin:0; padding:0; border:0; border-spacing:0; }
     .pagion         { padding:55pt 75pt 0 75pt; }
     .colorfff       { color:#fff; }
-    .bAzul          { background-color:#dd0000; }
+    .bAzul          { background-color:#ed0404; }
     .h60            { height:60pt;}
     .taC            { text-align:center;}
     .taR            { text-align:right;}

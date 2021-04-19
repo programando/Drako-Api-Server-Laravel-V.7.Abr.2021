@@ -84,8 +84,6 @@ class FctrasElctrncasInvoicesController
     }
 
        public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
-           print_r ( 'prueba...' . time()  . config('app-empresa.FACTURA_ELECT_TEST_ID'));
-           return ;
           $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
           InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
           return $Factura ;
