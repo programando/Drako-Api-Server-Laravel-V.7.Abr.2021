@@ -53,7 +53,7 @@
         <table width="100%" class="mb40">
             <tr>
                 <td width="30%">
-                   <img src="https://drako.api.plusoft.co/storage/images/balquimia/logo.jpg" alt="">              
+                   <img src="https://drako.api.plusoft.co/storage/images/drako/logo.jpg" alt="">              
                 </td>
               
                 <td width="40%" class="taC">
