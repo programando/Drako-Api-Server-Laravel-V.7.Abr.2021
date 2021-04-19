@@ -59,8 +59,8 @@
                 <td width="40%" class="taC">
                     <div class="t38 tB"> EDGAR CALVO GARCÍA </div>
                     <div class="t24">311 747 09 55</div>
-                    <div class="t24 mb15">CRA 13 9 19 BARRIO PANAMERICANO, Stader. de Quilichao, Cauca,Colombia</div>
-                    <div > </div>
+                    <div class="t24 mb15">CRA 13 9 19 BARRIO PANAMERICANO </div>
+                    <div >Santander de Quilichao, Cauca,Colombia </div>
                     <div class="tB">  </div>
                 </td>
                 <td width="30%" class="taR">
