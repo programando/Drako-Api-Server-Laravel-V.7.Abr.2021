@@ -15,7 +15,7 @@ trait ApiSoenac {
 
       public function traitSoenacResolutions() {
 
-         return env('FACTURA_ELECT_URL_BASE') . ' ' . env('FACTURA_ELECT_TOKEN');
+         
          return $this->ApiSoenac->getRequest('config/resolutions' ) ; 
         
   /*        $Resoluciones = Cache::tags('ResolucOctubre2020')
