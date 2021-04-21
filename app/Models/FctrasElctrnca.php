@@ -124,6 +124,9 @@ class FctrasElctrnca extends Model
 				return trim($value);
 			}
 			
+			public static function documentsList() {
+				return     DB::select(' call fctras_elctrncas_list');
+			}
 
 			public function getPrfjoDcmntoAttribute( $value ){
 				return trim($value);

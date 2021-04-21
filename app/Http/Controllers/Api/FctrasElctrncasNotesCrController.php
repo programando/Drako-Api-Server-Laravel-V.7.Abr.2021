@@ -31,10 +31,10 @@ class FctrasElctrncasNotesCrController
             
             foreach ($Documentos as $Documento ) {
                $this->notesToSend ( $Documento, $TipoNota) ;
-               //$response   = $this->ApiSoenac->postRequest( $URL, $this->jsonObject ) ;  
-               //$this->traitUpdateJsonObject ( $Documento );
-               //$this->documentsProcessReponse( $Documento, $response ) ;
-               return   $this->jsonObject;
+               $response   = $this->ApiSoenac->postRequest( $URL, $this->jsonObject ) ;  
+               $this->traitUpdateJsonObject ( $Documento );
+               $this->documentsProcessReponse( $Documento, $response ) ;
+               //return   $response;
             }  
       }
 

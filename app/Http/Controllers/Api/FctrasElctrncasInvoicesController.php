@@ -28,17 +28,20 @@ class FctrasElctrncasInvoicesController
 
    private $jsonObject = [] ;
   
- 
+        public function invoiceList(){
+            return FctrasElctrnca::documentsList();
+        }
+
+
         public function invoices() {
             $URL = 'invoice/'. env('FACTURA_ELECT_TEST_ID');
             $Documentos = FctrasElctrnca::InvoicesToSend()->get();  
-            //print_r ( $Documentos )     ;
+            
               foreach ($Documentos as $Documento ) {
                 $this->invoicesToSend ( $Documento) ;
                 $response = $this->ApiSoenac->postRequest( $URL, $this->jsonObject ) ;
                 $this->traitUpdateJsonObject ( $Documento );
                 $this->documentsProcessReponse( $Documento, $response ) ;
-                return  $response   ;
                 //return $this->jsonObject ;
             }   
         }

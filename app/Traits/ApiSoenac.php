@@ -38,7 +38,7 @@ trait ApiSoenac {
       public function traitSoenacResolutionsNotes() {
          $Resolutions =   $this->traitSoenacResolutions();  
          foreach ($Resolutions as $Resolution) {
-            if ( $Resolution['id'] === 2 ){
+            if ( $Resolution['id'] === 6 ){
                return $Resolution;
             }
          }
