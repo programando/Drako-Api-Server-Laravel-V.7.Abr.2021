@@ -17,7 +17,7 @@ return [
 
     'paths'                    => ['*','/login','/logout','/reset/password','/update/password','/sanctum/csrf-cookie'],
     'allowed_methods'          => ['*'],
-    'allowed_origins'          => ['http://localhost:3000','https://drako.api.plusoft.co', 'http://localhost:3001','https://drako.facturas.plusoft.co' ],
+    'allowed_origins'          => ['http://localhost:3000','https://drako.api.plusoft.co', 'http://localhost:3001','https://drako.facturas.plusoft.co:3001' ],
     'allowed_origins_patterns' => [],
     'allowed_headers'          => ['*'],
     'exposed_headers'          => false,
