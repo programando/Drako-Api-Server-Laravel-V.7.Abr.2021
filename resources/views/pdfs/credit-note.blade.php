@@ -57,11 +57,11 @@
                 </td>
               
                 <td width="40%" class="taC">
-                    <div class="t38 tB"> BALQUIMIA S.A.S </div>
-                    <div class="t24">PBX: (+57-2) 488 1616</div>
-                    <div class="t24 mb15">Calle 35 # 4-31 - Cali - Colombia</div>
-                    <div >Visita nuestro sitio web:</div>
-                    <div class="tB"> <a href="http://www.balquimia.com"> www.balquimia.com</a></div>
+                    <div class="t38 tB"> EDGAR CALVO GARCÍA </div>
+                    <div class="t24">311 747 09 55</div>
+                    <div class="t24 mb15">CRA 13 9 19 BARRIO PANAMERICANO </div>
+                    <div >Santander de Quilichao, Cauca,Colombia:</div>
+                    <div class="tB"> </a></div>
                 </td>
                 <td width="30%" class="taR">
                     <div class="t24">NIT: 900.755.214-4</div>
@@ -144,31 +144,43 @@
         <div class="bS1 bRad mb40">
             <table width="100%" class="bAzul taC colorfff tB">
                 <tr>
-                    <td width="15%" class="p8 bRS1">CANT</td>
-                    <td width="55%" class="p8 bRS1">DESCRIPCIÓN</td>
-                    <td width="15%" class="p8 bRS1">VR UNIT.</td>
-                    <td width="15%" class="p8 bRS1">TOTAL</td>
+                    <td width="10%" class="p8 bRS1">CÓDIGO</td>
+                    <td width="50%" class="p8 bRS1">DESCRIPCIÓN</td>
+                    <td width="10%" class="p8 bRS1">MEDIDA</td>
+                    <td width="10%" class="p8 bRS1">CANT.</td>
+                    <td width="10%" class="p8 bRS1">VR UNIT.</td>
+                    <td width="10%" class="p8 bRS1">IVA</td>
+                    <td width="10%" class="p8 ">TOTAL</td>
                 </tr>
             </table>
             <table width="100%">
+                {{ $CantItems = 0}}
                 @foreach($Products as $Product )
                     <tr>
-                        <td width="15%" class="p128 bRS1 taC">  {{ $Product['invoiced_quantity']                             }} </td>
-                        <td width="55%" class="p128 bRS1">      {{ $Product['description']                                   }}</td>
-                        <td width="15%" class="p128 bRS1 taR">  {{ Numbers::invoiceFormat($Product['price_amount'])          }}</td>
-                        <td width="15%" class="p128 taR">       {{ Numbers::invoiceFormat($Product['line_extension_amount']) }}</td>
+                        <td width="10%" class="p128 bRS1 ">  {{ $Product['code']                                          }} </td>
+                        <td width="50%" class="p128 bRS1 ">     {{ $Product['description']                                   }} </td>
+                        <td width="10%" class="p128 bRS1">    Unidad   </td>
+                        <td width="10%" class="p128 bRS1 taR">  {{ $Product['invoiced_quantity']                             }}</td>
+                        <td width="10%" class="p128 bRS1 taR">  {{ Numbers::invoiceFormat($Product['price_amount'])          }}</td>
+                        <td width="10%" class="p128 bRS1 taR">  {{ Numbers::invoiceFormat($Product['percent'])               }}</td>
+                        <td width="10%" class="p128  taR">      {{ Numbers::invoiceFormat($Product['price_amount'])          }}</td>
+                         {{ $CantItems ++}}
                     </tr>
                 @endforeach
-                {{ $CantFaltante= 32-$Product['CantProducts'] }}
+                {{ $CantFaltante= 23- $CantItems }}
                 @for ($i = 1; $i <= $CantFaltante; $i++)
                      <tr>
-                        <td width="15%" class="p128 bRS1"></td>
-                        <td width="55%" class="p128 bRS1"></td>
-                        <td width="15%" class="p128 bRS1 taR"></td>
-                        <td width="15%" class="p128 taR"></td>
+                        <td width="10%" class="p128 bRS1 taC">   </td>
+                        <td width="50%" class="p128 bRS1"></td>
+                        <td width="10%" class="p128 bRS1"></td>
+                        <td width="10%" class="p128 bRS1 taR"></td>
+                        <td width="10%" class="p128 bRS1 taR  "></td>
+                        <td width="10%" class="p128 bRS1 taR  "></td>
+                        <td width="10%" class="p128  taR"></td>
                     </tr>       
                 @endfor 
             </table>
+
             <table class="bTS1" width="100%">
                 <tr class="vatop">
 
@@ -190,26 +202,39 @@
                         </div>
                     </td>
 
-                    <td width="30%">
+                <td width="30%">
                         <table width="100%">
                             <tr>
-                                <td width="50%" class="p105 tB bRS1 bBS1">SUBTOTAL :</td>
-                                <td width="50%" class="t24 p105 bBS1 taR">{{ Numbers::invoiceFormat($Totals['line_extension_amount']) }}</td>
+                                <td width="50%" class="p10 tB bRS1 bBS1">SUBTOTAL :</td>
+                                <td width="50%" class="t20 tB p10 bBS1 taR">{{ Numbers::invoiceFormat($Totals['line_extension_amount']) }}</td>
+                            </tr>
+                        </table>
+                         <table width="100%">
+                            <tr>
+                                <td width="50%" class="p10 tB bRS1 bBS1">Cargos :</td>
+                                <td width="50%" class="t20 tB p10 bBS1 taR">{{ 0 }}</td>
+                            </tr>
+                        </table>   
+                         <table width="100%">
+                            <tr>
+                                <td width="50%" class="p10 tB bRS1 bBS1">Descuentos :</td>
+                                <td width="50%" class="t20 tB p10 bBS1 taR">{{ 0 }}</td>
+                            </tr>
+                        </table>                                            
+                        <table width="100%">
+                            <tr>
+                                <td width="50%" class="p10 tB bRS1 bBS1">IVA</td>
+                                <td width="50%" class="t20 tB p10 bBS1 taR">{{ Numbers::invoiceFormat($Additionals['vr_iva']) }}</td>
                             </tr>
                         </table>
                         <table width="100%">
                             <tr>
-                                <td width="50%" class="p105 tB bRS1 bBS1">IVA</td>
-                                <td width="50%" class="t24 p105 bBS1 taR">{{ Numbers::invoiceFormat($Additionals['vr_iva']) }}</td>
-                            </tr>
-                        </table>
-                        <table width="100%">
-                            <tr>
-                                <td width="50%" class="p105 tB bRS1">TOTAL</td>
-                                <td width="50%" class="t24 p105 taR">{{ Numbers::invoiceFormat($Totals['payable_amount']) }}</td>
+                                <td width="50%" class="p10 tB bRS1">TOTAL</td>
+                                <td width="50%" class="t20 tB p10 taR">{{ Numbers::invoiceFormat($Totals['payable_amount']) }}</td>
                             </tr>
                         </table>
                     </td>
+
                 </tr>
             </table>
         </div>

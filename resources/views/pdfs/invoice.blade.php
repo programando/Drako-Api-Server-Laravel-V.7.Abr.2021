@@ -155,17 +155,7 @@
             </table>
         </div>
 
-<!--         <div class="bS1 bRad mb40">
-            <table width="100%">
-                <tr>
-                    <td width="15%" class="p105 tB bAzul colorfff bRS1">N° Orden de compra:</td>
-                    <td width="35%" class="p105 bRS1">{{ $Factura['order_reference'] }}</td>
-                    <td width="15%" class="p105 tB bAzul colorfff  bRS1">Vendedor:</td>
-                    <td width="35%" class="p105">{{ $Additionals['nom_vnddor'] }}</td>
-                </tr>
-            </table>
-        </div> -->
-
+ 
         <div class="bS1 bRad mb40">
             <table width="100%" class="bAzul taC colorfff tB">
                 <tr>
@@ -295,13 +285,7 @@
         <div class="h60"></div>
 
         <div class="bS1 bRad p8 taC">
-<!--             <div class="t24 tB mb10">NO ACEPTAMOS DEVOLUCIONES DESPUÉS DE 15 DÍAS DE RECIBIDO(S) EL(LOS) PRODUCTO(S).</div>
-            <div class="mb10">
-                ELABORAMOS Y COMERCIALIZAMOS PRODUCTOS QUÍMICOS CONCENTRADOS Y ESPECIALIZADOS PARA LA LIMPIEZA, LA DESINFECCIÓN PROFUNDA Y EL
-                MANTENIMIENTO PREVENTIVO O CORRECTIVO EN LOS SECTORES: INDUSTRIAL, INSTITUCIONAL, TEXTIL, AUTOMOTRIZ, ARTES GRÁFICAS, MATERIAS PRIMAS Y LA
-                INDUSTRIA ALIMENTARIA. PRODUCTOS QUE RESPETAN LAS NORMAS DE SEGURIDAD INDUSTRIAL Y AL MEDIO AMBIENTE. CONSÚLTENOS Y DENOS LA OPORTUNIDAD
-                DE PRESENTAR NUESTRO PORTAFOLIO Y PROPUESTA DE VALOR.
-            </div> -->
+
             <div class="tB">Esta factura es un título valor de acuerdo al art. 774 del C.C. y una vez aceptada declara haber recibido los bienes y servicios a satisfacción</div>
             <br>
             <br>
