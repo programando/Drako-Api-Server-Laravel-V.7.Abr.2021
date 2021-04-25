@@ -116,7 +116,9 @@ class FctrasElctrncasNotesCrController
         $Note = $Note[0];
         $this->getNameFilesTrait($Note, true );
         $this->noteCreateFilesToSend ( $id_fact_elctrnca, $Note);
+        return '';
         //NoteWasCreatedEvent::dispatch ($Note);
+
     } 
 
     private function noteCreateFilesToSend ( $id_fact_elctrnca, $Note){
