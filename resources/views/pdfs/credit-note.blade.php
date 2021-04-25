@@ -2,15 +2,15 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>BALQUIMIA S.A.S.</title>
+    <title>DRAKO - AUTOPARTES</title>
    <style>
     @page           { size:1910pt 2467pt; }
     *               { margin:0; padding:0; }
     html            { margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:20pt; line-height:20pt; }
     table, tr, td   { margin:0; padding:0; border:0; border-spacing:0; }
     .pagion         { padding:55pt 75pt 0 75pt; }
-    .colorfff       { color:#fff; }
-    .bAzul          { background-color:#1c3e87; }
+    .colorfff       { color:#000; }
+    .bAzul          { background-color:#EEEEEE; }
     .h60            { height:60pt;}
     .taC            { text-align:center;}
     .taR            { text-align:right;}
@@ -64,7 +64,7 @@
                     <div class="tB"> </a></div>
                 </td>
                 <td width="30%" class="taR">
-                    <div class="t24">NIT: 900.755.214-4</div>
+                    <div class="t24">NIT: 10.485.950-1</div>
                     <div >RÉGIMEN IMPUESTOS SOBRE LAS VENTAS - IVA</div>
                     <div> &nbsp; </div>
                     <div>&nbsp; </div>  

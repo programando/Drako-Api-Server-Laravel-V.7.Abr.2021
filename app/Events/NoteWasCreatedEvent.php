@@ -24,14 +24,17 @@ class NoteWasCreatedEvent
     }
 
     private function getFileNames(){     
-         $this->FilePdf = $this->Note['prfjo_dcmnto']. $this->Note['document_number']. '.pdf' ;
-         $this->FileXml = $this->Note['prfjo_dcmnto'].$this->Note['document_number']. '.xml' ;
+         $this->FilePdf =  $this->Note['document_number']. '.pdf' ;
+         $this->FileXml =  $this->Note['document_number']. '.xml' ;
+         
          $this->ZipFile = $this->Note['uuid'].'.zip';
          $this->PathPdf = Storage::disk('Files')->path( $this->FilePdf  );
          $this->PathXml = Storage::disk('Files')->path( $this->FileXml );
+ 
     }
 
      private function createFileZipFromPdfXml ( ){
+          
          $this->ZipPathFile = Storage::disk('Files')->path('').$this->ZipFile;
          
          $zip = new \ZipArchive();
