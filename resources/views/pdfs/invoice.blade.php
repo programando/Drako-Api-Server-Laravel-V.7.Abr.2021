@@ -178,7 +178,7 @@
                         <td width="10%" class="p128 bRS1 taR">  {{ $Product['invoiced_quantity']                             }}</td>
                         <td width="10%" class="p128 bRS1 taR">  {{ Numbers::invoiceFormat($Product['price_amount'])          }}</td>
                         <td width="10%" class="p128 bRS1 taR">  {{ Numbers::invoiceFormat($Product['percent'])               }}</td>
-                        <td width="10%" class="p128  taR">      {{ Numbers::invoiceFormat($Product['price_amount'])          }}</td>
+                        <td width="10%" class="p128  taR">      {{ Numbers::invoiceFormat($Product['line_extension_amount'])          }}</td>
                          {{ $CantItems ++}}
                     </tr>
                 @endforeach
