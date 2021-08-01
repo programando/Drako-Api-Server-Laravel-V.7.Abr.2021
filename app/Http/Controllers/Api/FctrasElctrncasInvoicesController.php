@@ -26,8 +26,19 @@ class FctrasElctrncasInvoicesController
 {
    use FctrasElctrncasTrait, ApiSoenac, QrCodeTrait, PdfsTrait;
 
-   private $jsonObject = [] ;
+   private $jsonObject = [] , $jsonResponse = []; 
   
+        public function sentInvoicesLogs (Request $FormData) {
+            $prfjo_dcmnto = trim( $FormData->prfjo_dcmnto);
+            $nro_dcmnto   = $FormData->nro_dcmnto;
+            $partUrl      = "logs/$prfjo_dcmnto$nro_dcmnto";
+            $response     = $this->ApiSoenac->postRequest( $partUrl, $this->jsonResponse ) ;   
+            $Documento    = FctrasElctrnca::where('prfjo_dcmnto', "$prfjo_dcmnto")
+                                            ->where('nro_dcmnto',$nro_dcmnto  ) ->first();
+            $this->documentsProcessReponse( $Documento, $response[0] ) ;
+        }
+
+
         public function invoiceList(){
             return FctrasElctrnca::documentsList();
         }
@@ -89,7 +100,6 @@ class FctrasElctrncasInvoicesController
        public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
           $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
           InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
-          //return $Factura ;
        }
 
 

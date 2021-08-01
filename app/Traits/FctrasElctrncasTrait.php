@@ -169,7 +169,7 @@ trait FctrasElctrncasTrait {
             $Registro['status_code']                       = $dataResponse['status_code'];
             $Registro['status_description']                = $dataResponse['status_description'];
             $Registro['status_message']                    = $dataResponse['status_message'];
-            $Registro['xml_file_name']                     = $dataResponse['xml_file_name'];
+            $Registro['xml_file_name']                     = $dataResponse['xml_name'];
             $Registro['zip_name']                          = $dataResponse['zip_name'];
             $Registro['cstmer_token']                      = Str::random(60); 
             $Registro->save();
