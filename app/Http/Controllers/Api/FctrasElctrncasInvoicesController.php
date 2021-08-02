@@ -35,6 +35,7 @@ class FctrasElctrncasInvoicesController
             $response     = $this->ApiSoenac->postRequest( $partUrl, $this->jsonResponse ) ;   
             $Documento    = FctrasElctrnca::where('prfjo_dcmnto', "$prfjo_dcmnto")
                                             ->where('nro_dcmnto',$nro_dcmnto  ) ->first();
+            //return $response;
             $this->documentsProcessReponse( $Documento, $response[0] ) ;
         }
 
