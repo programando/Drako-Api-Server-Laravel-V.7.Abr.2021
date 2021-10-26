@@ -29,7 +29,7 @@ trait ApiSoenac {
       public function traitSoenacResolutionsInvoice() {
          $Resolutions =   $this->traitSoenacResolutions();  
          foreach ($Resolutions as $Resolution) {
-            if ( $Resolution['id'] === 7 ){
+            if ( $Resolution['id'] === 10 ){
                return $Resolution;
             }
          }
