@@ -4,7 +4,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-
+// NOMINA ELECTRONICA
+    Route::group(['prefix'=>'nomina', 'namespace'=>'Api'], function() {
+        $localController = 'NominaElctrncaController@';
+        Route:: get('/reporte/dian'          , $localController.'dianReporting');
+        Route:: post('/nota/ajuste'           , $localController.'notaAjusteNomina');
+        Route:: post('zipkey/{id}'           , $localController.'zipKey');
+    });
+	
 
 /* DB::listen(function($query){
   //Imprimimos la consulta ejecutada

@@ -10,6 +10,7 @@
       'FACTURA_ELECT_TEST_ID'   => env('FACTURA_ELECT_TEST_ID', ''), 
       'FACTURA_ELECT_TOKEN'     => env('FACTURA_ELECT_TOKEN', ''),
       'FACTURA_ELECT_URL_BASE'  => env('FACTURA_ELECT_URL_BASE', ''),
+      'NOMINA_ELECT_URL_BASE'   => env('NOMINA_ELECT_URL_BASE'),
       'URL_USER_PASSWORD_RESET' => '',
 
     ];
