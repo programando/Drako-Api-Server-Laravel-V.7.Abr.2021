@@ -24,7 +24,7 @@ trait NominaElctrncaTrait {
 
     protected function traitEnvironment ( &$jsonObject ) {
        $jsonObject['environment']=[
-         'type_environment_id' => '2',                                      // 1 producction,   2 habilitacion o pruebas
+         'type_environment_id' => '1',                                      // 1 producction,   2 habilitacion o pruebas
          'id'                  => '6729f32a-399d-4d8f-9897-9fd76e2a0eb4',   // identitication
          'pin'                 => '85950',                                  // pin
        ]; 
@@ -45,7 +45,7 @@ trait NominaElctrncaTrait {
    protected function traitEmployer(  &$jsonObject ) {
        $jsonObject['employer']=[
                   'identification_number' => '10485950',
-                  'municipality_id'       => '393',              //CALI
+                  'municipality_id'       => '393',              //SANTANDER DEE QUILICHAO
                   'address'               => 'CRA 13 9 19 BARRIO PANAMERICANO',
        ];
     }

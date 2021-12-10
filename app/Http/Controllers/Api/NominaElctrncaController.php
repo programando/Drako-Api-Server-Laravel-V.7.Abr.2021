@@ -52,7 +52,7 @@ class NominaElctrncaController extends Controller
        }
 
        public function notaAjusteNomina () {
-              $this->jsonObject['sync'] = false;
+              $this->jsonObject['sync'] = true;
               $this->traitEnvironment            ( $this->jsonObject                                             ) ;
               $payroll_reference =[
                             "number"     => "NOM577",
