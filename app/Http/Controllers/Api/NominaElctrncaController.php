@@ -2,28 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\NominaElctrncaXmlSequenceNumber as Nomina;
-
-use App\Helpers\DatesHelper;
-use App\Helpers\GeneralHelper  ;
-
+use config;
 use App\Traits\ApiSoenac;
+
 use App\Traits\PdfsTrait;
+
 use App\Traits\QrCodeTrait;
+use App\Helpers\DatesHelper;
+
+use Illuminate\Http\Request;
+use App\Helpers\GeneralHelper  ;
 use App\Traits\NominaElctrncaTrait;
+use App\Http\Controllers\Controller;
  
 
 Use Storage;
 Use Carbon;
-use config;
+use App\Events\TercerosNominaWasReportedEvent;
+use App\Models\NominaElctrncaXmlSequenceNumber as Nomina;
 
 class NominaElctrncaController extends Controller
 {
        use  ApiSoenac, QrCodeTrait, PdfsTrait, NominaElctrncaTrait;
-       private $jsonObject = [] , $jsonResponse = [];
+       private $jsonObject = [] , $jsonResponse = [], $employeeObject = [];
 
        
        public function zipKey ($ZipKey) {
@@ -40,15 +41,14 @@ class NominaElctrncaController extends Controller
               $URL           = 'payroll/102'  ;
               $requestNomina = true ;
               $Empleados     = Nomina::dianReporting();
- 
+               
               foreach ($Empleados as $Empleado ) {
                   $this->reportingInformation ( $Empleado );
-                  //return $this->jsonObject;
                   $response   = $this->ApiSoenac->postRequest( $URL, $this->jsonObject, $requestNomina ) ;  
                   $this->documentsProcessReponse( $Empleado['id_nomina_elctrnca'], $response ) ;
-                  //return  $response ;
               }
-             //return $this->jsonObject;
+             // Informa a empresa repote de nómina 
+             TercerosNominaWasReportedEvent::dispatch ( $this->employeeObject);
        }
 
        public function notaAjusteNomina () {
@@ -86,20 +86,19 @@ class NominaElctrncaController extends Controller
 
        private function jsonObjectCreate ( $Empleado, $otherData ) {
               
-              //dd ( $otherData[0]['generalInformation']['date']);
+              
               $this->traitXmlSequenceNumber      ( $Empleado                             ,  $this->jsonObject  ) ;
               $this->traitEnvironment            ( $this->jsonObject                                             ) ;
               $this->traitXmlProvider            ( $this->jsonObject                                             ) ;
               $this->traitGeneralInformation     ( $otherData[0]['generalInformation']   ,  $this->jsonObject  ) ;
-              $this->traitEmployer               ( $this->jsonObject                                             ) ;
-              $this->traitEmployee               ( $otherData[0]['employee']             ,  $this->jsonObject  ) ;
+             $this->traitEmployer               ( $this->jsonObject                                             ) ;
+              $this->traitEmployee               ( $otherData[0]['employee']             ,  $this->jsonObject, $this->employeeObject ) ;
               $this->traitPeriod                 ( $otherData[0]['period']               ,  $this->jsonObject  ) ;
               $this->traitPayment                ( $otherData[0]['payment']              ,  $this->jsonObject  ) ;
               $this->traitPaymentDates           ( $otherData[0]['period']               ,  $this->jsonObject  ) ;
               $this->traitEarBasic               ( $otherData[0]['earns']                ,  $this->jsonObject  ) ;
               $this->traitDeductions             ( $otherData[0]['deductions']           ,  $this->jsonObject  ) ;
               $this->traitTotals                 ( $Empleado                             ,  $this->jsonObject  ) ;
-             // dd ($otherData[0]['generalInformation']  );
 
        }
 

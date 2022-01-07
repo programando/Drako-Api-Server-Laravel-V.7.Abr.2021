@@ -18,12 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-       'App\Events\InvoiceWasCreatedEvent' => [
-            'App\Listeners\InvoiceSendXmlPdfToCustomer',
-        ],
-       'App\Events\NoteWasCreatedEvent' => [
-            'App\Listeners\NoteSendXmlPdfToCustomer',
-        ],
+       'App\Events\InvoiceWasCreatedEvent'         => ['App\Listeners\InvoiceSendXmlPdfToCustomer', ],
+       'App\Events\NoteWasCreatedEvent'            => ['App\Listeners\NoteSendXmlPdfToCustomer',],
+       'App\Events\TercerosNominaWasReportedEvent' => ['App\Listeners\TercerosNominaWasReportedListener', ],
     ];
 
     /**
