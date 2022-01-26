@@ -2,6 +2,7 @@
   return [
       'EMAIL_SISTEMAS'          => '',
       'EMAILS_CONTACTOS'        => '',
+      'EMAILS_EMPRESA'          =>env('EMAILS_EMPRESA'),
 
       'DIRECCION'       => 'CARRERA 13  9 19 Santander',
       'NIT'             => '10.485.950-1',

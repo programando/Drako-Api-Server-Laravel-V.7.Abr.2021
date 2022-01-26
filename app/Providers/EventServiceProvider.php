@@ -21,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
        'App\Events\InvoiceWasCreatedEvent'         => ['App\Listeners\InvoiceSendXmlPdfToCustomer', ],
        'App\Events\NoteWasCreatedEvent'            => ['App\Listeners\NoteSendXmlPdfToCustomer',],
        'App\Events\TercerosNominaWasReportedEvent' => ['App\Listeners\TercerosNominaWasReportedListener', ],
+       'App\Events\ProveedoresOrdCpraReportedEvent' => ['App\Listeners\ProveedoresOrdCpraReportedListener', ],
     ];
 
     /**

@@ -239,6 +239,10 @@ return [
         'View'         => Illuminate\Support\Facades\View::class,
 
 
+       /* COMPANY PROVIDERS */
+        'Arrays'    => App\Helpers\Arrays::class,
+ 
+
     ],
 
 ];
