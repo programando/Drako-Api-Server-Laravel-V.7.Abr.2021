@@ -13,7 +13,7 @@ class TercerosNominaWasReportedListener
      public function handle(TercerosNominaWasReportedEvent $event)
     {
           //
-         Mail::to( 'frenostoro1@hotmail.com')
+         Mail::to( config('company.EMAILS_EMPRESA'))
           ->cc(  'jhonjamesmg@hotmail.com')
           ->queue(   new TercerosNominaWasReported ($event->Empleados ));
     }

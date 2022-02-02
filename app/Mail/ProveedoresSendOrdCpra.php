@@ -22,6 +22,8 @@ class ProveedoresSendOrdCpra extends Mailable
             ->view('mails.terceros.proveedoresOrdenCompra');
     }
 
+
+ 
     private function buildTableOc ( $Numero, $Ordenes ) {
         $Tabla          = '';
         $Num            = 1;

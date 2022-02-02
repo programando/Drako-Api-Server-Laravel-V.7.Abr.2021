@@ -29,6 +29,6 @@ class TercerosNominaWasReported extends Mailable
     {
         return $this->view('mails.terceros.nomina')
         ->from( 'jhonjamesmg@hotmail.com', 'nómina' )
-        ->subject('Reporte nómina') ;
+        ->subject('Reporte nómina a la DIAN') ;
     }
 }
