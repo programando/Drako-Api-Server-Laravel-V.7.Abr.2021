@@ -15,7 +15,6 @@ class OrdenesCompraController extends Controller
    public function getOrdenesCompraInformarProveedor () {
         $OrdenesCompra = OrdenesCompra::getOrdenesCompraInformarProveedor () ;
         $NumerosOcs    = Arrays::getUniqueIdsFromArray ($OrdenesCompra  ,'numero');
-        
         foreach ($NumerosOcs as $NumeroOC ) {
             foreach ($OrdenesCompra as $OrdenCompra ) {
                 if ( $NumeroOC == $OrdenCompra->numero ) {
