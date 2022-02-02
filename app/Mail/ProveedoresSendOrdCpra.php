@@ -17,8 +17,7 @@ class ProveedoresSendOrdCpra extends Mailable
     }
 
     public function build()    {
-            return $this->from(config('company.EMAILS_EMPRESA'))
-            ->subject('Orden de compra - Drako-Autopartes')
+            return $this->subject('Orden de compra - Drako-Autopartes')
             ->view('mails.terceros.proveedoresOrdenCompra');
     }
 
