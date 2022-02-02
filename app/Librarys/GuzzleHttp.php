@@ -38,7 +38,6 @@ class GuzzleHttp {
          $response = $this->Guzzle->request(
             'POST', $URL, [
                'stream' => true,
-               'sink' => STDOUT,
                'headers'  => $this->headers ,
                'json'     => $Body,
                'base_uri' =>  $urlRequest
