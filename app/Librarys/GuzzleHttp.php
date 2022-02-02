@@ -34,13 +34,14 @@ class GuzzleHttp {
 
         public function postRequest ( $URL,$Body , $requestNomina=false ){
          $urlRequest    = $requestNomina == false ? config('company.FACTURA_ELECT_URL_BASE')  : config('company.NOMINA_ELECT_URL_BASE');
-         dd ( $this->headers);
+          
          $response = $this->Guzzle->request(
             'POST', $URL, [ 
                'headers'  => $this->headers ,
                'json'     => $Body,
                'base_uri' =>  $urlRequest
             ]); 
+            dd( $response );
             return json_decode($response->getBody()->getContents(),true);
     }
 
