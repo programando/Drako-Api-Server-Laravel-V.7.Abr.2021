@@ -18,7 +18,7 @@ class ProveedoresOrdCpraReportedListener
         if ( !empty( $event->Email_Proveedor))      array_push ($Emails, $event->Email_Proveedor );
         array_push ($Emails, config('company.EMAILS_EMPRESA'));
         array_push ($Emails, 'jhonjamesmg@hotmail.com');
-        dd ( $event->Numero) ;
+         
          Mail::to( $Emails)
             ->queue(   new  ProveedoresSendOrdCpra (  $event->Numero, $event->OrdenesCompra  ));
     }

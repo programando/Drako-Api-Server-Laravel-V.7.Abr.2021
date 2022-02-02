@@ -14,11 +14,13 @@ class ProveedoresSendOrdCpra extends Mailable
     
     public function __construct( $Numero, $OrdenesCompra )     {
         $this->BodyTable = $this->buildTableOc ( $Numero, $OrdenesCompra );
+        dd( $this->BodyTable);
     }
 
     public function build()    {
-            return $this->subject('Orden de compra - Drako-Autopartes')
-            ->view('mails.terceros.proveedoresOrdenCompra');
+            return $this->view('mails.terceros.proveedoresOrdenCompra')
+                        ->subject('Orden de compra - Drako-Autopartes');
+            
     }
 
 
