@@ -34,7 +34,7 @@ class GuzzleHttp {
 
         public function postRequest ( $URL,$Body , $requestNomina=false ){
          $urlRequest    = $requestNomina == false ? config('company.FACTURA_ELECT_URL_BASE')  : config('company.NOMINA_ELECT_URL_BASE');
-         dd ( $Body );
+         dd ( $this->headers);
          $response = $this->Guzzle->request(
             'POST', $URL, [ 
                'headers'  => $this->headers ,
