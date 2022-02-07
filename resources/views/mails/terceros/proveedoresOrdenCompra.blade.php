@@ -28,10 +28,10 @@
       <p style="text-align: justify;">
         Señores : <br>
         <strong> {{ $Proveedor }} </strong>, <br><br>
-         Con número de orden de compra : {{ $Numero }}, solicitamos despachar lo siguiente:
+         Con número de orden de compra : <strong>{{ $Numero }}</strong>, solicitamos despachar lo siguiente:
           <br><br><br>
          <div style="margin: 0 auto;">
-            <table    width="80%" >
+            <table    width="80%" style="margin: 0 auto;" >
 
                   <thead  style="text-align: center; color: #fff; background-color: #272C6B; height:25px;">
                     <tr>
