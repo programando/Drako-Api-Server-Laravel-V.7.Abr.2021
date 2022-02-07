@@ -31,8 +31,8 @@ class ProveedoresSendOrdCpra extends Mailable
             if ( $Orden->numero == $Numero ) {
                 $Tabla =  $Tabla ."<tr style='font-size:13px;border: black 1px solid;''>"  ;
                     $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . $Num       . "</td>" ;
-                    $Tabla = $Tabla . "<td>" . $Orden->producto       . "</td>" ;
-                    $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . $Orden->cantidad       . "</td>" ;
+                    $Tabla = $Tabla . "<td style='text-align: left; border: black 1px solid'>" . trim($Orden->producto)       . "</td>" ;
+                    $Tabla = $Tabla . "<td style='text-center: right; border: black 1px solid'>" . $Orden->cantidad       . "</td>" ;
                     $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . number_format($Orden->vr_unitario, 0, "" ,".")       . "</td>" ;
                     $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . number_format($Orden->vr_item, 0, "" ,".")        . "</td>" ;
                     $Tabla = $Tabla . '</tr>';
