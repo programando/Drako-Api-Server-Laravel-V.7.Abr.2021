@@ -27,24 +27,25 @@
         <h4 style="font-weight: 500;">         
       <p style="text-align: justify;">
         Señores : <br>
-        strong> {{ $Proveedor }} </strong>, <br><br>
+        <strong> {{ $Proveedor }} </strong>, <br><br>
          Con número de orden de compra : {{ $Numero }}, solicitamos despachar lo siguiente:
           <br><br><br>
          <div style="margin: 0 auto;">
-            <table    width="70%" >
+            <table    width="80%" >
 
                   <thead  style="text-align: center; color: #fff; background-color: #272C6B; height:25px;">
                     <tr>
-                      <th>#</th>
-                      <th>PRODUCTO</th>
-                      <th>CANTIDAD</th>
-                      <th>VR.UNITARIO</th>
-                      <th>VR.ÌTEM</th>
+                      <th>&nbsp;#</th>
+                      <th>&nbsp;PRODUCTO&nbsp;</th>
+                      <th>&nbsp;CANTIDAD&nbsp;</th>
+                      <th>&nbsp;VR.UNITARIO&nbsp;</th>
+                      <th>&nbsp;VR.ÍTEM&nbsp;</th>
                     </tr>
                   </thead>
-                  <tbody style="font-size:13px;">
+                  <tbody style="font-size:13px;border: black 1px solid;">
                         {!! $BodyTable !!}
                   </tbody>
+                  <br>
                   <tr>
                     <td colspan="4" style="text-align:right"> SUB-TOTAL : </td>
                     <td style="text-align:right"> {{ $SubTotal}}</td>

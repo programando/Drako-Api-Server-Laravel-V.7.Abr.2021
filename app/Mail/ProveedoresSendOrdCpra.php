@@ -29,12 +29,12 @@ class ProveedoresSendOrdCpra extends Mailable
         $Num            = 1;
         foreach ($Ordenes as $Orden ) {
             if ( $Orden->numero == $Numero ) {
-                $Tabla =  $Tabla ."<tr>"  ;
-                    $Tabla = $Tabla . "<td style='text-align: right;'>" . $Num       . "</td>" ;
+                $Tabla =  $Tabla ."<tr style='font-size:13px;border: black 1px solid;''>"  ;
+                    $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . $Num       . "</td>" ;
                     $Tabla = $Tabla . "<td>" . $Orden->producto       . "</td>" ;
-                    $Tabla = $Tabla . "<td style='text-align: right;'>" . $Orden->cantidad       . "</td>" ;
-                    $Tabla = $Tabla . "<td style='text-align: right;'>" . number_format($Orden->vr_unitario, 0, "" ,".")       . "</td>" ;
-                    $Tabla = $Tabla . "<td style='text-align: right;'>" . number_format($Orden->vr_item, 0, "" ,".")        . "</td>" ;
+                    $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . $Orden->cantidad       . "</td>" ;
+                    $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . number_format($Orden->vr_unitario, 0, "" ,".")       . "</td>" ;
+                    $Tabla = $Tabla . "<td style='text-align: right; border: black 1px solid'>" . number_format($Orden->vr_item, 0, "" ,".")        . "</td>" ;
                     $Tabla = $Tabla . '</tr>';
                     $Num++;
                     $this->Fecha         = $Orden->fecha ;
