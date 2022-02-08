@@ -31,11 +31,12 @@
          Con número de orden de compra : <strong>{{ $Numero }}</strong>, solicitamos despachar lo siguiente:
           <br><br><br>
          <div style="margin: 0 auto;">
-            <table    width="80%" style="margin: 0 auto;" >
+            <table    width="100%" style="margin: 0 auto;" >
 
                   <thead  style="text-align: center; color: #fff; background-color: #272C6B; height:25px;">
                     <tr>
-                      <th>&nbsp;#</th>
+                      <th>&nbsp;CÓD.DRAKO</th>
+                      <th>&nbsp;CÓD.PROVEED.</th>
                       <th>&nbsp;PRODUCTO&nbsp;</th>
                       <th>&nbsp;CANTIDAD&nbsp;</th>
                       <th>&nbsp;VR.UNITARIO&nbsp;</th>
