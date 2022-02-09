@@ -38,7 +38,7 @@
                       <th>&nbsp;CÓD.DRAKO</th>
                       <th>&nbsp;CÓD.PROVEED.</th>
                       <th>&nbsp;PRODUCTO&nbsp;</th>
-                      <th>&nbsp;CANTIDAD&nbsp;</th>
+                      <th>&nbsp;CANT.&nbsp;</th>
                       <th>&nbsp;VR.UNITARIO&nbsp;</th>
                       <th>&nbsp;VR.ÍTEM&nbsp;</th>
                     </tr>
@@ -48,16 +48,16 @@
                   </tbody>
                   <br>
                   <tr>
-                    <td colspan="4" style="text-align:right"> SUB-TOTAL : </td>
+                    <td colspan="5" style="text-align:right"> SUB-TOTAL : </td>
                     <td style="text-align:right"> {{ $SubTotal}}</td>
                   </tr> 
 
                   <tr>
-                    <td colspan="4" style="text-align:right"> IVA : </td>
+                    <td colspan="5" style="text-align:right"> IVA : </td>
                     <td style="text-align:right"> {{ $Iva}}</td>
                   </tr> 
                   <tr>
-                    <td colspan="4" style="text-align:right"> TOTAL : </td>
+                    <td colspan="5" style="text-align:right"> TOTAL : </td>
                     <td style="text-align:right"> {{ $Total}}</td>
                   </tr> 
             </table>
