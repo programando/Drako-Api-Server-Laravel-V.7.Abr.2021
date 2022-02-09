@@ -20,7 +20,7 @@ class OrdenesCompraController extends Controller
                 if ( $NumeroOC == $OrdenCompra->numero ) {
                    ProveedoresOrdCpraReportedEvent::dispatch ( $NumeroOC,$OrdenCompra, $OrdenesCompra) ;
                    OrdenesCompra::where('numero',$NumeroOC)->delete(); // Borrar el registro procesado
-                   exit;
+                   break;
                 }
             }//ordenes compra
         }//Numeros Oc
