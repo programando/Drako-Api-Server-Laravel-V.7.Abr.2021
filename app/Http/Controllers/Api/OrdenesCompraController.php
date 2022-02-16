@@ -27,7 +27,7 @@ class OrdenesCompraController extends Controller
                 if ( $NumeroOC == $OrdenCompra->numero ) {
                     $this->getPdf($NumeroOC );
                     ProveedoresOrdCpraReportedEvent::dispatch ( $NumeroOC,$OrdenCompra, $OrdenesCompra) ;
-                    //OrdenesCompra::where('numero',$NumeroOC)->delete(); // Borrar el registro procesado
+                    OrdenesCompra::where('numero',$NumeroOC)->delete(); // Borrar el registro procesado
                     //Storage::disk('Files')->delete ( $NumeroOC.'.pdf');
                    break;
                 }
