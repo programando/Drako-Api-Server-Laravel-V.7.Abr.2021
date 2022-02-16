@@ -51,6 +51,10 @@ class OrdenesCompra extends Model
 		return  $query->where('enviada','0')->get();
 	}
 
+		public static function scopegetOrdenesCompra( $query , $numeroOC ) {
+		return  $query->where('numero',$numeroOC)->get();
+	}
+ 
 	public function getEmailAsesorAttribute ( $value ){
 			return  trim($value);
 	}

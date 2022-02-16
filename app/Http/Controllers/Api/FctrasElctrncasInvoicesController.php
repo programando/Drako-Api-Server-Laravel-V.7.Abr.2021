@@ -162,6 +162,7 @@ class FctrasElctrncasInvoicesController
             return $Fechas;
         }
 
+
         public function invoiceAccepted ( $Token ) {          
             $this->customerResponse ( $Token, 'ACEPTADA');
             return redirect('/');

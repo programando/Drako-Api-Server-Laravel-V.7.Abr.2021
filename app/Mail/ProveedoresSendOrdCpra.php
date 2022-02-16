@@ -7,18 +7,23 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
+use Storage ;
+
 class ProveedoresSendOrdCpra extends Mailable
 {
     use Queueable, SerializesModels;
-    public $Numero, $Fecha, $SubTotal, $Iva, $Total, $Observaciones, $Proveedor, $BodyTable;
+    public $Numero, $Fecha, $SubTotal, $Iva, $Total, $Observaciones, $Proveedor, $BodyTable, $FilePdf, $PathPdf;
     
     public function __construct( $Numero, $OrdenesCompra )     {
         $this->BodyTable = $this->buildTableOc ( $Numero, $OrdenesCompra );
+         $this->FilePdf = $Numero. '.pdf' ;  //document_number     
+         $this->PathPdf = Storage::disk('Files')->path( $this->FilePdf  );
     }
 
     public function build()    {
             return $this->view('mails.terceros.proveedoresOrdenCompra')
-                        ->subject('Orden de compra - Drako-Autopartes');
+                        ->subject('Orden de compra - Drako-Autopartes')
+                         ->attach(  $this->PathPdf, [ 'as' => 'Orden de compra - Drako-Autopartes - ' . $this->FilePdf, 'mime' => 'application/pdf']);
             
     }
 
