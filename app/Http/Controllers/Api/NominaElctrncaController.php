@@ -44,6 +44,7 @@ class NominaElctrncaController extends Controller
                
               foreach ($Empleados as $Empleado ) {
                   $this->reportingInformation ( $Empleado );
+                  //return $this->jsonObject;
                   $response   = $this->ApiSoenac->postRequest( $URL, $this->jsonObject, $requestNomina ) ;  
                   $this->documentsProcessReponse( $Empleado['id_nomina_elctrnca'], $response ) ;
               }
@@ -87,18 +88,21 @@ class NominaElctrncaController extends Controller
        private function jsonObjectCreate ( $Empleado, $otherData ) {
               
               
-              $this->traitXmlSequenceNumber      ( $Empleado                             ,  $this->jsonObject  ) ;
+              $this->traitXmlSequenceNumber      ( $Empleado                             ,  $this->jsonObject    ) ;
               $this->traitEnvironment            ( $this->jsonObject                                             ) ;
               $this->traitXmlProvider            ( $this->jsonObject                                             ) ;
-              $this->traitGeneralInformation     ( $otherData[0]['generalInformation']   ,  $this->jsonObject  ) ;
-             $this->traitEmployer               ( $this->jsonObject                                             ) ;
+              $this->traitGeneralInformation     ( $otherData[0]['generalInformation']   ,  $this->jsonObject    ) ;
+             $this->traitEmployer                ( $this->jsonObject                                             ) ;
               $this->traitEmployee               ( $otherData[0]['employee']             ,  $this->jsonObject, $this->employeeObject ) ;
-              $this->traitPeriod                 ( $otherData[0]['period']               ,  $this->jsonObject  ) ;
-              $this->traitPayment                ( $otherData[0]['payment']              ,  $this->jsonObject  ) ;
-              $this->traitPaymentDates           ( $otherData[0]['period']               ,  $this->jsonObject  ) ;
-              $this->traitEarBasic               ( $otherData[0]['earns']                ,  $this->jsonObject  ) ;
-              $this->traitDeductions             ( $otherData[0]['deductions']           ,  $this->jsonObject  ) ;
-              $this->traitTotals                 ( $Empleado                             ,  $this->jsonObject  ) ;
+              $this->traitPeriod                 ( $otherData[0]['period']               ,  $this->jsonObject    ) ;
+              $this->traitPayment                ( $otherData[0]['payment']              ,  $this->jsonObject    ) ;
+              $this->traitPaymentDates           ( $otherData[0]['period']               ,  $this->jsonObject    ) ;
+              $this->traitEarBasic               ( $otherData[0]['earns']                ,  $this->jsonObject    ) ;
+              $this->traitEarVacation            ( $otherData[0]['earns']                ,  $this->jsonObject    ) ;
+              $this->traitEarPrimas              ( $otherData[0]['earns']                ,  $this->jsonObject    ) ;
+              $this->traitEarLayoffs             ( $otherData[0]['earns']                ,  $this->jsonObject    ) ;
+              $this->traitDeductions             ( $otherData[0]['deductions']           ,  $this->jsonObject    ) ;
+              $this->traitTotals                 ( $Empleado                             ,  $this->jsonObject    ) ;
 
        }
 

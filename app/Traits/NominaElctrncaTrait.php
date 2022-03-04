@@ -101,6 +101,42 @@ trait NominaElctrncaTrait {
       $jsonObject['earn']['basic'] =$Basic;
     }
 
+   protected function traitEarVacation ( $Earn, &$jsonObject ) {
+
+     if ( $Earn[0]['vacation_common_payment'] > 0 ) {
+        $Vacations = [
+            'start'    => $Earn[0]['vacation_common_start'],
+            'end'      => $Earn[0]['vacation_common_end'],
+            'quantity' => $Earn[0]['vacation_common_quantity'],
+            'payment'  => $Earn[0]['vacation_common_payment'],
+        ];
+        $jsonObject['earn']['vacation']['common'][] =  $Vacations ;
+     }
+   }
+
+  protected function traitEarPrimas ( $Earn, &$jsonObject ) {
+     if ( $Earn[0]['primas_quantity'] > 0 ) {
+        $Primas = [
+            'quantity'    => $Earn[0]['primas_quantity'],
+            'payment'      => $Earn[0]['primas_payment'],
+        ];
+        $jsonObject['earn']['primas'] =  $Primas ;
+     }
+   }
+
+ protected function traitEarLayoffs ( $Earn, &$jsonObject ) {
+     if ( $Earn[0]['layoffs_payment'] > 0 ) {
+        $Layoffs = [
+            'layoffs_payment'          => $Earn[0]['layoffs_payment'],
+            'layoffs_percentage'       => $Earn[0]['layoffs_percentage'],
+            'layoffs_interest_payment' => $Earn[0]['layoffs_interest_payment'],
+        ];
+        $jsonObject['earn']['layoffs'] =  $Layoffs ;
+     }
+   }
+
+
+   
    protected function traitDeductions( $Deductions, &$jsonObject ) {
       $health = [
           'percentage'      => $Deductions[0]['health_percentage'],
