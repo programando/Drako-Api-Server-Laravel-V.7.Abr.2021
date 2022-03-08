@@ -20,6 +20,10 @@ class FoldersHelper {
        return    asset('public/storage/css/'.$archivo) ;
    }
 
+   public static function ProductsImages () {
+      return storage_path('app/public/images/productos');
+   }
+
    
 
 }

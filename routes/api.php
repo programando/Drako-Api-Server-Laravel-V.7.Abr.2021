@@ -23,6 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// PRODUCTOS
+   Route::group(['prefix'=>'productos', 'namespace'=>'Api'], function() {
+        $localController = 'ProductosController@';
+        Route:: get('/listado'                           , $localController.'getProductos');
+    });
+
+
 
 // INVOICES
     Route::group(['prefix'=>'invoices', 'namespace'=>'Api'], function() {
