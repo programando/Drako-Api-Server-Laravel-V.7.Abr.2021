@@ -12,6 +12,6 @@ class ProductosController extends Controller
 {
     public function getProductos () {
         
-        return Producto::with('imagenes')->get();
+        return Producto::with('imagenes')->paginate(30);
     }
 }
