@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Helpers\FoldersHelper as Files;
+use Storage ;
+
 class ProductosImagene extends Model
 {
  
@@ -21,7 +23,7 @@ class ProductosImagene extends Model
 	protected $fillable = [ 	'idproducto', 'nom_imagen'];
 	protected $appends  = ['70x70','150x150','240x240','480x480','600x600','800x800'  ];
 
-
+ 
 	public function producto() 	{
 		return $this->belongsTo(Producto::class, 'idproducto', 'idproducto');
 	}
@@ -51,6 +53,7 @@ class ProductosImagene extends Model
 
 		 public function get800x800Attribute() {  
       return  Files::ProductsImages() .'/800x800/'. $this->nom_imagen  ;
+			
   }
 
 }
