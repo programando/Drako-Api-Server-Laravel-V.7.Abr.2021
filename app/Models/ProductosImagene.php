@@ -31,7 +31,10 @@ class ProductosImagene extends Model
 	public function productos() 	{
 		return $this->hasMany(Producto::class, 'idproducto', 'idproducto');
 	}
-
+	 
+	 public function getNomImagenAttribute( $value ) {
+		 	return strtolower($value );
+	 }
 	 public function get70x70Attribute() {  
       return Files::ProductsImages() .'/70x70/'. $this->nom_imagen  ;
   }
