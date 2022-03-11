@@ -21,7 +21,7 @@ class ProductosImagene extends Model
 
 	protected $casts    = [ 'idproducto' => 'int' ];
 	protected $fillable = [ 	'idproducto', 'nom_imagen'];
-	protected $appends  = ['70x70','150x150','240x240','480x480','600x600','800x800'  ];
+	protected $appends  = ['_70x70','_150x150','_240x240','_480x480','_600x600','_800x800'  ];
 
  
 	public function producto() 	{
