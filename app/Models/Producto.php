@@ -60,7 +60,7 @@ class Producto extends Model
 	//// 	SCOPES
 	//************************/
 
-	public  function scopebusqueda($query, $busqueda) {
+	public  function scopebusquedaTexto($query, $busqueda) {
     	if ($busqueda) {
     		return $query->where('tags'					,	'like',"%$busqueda%")
 						->orWhere('codproducto'			,	'like',"%$busqueda%")
@@ -71,6 +71,10 @@ class Producto extends Model
 						->orWhere('cod_oem'				,	'like',"%$busqueda%");
     	}
 
+	}
+
+	public function scopebusquedaGrupo ( $query, $idgrupos ){
+			return $query->whereIn('idgrupo',  $idgrupos );
 	}
 
 	//************************/

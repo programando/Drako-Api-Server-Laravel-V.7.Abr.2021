@@ -28,7 +28,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         $localController = 'ProductosController@';
         Route:: get('/listado'                           , $localController.'getProductos');
         Route:: get('/busqueda'                           , $localController.'getProductosBusqueda');
-
+        Route:: get('/grupo'                           , $localController.'getProductosGrupo');
     });
 
 

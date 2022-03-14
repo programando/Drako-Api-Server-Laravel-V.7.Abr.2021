@@ -15,7 +15,11 @@ class ProductosController extends Controller
     }
 
     public function getProductosBusqueda ( Request $FormData ){
-        return Producto::with('imagenes')->busqueda( $FormData->textoBusqueda)->paginate(30);;
-         
+        return Producto::with('imagenes')->busquedaTexto( $FormData->textoBusqueda)->paginate(30);;
     }
+
+    public function getProductosGrupo ( Request $FormData ){
+        //return $FormData->grupos;
+        return Producto::with('imagenes')->busquedaGrupo( [$FormData->grupos])->paginate(30);;
+    }    
 }
