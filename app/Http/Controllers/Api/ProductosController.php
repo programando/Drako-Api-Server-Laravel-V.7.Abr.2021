@@ -11,7 +11,11 @@ use Storage;
 class ProductosController extends Controller
 {
     public function getProductos () {
-        
         return Producto::with('imagenes')->paginate(30);
+    }
+
+    public function getProductosBusqueda ( Request $FormData ){
+        return Producto::with('imagenes')->busqueda( $FormData->textoBusqueda)->paginate(30);;
+         
     }
 }

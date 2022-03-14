@@ -9,40 +9,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Producto
- * 
- * @property int $idregistro
- * @property int|null $idgrupo
- * @property int|null $idproducto
- * @property int|null $idproducto_dt
- * @property string|null $codproducto
- * @property string|null $cod_oem
- * @property string|null $nombre_tecnico
- * @property string|null $nombre_popular
- * @property string|null $nombre_otros
- * @property string|null $nombre_impreso
- * @property string|null $medida_diametro
- * @property string|null $medida_largo
- * @property string|null $medida_alto
- * @property string|null $medida_ancho
- * @property string|null $medida_interna
- * @property string|null $medida_externa
- * @property float|null $peso_kg
- * @property string|null $vehiculos
- * @property float|null $precio_base
- * @property float|null $precio_oferta
- * @property float|null $iva
- * @property int|null $horas_reserva
- * @property string|null $tags
- * @property bool|null $inactivo
- * 
- * @property ProductosGrupo|null $productos_grupo
- * @property ProductosImagene|null $productos_imagene
- * @property Collection|ProductosImagene[] $productos_imagenes
- *
- * @package App\Models
- */
+use App\Helpers\StringsHelper;
+
 class Producto extends Model
 {
 	protected $table = 'productos';
@@ -87,15 +55,81 @@ class Producto extends Model
 		'inactivo'
 	];
 
-	public function grupos()
-	{
+
+	//************************/
+	//// 	SCOPES
+	//************************/
+
+	public  function scopebusqueda($query, $busqueda) {
+    	if ($busqueda) {
+    		return $query->where('tags'					,	'like',"%$busqueda%")
+						->orWhere('codproducto'			,	'like',"%$busqueda%")
+						->orWhere('nombre_tecnico'		,	'like',"%$busqueda%")
+						->orWhere('nombre_popular'		,	'like',"%$busqueda%")
+						->orWhere('nombre_otros'		,	'like',"%$busqueda%")
+						->orWhere('nombre_impreso'		,	'like',"%$busqueda%")
+						->orWhere('cod_oem'				,	'like',"%$busqueda%");
+    	}
+
+	}
+
+	//************************/
+	//// 	ACCESORS
+	//************************/
+	public function getTagsAttribute( $value ){
+		return StringsHelper::LowerTrim ($value);
+	}
+
+	public function getNombreImpresoAttribute( $value ){
+		return StringsHelper::InicialMayuscula ($value);
+	}
+
+	public function getNombrePopularAttribute( $value ){
+		return StringsHelper::InicialMayuscula ($value);
+	}
+	
+	public function getNombreTecnicoAttribute( $value ){
+		return StringsHelper::InicialMayuscula ($value);
+	}
+
+	public function getNombreOtrosAttribute( $value ){
+		return StringsHelper::InicialMayuscula ($value);
+	}
+
+	public function getVehiculosAttribute( $value ){
+		return StringsHelper::FixEnterTab ($value);
+	}
+
+	public function getMedidaDiametroAttribute( $value ){
+		return StringsHelper::UpperTrim ($value, 10);
+	}
+
+	public function getMedidaLargoAttribute( $value ){
+		return StringsHelper::UpperTrim ($value, 10);
+	}
+
+	public function getMedidaAltoAttribute( $value ){
+		return StringsHelper::UpperTrim ($value, 10);
+	}
+	public function getMedidaAnchoAttribute( $value ){
+		return StringsHelper::UpperTrim ($value, 10);
+	}
+	public function getMedidaInternaAttribute( $value ){
+		return StringsHelper::UpperTrim ($value, 10);
+	}
+	public function getMedidaExternaAttribute( $value ){
+		return StringsHelper::UpperTrim ($value, 10);
+	}
+
+	
+	//************************/
+	//// 	RELACIONES
+	//************************/
+	public function grupos(){
 		return $this->belongsTo(ProductosGrupo::class, 'idgrupo');
 	}
 
-
-
-	public function imagenes()
-	{
+	public function imagenes(){
 		return $this->hasMany(ProductosImagene::class, 'idproducto', 'idproducto');
 	}
 }

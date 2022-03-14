@@ -27,6 +27,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
    Route::group(['prefix'=>'productos', 'namespace'=>'Api'], function() {
         $localController = 'ProductosController@';
         Route:: get('/listado'                           , $localController.'getProductos');
+        Route:: get('/busqueda'                           , $localController.'getProductosBusqueda');
+
     });
 
 
