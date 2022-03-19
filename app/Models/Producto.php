@@ -60,6 +60,7 @@ class Producto extends Model
 	//// 	SCOPES
 	//************************/
 
+
 	public  function scopebusquedaTexto($query, $busqueda) {
     	if ($busqueda) {
     		return $query->where('tags'					,	'like',"%$busqueda%")
@@ -73,8 +74,14 @@ class Producto extends Model
 
 	}
 
-	public function scopebusquedaGrupo ( $query, $idgrupos ){
+	public function scopebusquedaPorGrupos ( $query, $idgrupos ){
 			return $query->whereIn('idgrupo',  $idgrupos );
+	}
+
+	public function scopeProductosPorGrupo ( $query, $idgrupo ){
+		return $query->Where('saldo','>','0')
+					 ->where('inactivo', '0')
+					 ->where('idgrupo', "$idgrupo"); // Facturas
 	}
 
 	//************************/
@@ -136,4 +143,6 @@ class Producto extends Model
 	public function imagenes(){
 		return $this->hasMany(ProductosImagene::class, 'idproducto', 'idproducto');
 	}
+
+
 }

@@ -31,6 +31,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route:: get('/grupo'                           , $localController.'getProductosGrupo');
     });
 
+    // PRODUCTOS
+   Route::group(['prefix'=>'grupos', 'namespace'=>'Api'], function() {
+    $localController = 'ProductosGruposController@';
+    Route:: get('/listado'                           , $localController.'GruposConProductos');
+});
 
 
 // INVOICES
