@@ -11,7 +11,7 @@ use Storage;
 class ProductosController extends Controller
 {
     public function getProductos () {
-        return Producto::with('imagenes')->paginate(30);
+        return Producto::with('imagenes')->inRandomOrder()->paginate(30);
     }
 
     public function getProductosBusqueda ( Request $FormData ){
