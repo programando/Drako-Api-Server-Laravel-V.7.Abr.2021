@@ -28,13 +28,17 @@ class ProductosGrupo extends Model
 		'inactivo'
 	];
 
+	
+	public static function getGruposConProductos () { 
+		return DB::select('call api_productos_grupos_con_productos_asignados()' );
+	}
+
+
 	public function productos()	{
 		return $this->hasMany(Producto::class, 'idgrupo');
 	}
 
-	public static function getGruposConProductos () { 
-		return DB::select('call api_productos_grupos_con_productos_asignados()' );
-	}
+
 
 	
 
