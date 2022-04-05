@@ -6,10 +6,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-
 use DB;
+use App\Helpers\StringsHelper;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
+
 class ProductosGrupo extends Model
 {
 	protected $table = 'productos_grupos';
@@ -25,7 +27,7 @@ class ProductosGrupo extends Model
 	protected $fillable = [
 		'nomgrupo',
 		'prefijo',
-		'inactivo'
+		'inactivo', 'imagen'
 	];
 
 	
@@ -36,6 +38,14 @@ class ProductosGrupo extends Model
 
 	public function productos()	{
 		return $this->hasMany(Producto::class, 'idgrupo');
+	}
+
+	public function getImagenAttribute( $value ){
+		return  StringsHelper::LowerTrim ($value);
+	}
+
+	public function getNomGrupoAttribute( $value ){
+			return  StringsHelper::LowerTrim ($value);
 	}
 
 

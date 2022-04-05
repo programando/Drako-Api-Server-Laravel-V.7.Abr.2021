@@ -23,18 +23,25 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+ 
+
 // PRODUCTOS
    Route::group(['prefix'=>'productos', 'namespace'=>'Api'], function() {
         $localController = 'ProductosController@';
         Route:: get('/listado'                           , $localController.'getProductos');
         Route:: post('/busqueda'                         , $localController.'getProductosBusqueda');
         Route:: post('/grupos'                           , $localController.'getProductosGrupo');
+        Route:: post('/buscar/codigo'                    , $localController.'getProductoPorCodigo');
+
+        Route:: get('/mas/vendidos'                      , 'ProductosVentasController@getProductosVendidos');
     });
 
     // GRUPOS
    Route::group(['prefix'=>'grupos', 'namespace'=>'Api'], function() {
     $localController = 'ProductosGruposController@';
     Route:: get('/listado'                           , $localController.'getGruposConProductos');
+    Route:: get('/destacados'                        , $localController.'getGruposDestacados');
 });
 
 

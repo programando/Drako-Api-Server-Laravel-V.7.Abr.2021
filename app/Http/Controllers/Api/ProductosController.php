@@ -10,8 +10,13 @@ use App\Models\Producto;
 use Storage;
 class ProductosController extends Controller
 {
+
+    public function getProductoPorCodigo ( Request $FormData ) {
+        return Producto::with('imagenes')->where('idproducto', $FormData->idproducto )->get();
+    }
+
     public function getProductos () {
-        return Producto::with('imagenes')->inRandomOrder()->paginate(20);
+        return Producto::with('imagenes')->paginate(20);
     }
 
     public function getProductosBusqueda ( Request $FormData ){
