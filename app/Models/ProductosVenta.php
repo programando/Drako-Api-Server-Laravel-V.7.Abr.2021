@@ -24,10 +24,10 @@ class ProductosVenta extends Model
 		'idproducto',
 		'idproducto_dt',
 		'codproducto',
-		'nombre_tecnico'
+		'nombre_impreso'
 	];
 
-  public function getNombreTecnicoAttribute( $value ){
+  public function getNombreImpresoAttribute( $value ){
 		return StringsHelper::InicialMayuscula ($value);
 	}
 

@@ -13,8 +13,8 @@ class ProductosGruposController extends Controller
     }
 
     public function getGruposDestacados () {
-        return GruposProductos::limit(6)->inRandomOrder()->get();
+        return GruposProductos::limit(6)->where('imagen','<>','')->get();
     }
 
-
+ 
 }

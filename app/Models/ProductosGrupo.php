@@ -11,6 +11,7 @@ use App\Helpers\StringsHelper;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use App\Helpers\FoldersHelper as Files;
 
 class ProductosGrupo extends Model
 {
@@ -40,15 +41,17 @@ class ProductosGrupo extends Model
 		return $this->hasMany(Producto::class, 'idgrupo');
 	}
 
-	public function getImagenAttribute( $value ){
+	/*public function getImagenAttribute( $value ){
 		return  StringsHelper::LowerTrim ($value);
 	}
-
+*/
 	public function getNomGrupoAttribute( $value ){
 			return  StringsHelper::LowerTrim ($value);
 	}
 
-
+	public function getImagenAttribute( $value ) {  
+        return  Files::ProductsImages() .'/240x240/'. $value  ;
+    }
 
 	
 
