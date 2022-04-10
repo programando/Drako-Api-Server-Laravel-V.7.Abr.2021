@@ -127,9 +127,9 @@ trait NominaElctrncaTrait {
  protected function traitEarLayoffs ( $Earn, &$jsonObject ) {
      if ( $Earn[0]['layoffs_payment'] > 0 ) {
         $Layoffs = [
-            'layoffs_payment'          => $Earn[0]['layoffs_payment'],
-            'layoffs_percentage'       => $Earn[0]['layoffs_percentage'],
-            'layoffs_interest_payment' => $Earn[0]['layoffs_interest_payment'],
+            'payment'          => $Earn[0]['layoffs_payment'],
+            'percentage'       => $Earn[0]['layoffs_percentage'],
+            'interest_payment' => $Earn[0]['layoffs_interest_payment'],
         ];
         $jsonObject['earn']['layoffs'] =  $Layoffs ;
      }
