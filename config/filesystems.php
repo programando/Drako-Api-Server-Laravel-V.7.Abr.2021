@@ -65,7 +65,8 @@ return [
             'root' => storage_path('app/public/images'),
             'visibility' => 'public',
         ],
-
+        
+ 
  
         's3' => [
             'driver' => 's3',
