@@ -35,7 +35,7 @@ class Producto extends Model
 
 
 
-protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format', 'idmd5'];
+protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 	//************************/
 	//// 	SCOPES
 	//************************/
