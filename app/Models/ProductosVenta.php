@@ -24,8 +24,10 @@ class ProductosVenta extends Model
 		'idproducto',
 		'idproducto_dt',
 		'codproducto',
-		'nombre_impreso'
+		'nombre_impreso','idmd5'
 	];
+
+
 
   public function getNombreImpresoAttribute( $value ){
 		return StringsHelper::InicialMayuscula ($value);
@@ -35,4 +37,7 @@ class ProductosVenta extends Model
 	public function imagenes(){
 		return $this->hasMany(ProductosImagene::class, 'idproducto', 'idproducto');
 	}
+
+
+	
 }

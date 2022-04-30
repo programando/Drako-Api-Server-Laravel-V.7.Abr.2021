@@ -35,7 +35,7 @@ class Producto extends Model
 
 
 
-protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
+protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format', 'idmd5'];
 	//************************/
 	//// 	SCOPES
 	//************************/
@@ -78,6 +78,7 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 	//************************/
 	//// 	ACCESORS
 	//************************/
+
 	public function getTagsAttribute( $value ){
 		return StringsHelper::LowerTrim ($value);
 	}
