@@ -33,9 +33,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route:: post('/busqueda'                         , $localController.'getProductosBusqueda');
         Route:: post('/grupos'                           , $localController.'getProductosGrupo');
         Route:: post('/buscar/idproducto'                , $localController.'getProductoPorID');
+        Route:: post('/buscar/idmd5'                     , $localController.'getProductoPorIdMd5');
         Route:: post('/por/grupo'                        , $localController.'getProductosPorGrupo');
-        
-
         Route:: get('/mas/vendidos'                      , 'ProductosVentasController@getProductosVendidos');
         
     });

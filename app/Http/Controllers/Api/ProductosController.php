@@ -13,6 +13,10 @@ class ProductosController extends Controller
 
   
 
+    public function getProductoPorIdMd5 ( Request $FormData ) {
+        return Producto::with('imagenes')->where('idmd5', $FormData->idmd5 )->get();
+    }
+
     public function getProductoPorID ( Request $FormData ) {
         return Producto::with('imagenes')->where('idproducto', $FormData->idproducto )->get();
     }
