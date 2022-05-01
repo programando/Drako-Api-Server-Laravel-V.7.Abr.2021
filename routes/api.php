@@ -31,10 +31,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         $localController = 'ProductosController@';
         Route:: get('/listado'                           , $localController.'getProductos');
         Route:: post('/busqueda'                         , $localController.'getProductosBusqueda');
-        Route:: post('/grupos'                           , $localController.'getProductosGrupo');
+        Route:: post('/grupos'                           , $localController.'getProductosGrupos');
         Route:: post('/buscar/idproducto'                , $localController.'getProductoPorID');
         Route:: post('/buscar/idmd5'                     , $localController.'getProductoPorIdMd5');
         Route:: post('/por/grupo'                        , $localController.'getProductosPorGrupo');
+        Route:: post('/por/clase'                        , $localController.'getProductosPorClase');
         Route:: get('/mas/vendidos'                      , 'ProductosVentasController@getProductosVendidos');
         
     });
@@ -46,6 +47,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route:: get('/destacados'                        , $localController.'getGruposDestacados');
 });
 
+    // CLASES DE PRODUCTO
+    Route::group(['prefix'=>'productos/clases', 'namespace'=>'Api'], function() {
+        $localController = 'ProductosGruposClaseController@';
+        Route:: get('/listado'                           , $localController.'productosGruposClaseListar');
+        
+    });
+
+    
 
 // INVOICES
     Route::group(['prefix'=>'invoices', 'namespace'=>'Api'], function() {

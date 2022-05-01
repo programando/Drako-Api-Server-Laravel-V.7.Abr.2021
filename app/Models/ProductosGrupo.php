@@ -45,6 +45,7 @@ class ProductosGrupo extends Model
 		return  StringsHelper::LowerTrim ($value);
 	}
 */
+
 	public function getNomGrupoAttribute( $value ){
 			return  StringsHelper::LowerTrim ($value);
 	}

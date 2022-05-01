@@ -58,15 +58,8 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
       return  0;
   }
 
-	public function getPrecioBaseFormatAttribute() {
-		return number_format( $this->precio_base, 0, ",", ".");
-	}
-	
-	 public function getPrecioOfertaFormatAttribute() {
-		return number_format( $this->precio_oferta, 0, ",", ".");
-	}
 	public function scopebusquedaPorGrupos ( $query, $idgrupos ){
-			return $query->whereIn('idgrupo',  $idgrupos );
+			return $query->whereIn('idgrupo',  (array)$idgrupos);
 	}
 
 	public function scopeProductosPorGrupo ( $query, $idgrupo ){
@@ -78,6 +71,16 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 	//************************/
 	//// 	ACCESORS
 	//************************/
+   public function getCodOemAttribute ( $value ){
+	   return trim($value);
+   }
+	public function getPrecioBaseFormatAttribute() {
+		return number_format( $this->precio_base, 0, ",", ".");
+	}
+	
+	 public function getPrecioOfertaFormatAttribute() {
+		return number_format( $this->precio_oferta, 0, ",", ".");
+	}
 
 	public function getTagsAttribute( $value ){
 		return StringsHelper::LowerTrim ($value);
