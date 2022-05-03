@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\StringsHelper;
+use App\Helpers\FoldersHelper;
 
 class ProductosGruposClase extends Model
 {
@@ -21,7 +22,7 @@ class ProductosGruposClase extends Model
 
 	protected $fillable = [
 		'nom_clase_grupo',
-		'inactivo'
+		'inactivo', 'imagen'
 	];
 
 	public function getNomClaseGrupoAttribute( $value ){
@@ -31,5 +32,9 @@ class ProductosGruposClase extends Model
 	public function Grupos(){
 		return $this->hasMany(ProductosGrupo::class, 'id_clase_grupo');
 	}
+	public function getImagenAttribute( $value ) {  
+        return  FoldersHelper::ProductsGruposDestacados() .'/'. $value  ;
+    }
 
+	
 }

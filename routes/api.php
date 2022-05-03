@@ -51,6 +51,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::group(['prefix'=>'productos/clases', 'namespace'=>'Api'], function() {
         $localController = 'ProductosGruposClaseController@';
         Route:: get('/listado'                           , $localController.'productosGruposClaseListar');
+        Route:: get('/destacadas'                        , $localController.'productosGruposClasesDestacadas');
         
     });
 

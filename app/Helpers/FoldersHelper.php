@@ -24,6 +24,9 @@ class FoldersHelper {
       return asset('storage/images/productos') ; // storage_path('app/public/images/productos');
    }
 
-   
+   public static function ProductsGruposDestacados () {
+      return asset('storage/images/gruposDestacados') ; // storage_path('app/public/images/productos');
+   }
+
 
 }
