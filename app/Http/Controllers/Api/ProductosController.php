@@ -39,14 +39,29 @@ class ProductosController extends Controller
 
     // TODOS LOS PRODUCTOS DE UNA CLASE.... RECIBE ARRAY COMO PARAMENTRO
     public function getProductosPorClase ( Request $FormData) {
+        $IdsGrupos = [];
         $ClasesProductos = ClaseProductos::with('grupos')->whereIn('id_clase_grupo', $FormData->clasesProdcucto)->get();
+        $IdsGrupos = $this->getGruposProductosPorClaseProducto( $ClasesProductos) ;
+        return Producto::with('imagenes')->busquedaPorGrupos(  $IdsGrupos)->paginate(20);
+    }
+
+    public function getProductosPorClaseIdMd5 ( Request $FormData) {
+        $IdsGrupos = [];
+        $ClasesProductos = ClaseProductos::with('grupos')->where('idmd5', $FormData->idmd5)->get();
+        $IdsGrupos = $this->getGruposProductosPorClaseProducto( $ClasesProductos) ;
+        return Producto::with('imagenes')->busquedaPorGrupos(  $IdsGrupos)->paginate(20);
+    }
+
+    // MAYO 04 2022     OBTIENE TODOS LOS GRUPO DE UNA CLASE
+    private function getGruposProductosPorClaseProducto ( $ClasesProductos) {
         $IdsGrupos = [];
         foreach ( $ClasesProductos as $Clave => $valor ){
             foreach ($valor->grupos as $grupo ) {
                 array_push($IdsGrupos, $grupo->idgrupo);  ;
             }
         }
-        return Producto::with('imagenes')->busquedaPorGrupos(  $IdsGrupos)->paginate(20);
+        return $IdsGrupos;
     }
+
 
 }

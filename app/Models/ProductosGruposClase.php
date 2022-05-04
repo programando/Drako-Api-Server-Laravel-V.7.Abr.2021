@@ -22,7 +22,7 @@ class ProductosGruposClase extends Model
 
 	protected $fillable = [
 		'nom_clase_grupo',
-		'inactivo', 'imagen'
+		'inactivo', 'imagen', 'idmd5'
 	];
 
 	public function getNomClaseGrupoAttribute( $value ){

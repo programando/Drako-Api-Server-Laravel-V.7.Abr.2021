@@ -36,6 +36,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route:: post('/buscar/idmd5'                     , $localController.'getProductoPorIdMd5');
         Route:: post('/por/grupo'                        , $localController.'getProductosPorGrupo');
         Route:: post('/por/clase'                        , $localController.'getProductosPorClase');
+        Route:: post('/por/idmd5/clase'                  , $localController.'getProductosPorClaseIdMd5');
         Route:: get('/mas/vendidos'                      , 'ProductosVentasController@getProductosVendidos');
         
     });
