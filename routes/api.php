@@ -38,6 +38,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route:: post('/por/clase'                        , $localController.'getProductosPorClase');
         Route:: post('/por/idmd5/clase'                  , $localController.'getProductosPorClaseIdMd5');
         Route:: get('/mas/vendidos'                      , 'ProductosVentasController@getProductosVendidos');
+        Route:: post('/relacionados'                      , 'ProductosRelacionadosController@getProductosRelacionados');
         
     });
 
