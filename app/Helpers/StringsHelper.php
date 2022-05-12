@@ -26,7 +26,7 @@ class StringsHelper {
     public static function InicialMayuscula ( $String) {
         $String = mb_strtolower( trim( $String),'UTF-8'); 
         return ucfirst( $String); 
- }
+     }
  
     public static function LowerTrim ( $String) {
            $String = trim( $String );
