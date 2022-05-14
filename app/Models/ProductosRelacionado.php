@@ -36,6 +36,6 @@ class ProductosRelacionado extends Model
 
 	public function imagenes()
 	{
-		return $this->belongsTo(ProductosImagene::class, 'idproducto', 'idproducto');
+		return $this->hasMany(ProductosImagene::class, 'idproducto', 'idproducto');
 	}
 }
