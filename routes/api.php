@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+
 // NOMINA ELECTRONICA
     Route::group(['prefix'=>'nomina', 'namespace'=>'Api'], function() {
         $localController = 'NominaElctrncaController@';
@@ -25,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
  
-
+ 
 // PRODUCTOS
    Route::group(['prefix'=>'productos', 'namespace'=>'Api'], function() {
         $localController = 'ProductosController@';
