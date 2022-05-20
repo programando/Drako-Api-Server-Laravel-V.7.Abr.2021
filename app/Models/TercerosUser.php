@@ -8,10 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-
-use Strings;
+use App\Helpers\StringsHelper as Strings;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hash;
  
-class TercerosUser extends Model
+class TercerosUser extends Authenticatable
 {
 	protected $table = 'terceros_users';
 	protected $primaryKey = 'idtercero_web';
@@ -40,6 +41,7 @@ class TercerosUser extends Model
 		'pnombre',
 		'papellido',
 		'direccion',
+		'direccion_cmplmnto',
 		'celular',
 		'email',
 		'password',
@@ -56,7 +58,7 @@ class TercerosUser extends Model
 
 
 	    //  MUTATORS:
-		public function setPasswordAttribute ( $value ){
+	public function setPasswordAttribute ( $value ){
 			$this->attributes['password'] = Hash::make( $value );
 	}
 

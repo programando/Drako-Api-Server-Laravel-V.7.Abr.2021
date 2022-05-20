@@ -21,8 +21,9 @@ use App\Http\Requests\TercerosUserLoginRequest;
 class TercerosUserController extends Controller
 {
     
-    public function buscarEmail ( request $FormData ) {
 
+
+    public function buscarEmail ( Request $FormData ) {
         $UsuarioExiste = TercerosUser::where('email', $FormData->email )->first();
  
         if ( !empty( $UsuarioExiste ) ){
@@ -32,19 +33,16 @@ class TercerosUserController extends Controller
         }
     }
 
-    public function login ( TercerosUserLoginRequest $FormData ){ 
-        return  $FormData ;
-         if (Auth::attempt( [
-                  'email'    => $FormData->email,
-                  'password' => $FormData->password,
-                    ],
-                   true ) ) {                               // true al final es para recordar sessión               
+    public function login ( Request $FormData ){ 
+        $credenciales = $FormData->only('email','password');
+
+        if ( Auth::attempt( $credenciales ) ) {                               // true al final es para recordar sessión               
             return response()->json( Auth::user(), 200);
         }    
         $this->ErrorMessage ( 'Datos no registrados en nuestra base de datos...');
     }
   
-      public function logout(){
+    public function logout(){
         Session::flush();
         Cache::flush();
         Auth::logout();
@@ -101,6 +99,21 @@ class TercerosUserController extends Controller
         throw ValidationException::withMessages( [
             'email' =>  [$ErrorTex  ]
         ]);
+    }
+
+    public function registroNuevoUsuario ( request $FormData ) {
+        $Usuario                 = new TercerosUser;
+        $Usuario->identificacion = $FormData->identificacion   ;
+        $Usuario->tipo_persona   = $FormData->tipo_persona   ;
+        $Usuario->idmcipio       = $FormData->idmcipio   ;
+        $Usuario->pnombre        = $FormData->pnombre   ;
+        $Usuario->papellido      = $FormData->papellido   ;
+        $Usuario->direccion      = $FormData->direccion   ;
+        $Usuario->celular        = $FormData->celular   ;
+        $Usuario->email          = $FormData->email   ;
+        $Usuario->password       = $FormData->password   ;
+        $Usuario->save();
+        return $Usuario;
     }
 
 }

@@ -12,8 +12,10 @@ use Illuminate\Support\Facades\Route;
     Route::post('/logout'           , 'TercerosUserController@logout')->name('logout'); 
     Route::post('/reset/password'   , 'TercerosUserController@resetPassword')->name('reset-password'); 
     Route::post('/update/password'  , 'TercerosUserController@updatePassword')->name('update-password'); 
+    Route::post('/registro'          , 'TercerosUserController@registroNuevoUsuario'); 
+
 //});
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/autenticado', function (Request $request) {
     return $request->user();
 });
