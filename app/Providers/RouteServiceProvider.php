@@ -46,6 +46,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
         $this->mapApiPedidos();
         $this->mapApiGenerales();
+        $this->mapApiTercerosUsuarios();
         $this->mapWebRoutes();
         
     }
@@ -98,4 +99,13 @@ class RouteServiceProvider extends ServiceProvider
            ->group(base_path('routes/api/generales.php'));
    }
 
+   protected function mapApiTercerosUsuarios(){
+    Route::middleware('api')
+       ->namespace($this->namespaceApi)
+       ->prefix('usuarios')
+       ->group(base_path('routes/api/tercerosUsers.php'));
+}
+
+
+   
 }

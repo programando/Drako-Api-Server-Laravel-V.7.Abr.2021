@@ -25,5 +25,4 @@ Route::get('/', function () {
 
 //FRASE DEL DÍA
 Route::get('frase'          , 'FrasesController@sentenceToday');
-
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
