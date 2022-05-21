@@ -102,16 +102,19 @@ class TercerosUserController extends Controller
     }
 
     public function registroNuevoUsuario ( request $FormData ) {
-        $Usuario                 = new TercerosUser;
-        $Usuario->identificacion = $FormData->identificacion   ;
-        $Usuario->tipo_persona   = $FormData->tipo_persona   ;
-        $Usuario->idmcipio       = $FormData->idmcipio   ;
-        $Usuario->pnombre        = $FormData->pnombre   ;
-        $Usuario->papellido      = $FormData->papellido   ;
-        $Usuario->direccion      = $FormData->direccion   ;
-        $Usuario->celular        = $FormData->celular   ;
-        $Usuario->email          = $FormData->email   ;
-        $Usuario->password       = $FormData->password   ;
+        $Usuario                     = new TercerosUser;
+        $Usuario->identificacion     = $FormData->identificacion   ;
+        $Usuario->tipo_persona       = $FormData->tipo_persona   ;
+        $Usuario->idmcipio           = $FormData->idmcipio   ;
+        $Usuario->pnombre            = $FormData->pnombre   ;
+        $Usuario->papellido          = $FormData->papellido   ;
+        $Usuario->direccion          = $FormData->direccion   ;
+        $Usuario->direccion_cmplmnto = $FormData->direccion_cmplmnto   ;
+        $Usuario->celular            = $FormData->celular   ;
+        $Usuario->email              = $FormData->email   ;
+        $Usuario->password           = $FormData->password   ;
+        $Usuario->regimen            = $FormData->regimen   ;
+
         $Usuario->save();
         return $Usuario;
     }

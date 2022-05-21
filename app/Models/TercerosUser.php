@@ -37,6 +37,7 @@ class TercerosUser extends Authenticatable
 	protected $fillable = [
 		'identificacion',
 		'tipo_persona',
+		'regimen',
 		'idmcipio',
 		'pnombre',
 		'papellido',
@@ -60,6 +61,22 @@ class TercerosUser extends Authenticatable
 	    //  MUTATORS:
 	public function setPasswordAttribute ( $value ){
 			$this->attributes['password'] = Hash::make( $value );
+	}
+
+	public function setPnombreAttribute ( $value ){
+		$this->attributes['pnombre'] = Strings:: UpperTrim( $value );
+	}
+
+	public function setPapellidoAttribute ( $value ){
+		$this->attributes['papellido'] = Strings:: UpperTrim( $value );
+	}
+
+	public function setDireccionAttribute ( $value ){
+		$this->attributes['direccion'] = Strings:: UpperTrim( $value );
+	}
+
+	public function setDireccionCmplmntoAttribute ( $value ){
+		$this->attributes['direccion_cmplmnto'] = Strings:: UpperTrim( $value );
 	}
 
 	public function setEmailAttribute ( $value ){
