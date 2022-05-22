@@ -15,7 +15,7 @@ return [
     |api/*
     */
 
-    'paths'                    => ['*','/usuarios/login','/usuarios/logout','/usuarios/reset/password','/usuarios/update/password','/sanctum/csrf-cookie'],
+    'paths'                    => ['*','/usuarios/login','/usuarios/logout','/usuarios/reset/password','/usuarios/update/password','/sanctum/csrf-cookie', '/usuarios/autenticado'],
     'allowed_methods'          => ['*'],
     'allowed_origins'          => ['http://localhost:3000','http://localhost:3001','https://drako.facturas.plusoft.co', 'https://api.drako.com.co','http://localhost:8000','https://tienda.drako.com.co', 'https://drako.com.co'],
     'allowed_origins_patterns' => [],
