@@ -31,7 +31,8 @@ class Producto extends Model
 
 	protected $fillable = [ 		'idgrupo', 		'idproducto',  		'idproducto_dt',  		'codproducto', 		'cod_oem',  		'nombre_tecnico',  		'nombre_popular',  		'nombre_otros',
 															'nombre_impreso',  		'medida_diametro',  		'medida_largo',  		'medida_alto',  		'medida_ancho',  		'medida_interna',  		'medida_externa',
-															'peso_kg',  		'vehiculos',  		'precio_base',  		'precio_oferta',  		'iva', 		'horas_reserva', 		'tags',  		'inactivo' ,'idmd5'	];
+															'peso_kg',  		'vehiculos',  		'precio_base',  		'precio_oferta',  		'iva', 		'horas_reserva', 		'tags',  		'inactivo' ,'idmd5',
+														'cant_reservada','saldo'	];
 
 
 
@@ -54,9 +55,9 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 
 	}
 
- public function getCantidadAttribute() {  
-      return  0;
-  }
+	public function getCantidadAttribute() {  
+		return  0;
+	}
 
 	public function scopebusquedaPorGrupos ( $query, $idgrupos ){
 			return $query->whereIn('idgrupo',  (array)$idgrupos);
@@ -68,6 +69,9 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 					 ->where('idgrupo', "$idgrupo"); // Facturas
 	}
 
+	public static function saldoPorIdProducto ($query,  $idproducto ) {
+		return $query->WhereIdProducto($idproducto)->select('saldo','idproducto','cant_reservada')->get();
+	}
 	//************************/
 	//// 	ACCESORS
 	//************************/
