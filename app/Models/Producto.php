@@ -69,8 +69,8 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 					 ->where('idgrupo', "$idgrupo"); // Facturas
 	}
 
-	public static function saldoPorIdProducto ($query,  $idproducto ) {
-		return $query->WhereIdProducto($idproducto)->select('saldo','idproducto','cant_reservada')->get();
+	public   function scopesaldoPorIdProducto ( $query, $idproducto ) {
+		return $query->where('idproducto',$idproducto)->select('saldo','idproducto','cant_reservada')->get();
 	}
 	//************************/
 	//// 	ACCESORS

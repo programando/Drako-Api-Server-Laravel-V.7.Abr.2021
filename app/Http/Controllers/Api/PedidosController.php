@@ -12,6 +12,11 @@ use App\Models\Producto;
 class PedidosController extends Controller
 {
     public function pedidoNuevoRegistro ( request $FormData ) {
+        
+        $DetallePedido =  $FormData->get('detallePedido');
+ 
+        if ( $this->saldoVefiricarExistencias ( $DetallePedido ) === "Inventario-NO-Disponible") return   response()->json("Inventario-NO-Disponible", 150);
+        
         $Pedido = new Pedido;
         $Pedido->idtercero        = $FormData->idtercero ;
         $Pedido->fcha_pedido      = Carbon::now('UTC');
@@ -22,8 +27,6 @@ class PedidosController extends Controller
         $Pedido->flete            = $FormData->flete ;
         $Pedido->total            = $FormData->total ;
         $Pedido->save();
-         
-        $DetallePedido =  $FormData->get('detallePedido');
 
         foreach ( $DetallePedido as $Registro=>$PedidosDt ) {
             $newPedidoDt                 = new PedidosDt;
@@ -42,7 +45,10 @@ class PedidosController extends Controller
             $this->updateSaldoyReservaProducto ( $PedidosDt['idproducto'],$PedidosDt['cantidad'] );
             /*--------------------------------------------------------------------------------------*/
         }
-        // ENVIA CORREO AL CLIENTE Y A DRAKO
+
+         /*-------------ENVIAR CORREO AL CLIENTE CON INFORMACIÓN DEL PEDIDO CREADO------------------*/
+        PedidoWasCreateEvent::dispatch ( $Pedido );   // Pendeinte por desarrollar
+
         return $Pedido;
     }
 
@@ -55,12 +61,11 @@ class PedidosController extends Controller
 
  
 
-    private function saldoVefiricarExistencias( $IdProducto,) {
+    public function saldoVefiricarExistencias($DetallePedido ) {
         foreach ( $DetallePedido as $Registro=>$PedidosDt ) {
-            $saldoProducto = Producto::saldoPorIdProducto( $IdProducto );
-            return $saldoProducto;
-
-            if ( $saldoProducto < $Registro['cantidad'] ) return "Inventario-NO-Disponible";
+            $Producto = Producto::saldoPorIdProducto( $PedidosDt['idproducto'] );
+            $Producto = $Producto->shift();
+            if ( (int)$Producto->saldo  < (int)$Registro['cantidad'] ) return "Inventario-NO-Disponible";
         }
         return "Inventario-SI-Disponible";
     }
