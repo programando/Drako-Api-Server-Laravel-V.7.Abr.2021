@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Pedido;
 use App\Models\PedidosDt;
 use App\Models\Producto;
+use  App\Events\PedidoWasCreateEvent;
 
 class PedidosController extends Controller
 {
@@ -15,8 +16,13 @@ class PedidosController extends Controller
         
         $DetallePedido =  $FormData->get('detallePedido');
  
-        if ( $this->saldoVefiricarExistencias ( $DetallePedido ) === "Inventario-NO-Disponible") return   response()->json("Inventario-NO-Disponible", 150);
-        
+        if ( $this->saldoVefiricarExistencias ( $DetallePedido ) === "Inventario-NO-Disponible") {
+             return response()->json(['message' => 'Inventario-NO-Disponible'], 422);
+        }
+         
+
+
+
         $Pedido = new Pedido;
         $Pedido->idtercero        = $FormData->idtercero ;
         $Pedido->fcha_pedido      = Carbon::now('UTC');
@@ -42,7 +48,7 @@ class PedidosController extends Controller
             $newPedidoDt->save();
 
             /*--------------------------------------------------------------------------------------*/
-            $this->updateSaldoyReservaProducto ( $PedidosDt['idproducto'],$PedidosDt['cantidad'] );
+           $this->updateSaldoyReservaProducto ( $PedidosDt['idproducto'],$PedidosDt['cantidad'] );
             /*--------------------------------------------------------------------------------------*/
         }
 
@@ -54,18 +60,19 @@ class PedidosController extends Controller
 
     private function updateSaldoyReservaProducto ( $IdProducto, $Cantidad ) {
         $Producto                 = Producto::saldoPorIdProducto( $IdProducto  );
-        $Producto->saldo          = $Producto->saldo - $Cantidad ;
-        $Producto->cant_reservada = $Producto->cant_reservada + $Cantidad ;
+        $Producto->saldo          =  $Producto->saldo - $Cantidad ;
+        $Producto->cant_reservada =  $Producto->cant_reservada + $Cantidad ;
         $Producto->update();
     }
 
  
 
-    public function saldoVefiricarExistencias($DetallePedido ) {
+    public function saldoVefiricarExistencias( $DetallePedido ) {
+         
+
         foreach ( $DetallePedido as $Registro=>$PedidosDt ) {
             $Producto = Producto::saldoPorIdProducto( $PedidosDt['idproducto'] );
-            $Producto = $Producto->shift();
-            if ( (int)$Producto->saldo  < (int)$Registro['cantidad'] ) return "Inventario-NO-Disponible";
+            if ( (int)$Producto['saldo']  < (int)$PedidosDt['cantidad'] ) return "Inventario-NO-Disponible";
         }
         return "Inventario-SI-Disponible";
     }
