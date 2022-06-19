@@ -59,9 +59,10 @@ class PedidosController extends Controller
     }
 
     private function updateSaldoyReservaProducto ( $IdProducto, $Cantidad ) {
-        $Producto                 = Producto::saldoPorIdProducto( $IdProducto  );
-        $Producto->saldo          =  $Producto->saldo - $Cantidad ;
-        $Producto->cant_reservada =  $Producto->cant_reservada + $Cantidad ;
+        $Producto                          = Producto::saldoPorIdProducto( $IdProducto  );
+        $Producto->saldo                   = $Producto->saldo - $Cantidad ;
+        $Producto->cant_reservada          = $Producto->cant_reservada + $Cantidad ;
+        $Producto->cant_reservada_in_drako = 0 ;
         $Producto->update();
     }
 
