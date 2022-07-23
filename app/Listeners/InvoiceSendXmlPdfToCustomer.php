@@ -18,13 +18,15 @@ class InvoiceSendXmlPdfToCustomer
 
         $Emails         =   $event->Factura['emails']->unique('email')  ;     
         $when           = now()->addSeconds(5);
+        
         Mail::to( $Emails )
                   ->later( $when,new InvoiceSendToCustomerMail(
                             $event->Factura ,
                             $event->FilePdf, $event->FileXml, 
                             $event->PathPdf, $event->PathXml,
                             $EmailSubject, 
-                            $event->ZipPathFile, $event->ZipFile
+                            $event->ZipPathFile, $event->ZipFile,
+                            $event->UUID
                             ));
     }
  

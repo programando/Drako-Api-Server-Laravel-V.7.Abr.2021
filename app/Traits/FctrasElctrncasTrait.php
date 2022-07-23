@@ -4,19 +4,22 @@ namespace App\Traits;
  
 use Illuminate\Support\Str;
 use App\Models\FctrasElctrnca;
-use App\Models\FctrasElctrncasDataResponse;
-use App\Models\FctrasElctrncasErrorsMessage;
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\DatesHelper as Fecha;
+ 
 use App\Helpers\NumbersHelper as Numbers;
 use App\Helpers\StringsHelper as Strings;
+use App\Models\FctrasElctrncasDataResponse;
+use App\Models\FctrasElctrncasEvent;
+use App\Models\FctrasElctrncasErrorsMessage;
 
 
 
 trait FctrasElctrncasTrait {
     
-    protected $PdfFile, $XmlFile, $DocumentNumber;
+    protected $PdfFile, $XmlFile, $DocumentNumber ;
      
+ 
       protected function traitEmailSend ( $Emails, &$jsonObject ) {
          $emails=[] ;
          foreach ($Emails as $Cuenta ) {
@@ -175,15 +178,29 @@ trait FctrasElctrncasTrait {
             $Registro->save();
 
             // Almacena respuesta de la factura
+            $this->traitFctrasDataReponseNewRecord ($id_factelctrnca, $dataResponse  );
+
+            //Crea registro en el evento
+            $this->traitFctrasEventsNewRecord ($id_factelctrnca );
+        }
+
+        protected function traitFctrasDataReponseNewRecord( $id_fact_elctrnca, $dataResponse ) {
+            FctrasElctrncasDataResponse::where('id_fact_elctrnca', $id_fact_elctrnca)->delete();
             $FctrasDataReponse = new FctrasElctrncasDataResponse;
-            $FctrasDataReponse->id_fact_elctrnca                   = $id_factelctrnca;
+            $FctrasDataReponse->id_fact_elctrnca                   = $id_fact_elctrnca;
             $FctrasDataReponse->qr_data                            = $dataResponse['qr_data'];
-            $FctrasDataReponse->application_response_base64_bytes  = '' ;
             $FctrasDataReponse->attached_document_base64_bytes     = $dataResponse['attached_document_base64_bytes'];
+            $FctrasDataReponse->application_response_base64_bytes  = '' ;
             $FctrasDataReponse->pdf_base64_bytes                   = '' ;
             $FctrasDataReponse->save(); 
-            //$dataResponse['application_response_base64_bytes'];
-            //$dataResponse['pdf_base64_bytes'];  
+        }
+
+        protected function traitFctrasEventsNewRecord ( $id_fact_elctrnca) {
+            $EventExists = FctrasElctrncasEvent::where('id_fact_elctrnca', $id_fact_elctrnca)->first();
+            if ( $EventExists)      return ;
+            $FctrasElctrncasEvent = new FctrasElctrncasEvent;
+            $FctrasElctrncasEvent->id_fact_elctrnca                   = $id_fact_elctrnca;
+            $FctrasElctrncasEvent->save(); 
         }
 
         protected function traitdocumentErrorResponse ( $id_fact_elctrnca, $dataResponse ){ 
@@ -225,6 +242,7 @@ trait FctrasElctrncasTrait {
                 $this->PdfFile  = $documentNumber.'.pdf';
                 $this->XmlFile  = $documentNumber.'.xml';
                 $this->DocumentNumber = $documentNumber;
+                
         }
 
 

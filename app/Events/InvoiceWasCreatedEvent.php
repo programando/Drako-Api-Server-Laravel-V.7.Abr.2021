@@ -16,12 +16,13 @@ class InvoiceWasCreatedEvent
 {
     use Dispatchable,  SerializesModels;
     
-    public $Factura, $FileXml, $FilePdf, $PathPdf, $PathXml, $ZipPathFile, $ZipFile ;
+    public $Factura, $FileXml, $FilePdf, $PathPdf, $PathXml, $ZipPathFile, $ZipFile, $UUID ;
  
     public function __construct( $Factura )  {
          $this->Factura = $Factura ;
+         $this->UUID    = $this->Factura['uuid'];
          $this->getFileNames();
-         $this->createFileZipFromPdfXml () ;
+         $this->createFileZipFromPdfXml () ; 
     }
 
     private function getFileNames(){     
@@ -30,6 +31,7 @@ class InvoiceWasCreatedEvent
          $this->ZipFile = $this->Factura['uuid'].'.zip';
          $this->PathPdf = Storage::disk('Files')->path( $this->FilePdf  );
          $this->PathXml = Storage::disk('Files')->path( $this->FileXml );
+         
     }
 
      private function createFileZipFromPdfXml ( ){

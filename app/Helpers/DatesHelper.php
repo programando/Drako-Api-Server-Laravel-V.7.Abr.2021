@@ -12,7 +12,7 @@ class DatesHelper {
    }
 
    public static function DMY( $value ) {
-        return date_format($value, 'd/mm/Y');
+        return date_format($value, 'd/m/Y');
    }
 
 

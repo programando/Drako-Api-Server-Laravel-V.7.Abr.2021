@@ -28,6 +28,17 @@ class FctrasElctrncasInvoicesController
 
    private $jsonObject = [] , $jsonResponse = []; 
   
+
+        public function invoicesReceived() {
+            $URL = 'receptions' ;
+            return  $this->ApiSoenac->postRequest( $URL , $this->jsonResponse ) ;     
+        }
+
+
+        public function searchInvoceByUuid ( request $FormData ){
+            return FctrasElctrnca::with('customer', 'total', 'events')->where('uuid', $FormData->uuid)->first();
+        }
+
         public function sentInvoicesLogs (Request $FormData) {
             $prfjo_dcmnto = trim( $FormData->prfjo_dcmnto);
             $nro_dcmnto   = $FormData->nro_dcmnto;
@@ -101,18 +112,20 @@ class FctrasElctrncasInvoicesController
        public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
           $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
           InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
+          return "ok";
        }
 
 
         private function invoiceSendGetData ( $id_fact_elctrnca ) {
-             $Factura = FctrasElctrnca::with('customer','total', 'products', 'emails','additionals', 'serviceResponse')->where('id_fact_elctrnca','=', $id_fact_elctrnca)->get();
-             $Factura = $Factura[0];
+            $Factura = FctrasElctrnca::with('customer','total', 'products', 'emails','additionals', 'serviceResponse')->where('id_fact_elctrnca','=', $id_fact_elctrnca)->get();
+            $Factura = $Factura[0];
             $this->getNameFilesTrait($Factura );
             $this->invoiceCreateFilesToSend  ( $id_fact_elctrnca,  $Factura  );
             return $Factura;
         }
 
         public function invoiceFileDownload ( $fileType, $id_fact_elctrnca ) {
+         
             $this->invoiceSendGetData ( $id_fact_elctrnca) ;
             if ( strtoupper( $fileType) == 'PDF') {
                 return response()->download( Storage::disk('Files')->path( $this->PdfFile ) )->deleteFileAfterSend();

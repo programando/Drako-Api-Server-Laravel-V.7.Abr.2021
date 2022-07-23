@@ -4,6 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
+// DOCUMENTO SOPORTE
+Route::group(['prefix'=>'docsoporte', 'namespace'=>'Api'], function() {
+    $localController = 'DcmntosSprteController@';
+    Route:: get('/reporte/dian'          , $localController.'documentosSoporte');
+});
+
+
+
+
 
 // NOMINA ELECTRONICA
     Route::group(['prefix'=>'nomina', 'namespace'=>'Api'], function() {
@@ -70,6 +79,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route:: get('rejected/{id}'               , $localController.'invoiceRejected');  
         Route:: get('/list'                       , $localController.'invoiceList');
         Route:: post('logs'                       , $localController.'sentInvoicesLogs');
+        Route:: post('search-document-by-uuid'    , $localController.'searchInvoceByUuid');
+        Route:: post('recepcionadas'              , $localController.'invoicesReceived');
+
     });
 
 

@@ -10,7 +10,9 @@ use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
+use App\Helpers\DatesHelper as Fechas;
  
 class FctrasElctrnca extends Model
 {
@@ -38,38 +40,17 @@ class FctrasElctrnca extends Model
 		'fcha_dcmnto'
 	];
 
-	protected $fillable = [
-		'number',
-		'sync',
-		'send',
-		'notes',
-		'type_operation_id',
-		'type_document_id',
-		'resolution_id',
-		'fcha_dcmnto',
-		'due_date',
-		'type_currency_id',
-		'order_reference',
-		'receipt_document_reference',
-		'rspnse_dian',
-		'is_valid',
-		'document_number',
-		'uuid',
-		'issue_date',
-		'zip_key',
-		'status_code',
-		'status_description',
-		'status_message',
-		'xml_file_name',
-		'zip_name',
-		'cstmer_rspnse',
-		'cstmer_rspnse_date'
+	protected $fillable = [	'number',	'sync',	'send',	'notes',	'type_operation_id',	'type_document_id',	'resolution_id','fcha_dcmnto','due_date',
+		'type_currency_id',	'order_reference','receipt_document_reference',	'rspnse_dian','is_valid','document_number','uuid','issue_date',
+		'zip_key','status_code','status_description','status_message','xml_file_name','zip_name','cstmer_rspnse','cstmer_rspnse_date'
 	];
+
+	protected $appends = ['PdfFile','XmlFile', 'fechaEmision', 'UrlDian'];
 
 		public function fields(){
 			return [
-					'id'					 => $this->id_fact_elctrnca,
-					'prefijo'			 => $this->prfjo_dcmnto,
+					'id'            => $this->id_fact_elctrnca,
+					'prefijo'       => $this->prfjo_dcmnto,
 					'number'        => $this->number,
 					'fcha_dcmnto'   => $this->fcha_dcmnto,
 					'diffForHumans' => $this->fcha_dcmnto->diffForHumans(),
@@ -77,15 +58,34 @@ class FctrasElctrnca extends Model
 					'rspnse_dian'   => $this->is_valid,
 			];
 		}
+		
+		public function getFechaEmisionAttribute() {  
+			return   Fechas::DMY ( $this->fcha_dcmnto);
+		}
+		public function getUrlDianAttribute() {  
+			return   "https://catalogo-vpfe.dian.gov.co/document/ShowDocumentToPublic/$this->uuid";
+		}
+
+		public function getPdfFileAttribute() {  
+			return  asset('storage/documents')."/".$this->document_number.'.pdf';
+		}
+
+		public function getXmlFileAttribute() {  
+			return   asset('storage/documents')."/".$this->document_number.'.xml';
+		}
 
 		public function customer() {
-			return $this->hasOne(FctrasElctrncasCustomer::class, 'id_fact_elctrnca');
-			
+			return $this->hasOne(FctrasElctrncasCustomer::class, 'id_fact_elctrnca');	
 		}
 
 		public function total() {
 			return $this->hasOne(FctrasElctrncasLegalMonetaryTotal::class, 'id_fact_elctrnca');
 		}
+
+		public function events() {
+			return $this->hasOne(FctrasElctrncasEvent::class, 'id_fact_elctrnca');
+		}
+
 		public function products() {
 			return $this->hasMany(FctrasElctrncasInvoiceLine::class, 'id_fact_elctrnca');
 		}
@@ -105,7 +105,9 @@ class FctrasElctrnca extends Model
 			return $this->hasOne(FctrasElctrncasDataResponse::class, 'id_fact_elctrnca');
 		}
 		
-
+		public function docsSoporteRetenciones() {
+			return $this->hasMany(DcmntosSprteWithholdingTaxTotal::class, 'id_fact_elctrnca');
+		}
  
 
 
@@ -117,7 +119,10 @@ class FctrasElctrnca extends Model
 			public function scopeCreditNotesToSend ( $query ){
 				return $query->Where('rspnse_dian','0')->whereIn('type_document_id', array('5','6'))->get();	// Notas Crédito/Débito
 			}
-			
+			public function scopeDocumentosSoporteToSend ( $query ){
+				return $query->Where('rspnse_dian','0')->where('type_document_id',  array('12','13'))->get(); // Documentos soporte
+			}
+
 		// ACCESORS
 		//=========
 			public function getDocumentNumberAttribute( $value ){

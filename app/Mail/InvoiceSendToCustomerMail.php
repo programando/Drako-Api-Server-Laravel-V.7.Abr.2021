@@ -15,9 +15,9 @@ class InvoiceSendToCustomerMail extends Mailable
 
     public $Factura;
     public $FilePdf, $FileXml, $PathPdf, $PathXml, $ZipFile, $ZipPathFile;
-    public $subject;
+    public $subject,   $SPA_Url_Factura;
  
-    public function __construct( $DatosToEmail, $FilePdf, $FileXml, $PathPdf, $PathXml, $subject, $ZipPathFile, $ZipFile ) {
+    public function __construct( $DatosToEmail, $FilePdf, $FileXml, $PathPdf, $PathXml, $subject, $ZipPathFile, $ZipFile, $UUID ) {
         $this->Factura     = $DatosToEmail;
         $this->FilePdf     = $FilePdf;
         $this->FileXml     = $FileXml;
@@ -26,6 +26,11 @@ class InvoiceSendToCustomerMail extends Mailable
         $this->subject     = $subject;
         $this->ZipFile     = $ZipFile;
         $this->ZipPathFile = $ZipPathFile;
+       
+        $this->SPA_Url_Factura     = config('company.URL_SPA_NUXT'). "documentos/electronicos/factura/$UUID ";
+
+    
+         
     }
 
      public function build()  {        
@@ -33,9 +38,6 @@ class InvoiceSendToCustomerMail extends Mailable
                      ->attach(  $this->ZipPathFile, [ 'as' => $this->ZipFile, 'mime' => 'application/zip']);
     }
 
-
-/*              return $this->subject( $this->subject)->view('mails.invoices.ToCustomer')
-                     ->attach($this->PathPdf, [ 'as' => $this->FilePdf, 'mime' => 'application/pdf'])
-                     ->attach($this->PathXml, [ 'as' => $this->FileXml, 'mime' => 'application/xml']); */
+ 
 
 }
