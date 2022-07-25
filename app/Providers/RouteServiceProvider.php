@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiPedidos();
         $this->mapApiGenerales();
         $this->mapApiTercerosUsuarios();
+        $this->mapFacturaElectronica();
         $this->mapWebRoutes();
         
     }
@@ -104,8 +105,14 @@ class RouteServiceProvider extends ServiceProvider
        ->namespace($this->namespaceApi)
        ->prefix('usuarios')
        ->group(base_path('routes/api/tercerosUsers.php'));
-}
+    }
 
 
-   
+    protected function mapFacturaElectronica(){
+        Route::middleware('api')
+           ->namespace($this->namespaceApi)
+           ->prefix('invoices')
+           ->group(base_path('routes/api/facuraElectronica.php'));
+        }
+ 
 }

@@ -18,22 +18,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-       'App\Events\InvoiceWasCreatedEvent'         => ['App\Listeners\InvoiceSendXmlPdfToCustomer', ],
-       'App\Events\NoteWasCreatedEvent'            => ['App\Listeners\NoteSendXmlPdfToCustomer',],
-       'App\Events\TercerosNominaWasReportedEvent' => ['App\Listeners\TercerosNominaWasReportedListener', ],
-       'App\Events\ProveedoresOrdCpraReportedEvent' => ['App\Listeners\ProveedoresOrdCpraReportedListener', ],
-       'App\Events\PedidoWasCreateEvent'            => ['App\Listeners\PedidoWasCreateListener', ],
+       'App\Events\InvoiceWasCreatedEvent'                   => ['App\Listeners\InvoiceSendXmlPdfToCustomer', ],
+       'App\Events\NoteWasCreatedEvent'                      => ['App\Listeners\NoteSendXmlPdfToCustomer',],
+       'App\Events\TercerosNominaWasReportedEvent'           => ['App\Listeners\TercerosNominaWasReportedListener', ],
+       'App\Events\ProveedoresOrdCpraReportedEvent'          => ['App\Listeners\ProveedoresOrdCpraReportedListener', ],
+       'App\Events\PedidoWasCreateEvent'                     => ['App\Listeners\PedidoWasCreateListener', ],
+       'App\Events\InvoiceEvent030AcuseReciboWasCreateEvent' => ['App\Listeners\InvoiceEvent030AcuseReciboWasCreateListener', ],
     ];
 
-    /**
-     * Register any events for your application.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
-
-        //
-    }
+ 
 }

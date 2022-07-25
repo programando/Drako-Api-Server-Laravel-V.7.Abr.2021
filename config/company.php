@@ -5,7 +5,7 @@
       'EMAILS_EMPRESA'          =>env('EMAILS_EMPRESA'),
 
       'DIRECCION'       => 'CARRERA 13  9 19 Santander',
-      'NIT'             => '10.485.950-1',
+      'NIT'             => '10485950-1',
       'NOMBRE'          => 'DRAKO AUTOPARTES',
 
       'FACTURA_ELECT_TEST_ID'   => env('FACTURA_ELECT_TEST_ID', ''),

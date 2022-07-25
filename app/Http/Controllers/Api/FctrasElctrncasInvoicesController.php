@@ -102,7 +102,7 @@ class FctrasElctrncasInvoicesController
 
     private function responseContainKeyIsValid($idfact_elctrnca , $response ){
         if ( $response['is_valid'] == true || is_null( $response['is_valid'] ) ) {
-            $this->traitDocumentSuccessResponse ( $idfact_elctrnca , $response );
+            $this->traitDocumentSuccessResponse ( $idfact_elctrnca , $response);
             $this->invoiceSendToCustomer  ( $idfact_elctrnca ); 
         }else {
             $this->traitdocumentErrorResponse( $idfact_elctrnca, $response );     
@@ -124,6 +124,7 @@ class FctrasElctrncasInvoicesController
             return $Factura;
         }
 
+        
         public function invoiceFileDownload ( $fileType, $id_fact_elctrnca ) {
          
             $this->invoiceSendGetData ( $id_fact_elctrnca) ;
@@ -141,7 +142,7 @@ class FctrasElctrncasInvoicesController
         }
 
         private function saveInvoicePfdFile  ( $Resolution, $Factura   ){           
-            $Fechas          = $this->FechasFactura ( $Factura['fcha_dcmnto'], $Factura['due_date'] );
+            $Fechas          = $this->FechasFacturaTrait ( $Factura['fcha_dcmnto'], $Factura['due_date'] );
             $Customer        = $Factura['customer'];
             $Products        = $Factura['products'];
             $Totals          = $Factura['total'];
@@ -160,21 +161,7 @@ class FctrasElctrncasInvoicesController
             Storage::disk('Files')->put( $this->XmlFile, base64_decode($base64_bytes));
         }
 
-        private function FechasFactura ( $FechaFactura, $FechaVencimiento) {
-            $Fechas       = [];
-            $FechaFactura = DatesHelper::DocumentDate( $FechaFactura  );  
-            $FechaVcmto   = DatesHelper::DocumentDate( $FechaVencimiento  );
-            $Fechas = [
-                'FactDia'   => $FechaFactura->day,
-                'FactMes'   => GeneralHelper::nameOfMonth( $FechaFactura->month),
-                'Factyear'  => $FechaFactura->year,
-                'VenceDia'  => $FechaVcmto->day,
-                'VenceMes'  => GeneralHelper::nameOfMonth( $FechaVcmto->month),
-                'VenceYear' => $FechaVcmto->year
-            ];
-            return $Fechas;
-        }
-
+ 
 
         public function invoiceAccepted ( $Token ) {          
             $this->customerResponse ( $Token, 'ACEPTADA');

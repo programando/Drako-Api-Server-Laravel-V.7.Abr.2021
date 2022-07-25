@@ -69,21 +69,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     
 
-// INVOICES
-    Route::group(['prefix'=>'invoices', 'namespace'=>'Api'], function() {
-        $localController = 'FctrasElctrncasInvoicesController@';
-        Route:: get('/'                           , $localController.'invoices')->name('invoices');
-        Route:: get('pdf/{id}'                    , $localController.'invoiceSendToCustomer');
-        Route:: get('/download/{filetype}/{id}'   , $localController.'invoiceFileDownload');
-        Route:: get('accepted/{id}'               , $localController.'invoiceAccepted');
-        Route:: get('rejected/{id}'               , $localController.'invoiceRejected');  
-        Route:: get('/list'                       , $localController.'invoiceList');
-        Route:: post('logs'                       , $localController.'sentInvoicesLogs');
-        Route:: post('search-document-by-uuid'    , $localController.'searchInvoceByUuid');
-        Route:: post('recepcionadas'              , $localController.'invoicesReceived');
-
-    });
-
+// 
 
  // NOTES
     Route::group(['prefix'=>'notes', 'namespace'=>'Api'], function() {

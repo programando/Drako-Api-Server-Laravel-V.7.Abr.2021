@@ -5,15 +5,17 @@ namespace App\Traits;
 use Illuminate\Support\Str;
 use App\Models\FctrasElctrnca;
 use Illuminate\Support\Facades\Hash;
+
 use App\Helpers\DatesHelper as Fecha;
- 
+use App\Helpers\GeneralHelper  ;
+
 use App\Helpers\NumbersHelper as Numbers;
 use App\Helpers\StringsHelper as Strings;
 use App\Models\FctrasElctrncasDataResponse;
 use App\Models\FctrasElctrncasEvent;
 use App\Models\FctrasElctrncasErrorsMessage;
 
-
+use Carbon;
 
 trait FctrasElctrncasTrait {
     
@@ -163,7 +165,7 @@ trait FctrasElctrncasTrait {
             $Registro->save();
         }
 
-       protected function traitDocumentSuccessResponse( $id_factelctrnca, $dataResponse ){
+       protected function traitDocumentSuccessResponse( $id_factelctrnca, $dataResponse){
             $Registro = FctrasElctrnca::findOrFail( $id_factelctrnca );
             $Registro['is_valid']                          = $dataResponse['is_valid'];
             $Registro['document_number']                   = $dataResponse['number'];
@@ -178,18 +180,19 @@ trait FctrasElctrncasTrait {
             $Registro->save();
 
             // Almacena respuesta de la factura
-            $this->traitFctrasDataReponseNewRecord ($id_factelctrnca, $dataResponse  );
+            $this->traitFctrasDataReponseNewRecord ($id_factelctrnca, $dataResponse );
 
             //Crea registro en el evento
             $this->traitFctrasEventsNewRecord ($id_factelctrnca );
         }
 
-        protected function traitFctrasDataReponseNewRecord( $id_fact_elctrnca, $dataResponse ) {
+        protected function traitFctrasDataReponseNewRecord( $id_fact_elctrnca, $dataResponse) {
             FctrasElctrncasDataResponse::where('id_fact_elctrnca', $id_fact_elctrnca)->delete();
             $FctrasDataReponse = new FctrasElctrncasDataResponse;
             $FctrasDataReponse->id_fact_elctrnca                   = $id_fact_elctrnca;
             $FctrasDataReponse->qr_data                            = $dataResponse['qr_data'];
             $FctrasDataReponse->attached_document_base64_bytes     = $dataResponse['attached_document_base64_bytes'];
+
             $FctrasDataReponse->application_response_base64_bytes  = '' ;
             $FctrasDataReponse->pdf_base64_bytes                   = '' ;
             $FctrasDataReponse->save(); 
@@ -199,7 +202,8 @@ trait FctrasElctrncasTrait {
             $EventExists = FctrasElctrncasEvent::where('id_fact_elctrnca', $id_fact_elctrnca)->first();
             if ( $EventExists)      return ;
             $FctrasElctrncasEvent = new FctrasElctrncasEvent;
-            $FctrasElctrncasEvent->id_fact_elctrnca                   = $id_fact_elctrnca;
+            $FctrasElctrncasEvent->id_fact_elctrnca              = $id_fact_elctrnca;
+            $FctrasElctrncasEvent->fcha_rgstro                   = Carbon::now();
             $FctrasElctrncasEvent->save(); 
         }
 
@@ -245,5 +249,19 @@ trait FctrasElctrncasTrait {
                 
         }
 
+        private function FechasFacturaTrait ( $FechaFactura, $FechaVencimiento) {
+            $Fechas       = [];
+            $FechaFactura = Fecha::DocumentDate( $FechaFactura  );  
+            $FechaVcmto   = Fecha::DocumentDate( $FechaVencimiento  );
+            $Fechas = [
+                'FactDia'   => $FechaFactura->day,
+                'FactMes'   => GeneralHelper::nameOfMonth( $FechaFactura->month),
+                'Factyear'  => $FechaFactura->year,
+                'VenceDia'  => $FechaVcmto->day,
+                'VenceMes'  => GeneralHelper::nameOfMonth( $FechaVcmto->month),
+                'VenceYear' => $FechaVcmto->year
+            ];
+            return $Fechas;
+        }
 
 }

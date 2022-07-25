@@ -59,6 +59,8 @@ class FctrasElctrnca extends Model
 			];
 		}
 		
+
+
 		public function getFechaEmisionAttribute() {  
 			return   Fechas::DMY ( $this->fcha_dcmnto);
 		}
@@ -104,6 +106,10 @@ class FctrasElctrnca extends Model
 		public function serviceResponse() {
 			return $this->hasOne(FctrasElctrncasDataResponse::class, 'id_fact_elctrnca');
 		}
+ 
+		public function eventsResponse030() {
+			return $this->hasOne(FctrasElctrncasEventsResponse::class, 'id_fact_elctrnca')->where('cod_event','030');
+		}
 		
 		public function docsSoporteRetenciones() {
 			return $this->hasMany(DcmntosSprteWithholdingTaxTotal::class, 'id_fact_elctrnca');
@@ -113,6 +119,10 @@ class FctrasElctrnca extends Model
 
 		// SCOPES
 		//=========
+			public function scopeInvoicesSearchDataByUUID ($query, $uuid ){
+ 
+				return $query->Where('uuid', "=","$uuid")->get(); // Facturas
+			}
 			public function scopeInvoicesToSend ( $query ){
 				return $query->Where('rspnse_dian','0')->where('type_document_id', '1'); // Facturas
 			}
