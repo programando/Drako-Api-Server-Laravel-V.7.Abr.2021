@@ -30,7 +30,7 @@ class FctrasElctrncasErrorsMessage extends Model
 
 	protected $fillable = [
 		'id_fact_elctrnca',
-		'error_message'
+		'error_message','fecha'
 	];
 
 	public function fctras_elctrnca()

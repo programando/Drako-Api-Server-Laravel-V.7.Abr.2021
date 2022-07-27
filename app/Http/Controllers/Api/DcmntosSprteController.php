@@ -15,6 +15,7 @@ use App\Helpers\DatesHelper;
 use App\Helpers\GeneralHelper  ;
 
 use App\Models\FctrasElctrnca   ;
+use App\Models\FctrasElctrncasErrorsMessage as ErrorResponse   ;
 use App\Models\FctrasElctrncasMcipio;
 use App\Models\DcmntosSprteWithholdingTaxTotal;
  
@@ -37,12 +38,33 @@ class DcmntosSprteController extends Controller {
         foreach ($Documentos as $Documento ) {
             $this->reportingInformation ( $Documento );
             $response   = $this->ApiSoenac->postRequest( $URL, $this->jsonObject) ;  
-             
+            $this->traitUpdateJsonObject ( $Documento );
+            $this->errorResponse  ( $response , $Documento['id_fact_elctrnca']  );
+            $this->successReponse ( $response , $Documento['id_fact_elctrnca']  );
             return  $response ;
-            //$this->documentsProcessReponse( $Empleado['id_nomina_elctrnca'], $response ) ;
         }
- 
-        return $Documentos;
+    }
+
+
+    private function successReponse ( $response, $IdFactElctrnca) {
+        if ( $response['is_valid'] == true ) {
+            $this->traitDocumentSuccessResponse   ( $IdFactElctrnca, $response );
+            $this->traitDocumentSoportReponseSave ( $IdFactElctrnca, $response );
+        }
+    }
+
+
+    private function errorResponse ( $response, $IdFactElctrnca) {
+        if ( $response['is_valid'] == false ) {
+            $Erors   = $response['errors_messages'] ;
+            foreach ($erors as $Error) {
+                 $NewError                   = new ErrorResponse ;
+                 $NewError->id_fact_elctrnca = $IdFactElctrnca;
+                 $NewError->error_message    = $Error;
+                 $NewError->fecha            = $Carbon::now();
+                 $NewError->save();
+            }
+        }
     }
 
 
@@ -56,15 +78,13 @@ class DcmntosSprteController extends Controller {
 
 
    private function jsonObjectCreate ( $DocSoporte, $otherData ) {
-   
-        $this->DocSoporteHeaderTrait                ( $DocSoporte                               ,  $this->jsonObject                            )   ;  
-        $this->DocSoporteResolutionTrait            ( $this->jsonObject                                                                         )   ;  
+        $this->DocSoporteHeaderTrait                ( $DocSoporte                               ,  $this->jsonObject    , $DocSoporte['fcha_dcmnto'] )   ;  
+        $this->DocSoporteResolutionTrait            ( $this->jsonObject                                                                              )   ;  
         $this->DocSoporteEnvironmentTrait           ( $this->jsonObject                                                                         )   ;
         $this->traitCustomer                        ( $otherData[0]['customer']                 , $this->jsonObject                             )   ;   
-        $this->DocSoporteWithHoldingTaxTotalsTrait  ( $otherData[0]['docsSoporteRetenciones']   , $this->jsonObject, 'withholding_tax_totals'   )   ;
+        //$this->DocSoporteWithHoldingTaxTotalsTrait  ( $otherData[0]['docsSoporteRetenciones']   , $this->jsonObject, 'withholding_tax_totals'   )   ;
         $this->DocSoporteLegalMonetaryTotalsTrait   ( $otherData[0]['total']                    , $this->jsonObject, 'legal_monetary_totals'    )   ;
-        $this->DocSoporteInvoiceLinesTrait          ( $otherData[0]['products']                 , $this->jsonObject, 'invoice_lines'            )   ; 
-       
+        $this->DocSoporteInvoiceLinesTrait          ( $otherData[0]['products']                 , $this->jsonObject, 'invoice_lines' , $DocSoporte['fcha_dcmnto']           )   ; 
    }
 
 

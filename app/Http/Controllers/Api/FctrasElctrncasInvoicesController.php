@@ -102,7 +102,8 @@ class FctrasElctrncasInvoicesController
 
     private function responseContainKeyIsValid($idfact_elctrnca , $response ){
         if ( $response['is_valid'] == true || is_null( $response['is_valid'] ) ) {
-            $this->traitDocumentSuccessResponse ( $idfact_elctrnca , $response);
+            $this->traitDocumentSuccessResponse    ( $idfact_elctrnca , $response );
+            $this->traitFctrasDataReponseNewRecord ( $idfact_elctrnca , $response );
             $this->invoiceSendToCustomer  ( $idfact_elctrnca ); 
         }else {
             $this->traitdocumentErrorResponse( $idfact_elctrnca, $response );     

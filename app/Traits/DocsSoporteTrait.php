@@ -5,7 +5,8 @@ namespace App\Traits;
 use Illuminate\Support\Str;
 use App\Models\FctrasElctrnca;
 use App\Models\FctrasElctrncasDataResponse;
-use App\Models\FctrasElctrncasErrorsMessage;
+use App\Models\FctrasElctrncasSoportDocumentResponse as DocSoporteResponse;
+
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\DatesHelper as Fecha;
 use App\Helpers\NumbersHelper as Numbers;
@@ -19,13 +20,15 @@ trait DocsSoporteTrait {
     
     
 
-    protected function DocSoporteHeaderTrait($Document , &$jsonObject ) {      
+    protected function DocSoporteHeaderTrait($Document , &$jsonObject, $FechaTransacion  ) {      
         $jsonObject= [
-            'number'            => $Document["number"],
+            //'number'            => $Document["number"],
+            'number'            => '990000104',
             'type_document_id'  => $Document["type_document_id"],
             'type_operation_id' => $Document["type_operation_id"],
             //'resolution_id'     => $Document["resolution_id"],
             'sync'              => true,
+            'date'              => Fecha::YMD( $FechaTransacion) 
             ] ;
         }
 
@@ -70,28 +73,26 @@ trait DocsSoporteTrait {
 
     protected function DocSoporteLegalMonetaryTotalsTrait ( $Totals, &$jsonObject, $key  ) {
         $jsonObject[$key] =[
-            'line_extension_amount'  => Numbers::jsonFormat($Totals['line_extension_amount'],2),
-            'tax_exclusive_amount'   => Numbers::jsonFormat($Totals  ['tax_exclusive_amount'],2),
-            'tax_inclusive_amount'   => Numbers::jsonFormat($Totals  ['tax_inclusive_amount'],2),
-            'payable_amount'         => Numbers::jsonFormat($Totals  ['payable_amount'],2),
+            'line_extension_amount'  => Numbers::jsonFormat($Totals['line_extension_amount'],2),        // Total Valor Bruto (Antes de tributos)
+            'tax_exclusive_amount'   => Numbers::jsonFormat($Totals  ['tax_exclusive_amount'],2),       // Total Valor Base Imponible (Base imponible para el cálculo de los tributos)
+            'tax_inclusive_amount'   => Numbers::jsonFormat($Totals  ['tax_inclusive_amount'],2),       // Total de Valor Bruto más tributos
+            'payable_amount'         => Numbers::jsonFormat($Totals  ['payable_amount'],2),             // Valor de la Factura
         ];      
     }
 
-    protected function DocSoporteInvoiceLinesTrait ( $Products, &$jsonObject, $jsonKey  ) {
+    protected function DocSoporteInvoiceLinesTrait ( $Products, &$jsonObject, $jsonKey, $FechaTransacion  ) {
         $Productos = [];          
         foreach ($Products as $Product) {
          $ProductToCreate = [
-             'unit_measure_id'             => $Product['unit_measure_id'],
              'invoiced_quantity'           => Numbers::jsonFormat ( $Product['invoiced_quantity'], 6),
-             'vendor_code'                 => $Product['vendor_code'],
+             'vendor_code'                 => $Product['code'],
              'line_extension_amount'       => Numbers::jsonFormat ($Product['line_extension_amount'], 2),
              'invoice_period'              => [
-                'start_date'                        =>  '2022-07-18',
-                'form_generation_transmission_id'   => '2' ,  
+                'start_date'                        =>  Fecha::YMD( $FechaTransacion) ,
+                'form_generation_transmission_id'   => '1' ,  
              ],
              'description'                 => $Product['description'],
              'code'                        => $Product['code'],
-             'type_item_identification_id' => $Product['type_item_identification_id'],
              'price_amount'                => Numbers::jsonFormat ($Product['price_amount'],2),
              'base_quantity'               => Numbers::jsonFormat ($Product['base_quantity'],2)
            ];  
@@ -103,9 +104,16 @@ trait DocsSoporteTrait {
 
  
 
-/*
-      'start_date'                        =>  '20220718';//$Product['start_date'],
-                'form_generation_transmission_id'   => '2' ;        //$Product['form_generation_transmission_id']
-                */
+    protected function traitDocumentSoportReponseSave( $id_fact_elctrnca, $dataResponse) {
+        DocSoporteResponse::where('id_fact_elctrnca', $id_fact_elctrnca)->delete();
+        $FctrasDataReponse = new DocSoporteResponse;
+        $FctrasDataReponse->id_fact_elctrnca                   = $id_fact_elctrnca;
+        $FctrasDataReponse->qr_data                            = $dataResponse['qr_data'];
+        $FctrasDataReponse->attached_document_base64_bytes     = $dataResponse['attached_document_base64_bytes'];
+        $FctrasDataReponse->application_response_base64_bytes  = '' ;
+        $FctrasDataReponse->pdf_base64_bytes                   = '' ;
+        $FctrasDataReponse->save(); 
+    }
+
 
 }
