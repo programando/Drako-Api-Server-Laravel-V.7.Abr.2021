@@ -19,7 +19,7 @@ class NoteSendXmlPdfToCustomer
         $Emails =   $event->Note['emails']->unique('email')  ;     
         $when   = now()->addSeconds(5);
         Mail::to( $Emails )
-                  ->cc('auxcontable@balquimia.com')
+                  ->cc('frenostoro1@hotmail.com')
                   ->later( $when,new CreditNoteSentToCustomerMail(
                             $event->Note ,
                             $event->FilePdf, $event->FileXml, 

@@ -35,7 +35,7 @@
                                  <tr>
                                     <td style="box-sizing:border-box;
                                        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';max-width:100vw;padding:32px">
-                                       Ha recibido este correo electónico desde la página de balquimia.com <br>
+                                       Ha recibido este correo electónico desde la página de drako.com.co <br>
 
                                        <p> {{ $comentario }} </p>
                                        <p>  Interesado(a) en :</p>

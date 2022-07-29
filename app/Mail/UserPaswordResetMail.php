@@ -18,7 +18,7 @@ class UserPaswordResetMail extends Mailable
     {
         $this->Email = $Email;
         $this->Token = $Token;
-        $this->from = ['address'=> env('EMAIL_SISTEMAS'), 'name' => config('balquimia.EMPRESA' )];
+        $this->from = ['address'=> env('EMAIL_SISTEMAS'), 'name' => config('company.NOMBRE' )];
         $this->urlClient = env('APP_URL_CLIENT') . env('URL_USER_PASSWORD_RESET').$Token;
     }
 

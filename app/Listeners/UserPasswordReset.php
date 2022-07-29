@@ -14,7 +14,7 @@ class UserPasswordReset
     public $from;
     
     public function handle(UserPasswordResetEvent $event)    {
-         //$this->from ='sistemas@balquimia.com';
+       
          
          Mail::to( $event->Email)
             ->queue( new UserPaswordResetMail (  $event->Email, $event->Token  ));

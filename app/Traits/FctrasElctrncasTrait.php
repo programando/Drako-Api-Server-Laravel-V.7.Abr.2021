@@ -178,6 +178,8 @@ trait FctrasElctrncasTrait {
             $Registro['zip_name']                          = $dataResponse['zip_name'];
             //$Registro['cstmer_token']                      = Str::random(60); 
             $Registro->save();
+
+            $this->traitFctrasEventsNewRecord($id_factelctrnca  );
         }
 
         protected function traitFctrasDataReponseNewRecord( $id_fact_elctrnca, $dataResponse) {
