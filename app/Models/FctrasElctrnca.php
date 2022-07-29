@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 use App\Helpers\DatesHelper as Fechas;
  
+
 class FctrasElctrnca extends Model
 {
 	protected $primaryKey   = 'id_fact_elctrnca';
@@ -75,6 +76,11 @@ class FctrasElctrnca extends Model
 		public function getXmlFileAttribute() {  
 			return   asset('storage/documents')."/".$this->document_number.'.xml';
 		}
+
+		public static function notesBillingReferenceGetUuid() {
+			return DB::select('call fctras_elctrncas_notes_billing_reference_get_uuid()' );
+		}
+
 
 		public function customer() {
 			return $this->hasOne(FctrasElctrncasCustomer::class, 'id_fact_elctrnca');	

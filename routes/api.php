@@ -75,9 +75,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::group(['prefix'=>'notes', 'namespace'=>'Api'], function() {
         Route::get('pdf/{id}'             , 'FctrasElctrncasNotesCrController@noteSendToCustomer');
         Route::get('{tpNote}'             , 'FctrasElctrncasNotesCrController@notes');
+        Route:: post('/getUuidCreditNote' ,  'FctrasElctrncasNotesCrController@notesBillingReferenceGetUuid')                        ;
+        //  notes/getUuidCreditNote        
     });
 
     Route::group(['prefix'=>'ordenes-compra', 'namespace'=>'Api'], function() {
-        Route::get('enviar-proveedor'           , 'OrdenesCompraController@getOrdenesCompraInformarProveedor');
-       
+        Route::get('enviar-proveedor'           , 'OrdenesCompraController@getOrdenesCompraInformarProveedor'); 
     });

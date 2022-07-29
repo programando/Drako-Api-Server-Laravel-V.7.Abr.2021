@@ -22,6 +22,12 @@ class FctrasElctrncasNotesCrController
     private $jsonObject = [] ;
     private  $keyMonetary ,$keyLines ;
     
+
+    public function notesBillingReferenceGetUuid() {
+       return  FctrasElctrnca::notesBillingReferenceGetUuid();
+    }
+
+
     public function notes( $TipoNota ) {
           $URL = $this->getNotesUrl($TipoNota );
            
