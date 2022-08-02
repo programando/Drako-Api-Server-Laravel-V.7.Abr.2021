@@ -22,11 +22,10 @@ trait DocsSoporteTrait {
 
     protected function DocSoporteHeaderTrait($Document , &$jsonObject, $FechaTransacion  ) {      
         $jsonObject= [
-            //'number'            => $Document["number"],
-            'number'            => '990000104',
+            'number'            => $Document["number"],
             'type_document_id'  => $Document["type_document_id"],
             'type_operation_id' => $Document["type_operation_id"],
-            //'resolution_id'     => $Document["resolution_id"],
+             'resolution_id'    => 11,
             'sync'              => true,
             'date'              => Fecha::YMD( $FechaTransacion) 
             ] ;
@@ -34,7 +33,7 @@ trait DocsSoporteTrait {
 
     protected function DocSoporteEnvironmentTrait ( &$jsonObject ) {
         $jsonObject['environment']=[
-                'type_environment_id' => '2',                                      // 1 producction,   2 habilitacion o pruebas
+                'type_environment_id' => '1',                                      // 1 producction,   2 habilitacion o pruebas
         ]; 
     }
 
