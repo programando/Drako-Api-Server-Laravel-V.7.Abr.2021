@@ -15,5 +15,6 @@ Route:: get('/list'                       , $localController.'invoiceList')     
 Route:: post('logs'                       , $localController.'sentInvoicesLogs')                        ;
 Route:: post('search-document-by-uuid'    , $localController.'searchInvoceByUuid')                      ;
 Route:: post('recepcionadas'              , $localController.'invoicesReceived')                        ;
+
 Route:: post('event/acuse-recibo'         , 'FctrasElctrncasEventsController@acuseRecibo')              ;
 

@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
  
@@ -16,7 +17,7 @@ class FctrasElctrncasEvent extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'id_fact_elctrnca'        => 'int',
+		 
 		'event_030_acse_rbo'      => 'bool',
 		'event_031_rclmo_rchzo'   => 'bool',
 		'event_032_rcbo_bn'       => 'bool',
@@ -33,7 +34,7 @@ class FctrasElctrncasEvent extends Model
 	];
 
 	protected $fillable = [
-		'id_fact_elctrnca',
+		'uuid',
 		'event_030_acse_rbo',
 		'event_031_rclmo_rchzo',
 		'event_032_rcbo_bn',
@@ -45,12 +46,11 @@ class FctrasElctrncasEvent extends Model
 		'event_033_fcha',
 		'event_034_fcha'
 	];
-
-	public function fctras_elctrnca()
-	{
-		return $this->belongsTo(FctrasElctrnca::class, 'id_fact_elctrnca');
+ 
+ 
+	public static function maxId(   ) {
+		return DB::table('fctras_elctrncas_events')->max('id')+1;
 	}
 
- 
 
 }
