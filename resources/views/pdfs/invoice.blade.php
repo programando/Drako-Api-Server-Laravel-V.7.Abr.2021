@@ -265,12 +265,15 @@
                             </table>
                             
                             <table width="100%">
+                            @foreach($Taxes as $Tax )
                                 <tr>
                                     <td width="40%" class="p5 bRS1">IVA</td>
-                                    <td width="20%" class="p5 taR bRS1">{{ Numbers::invoiceFormat($Additionals['vr_base']) }}</td>
-                                    <td width="20%" class="p5 taR bRS1">{{ Numbers::invoiceFormat($Additionals['pctje_iva']) .'%'}}</td>
-                                    <td width="20%" class="p5 taR">{{ Numbers::invoiceFormat($Additionals['vr_iva']) }}</td>
+                                    <td width="20%" class="p5 taR bRS1">{{ Numbers::invoiceFormat($Tax['vr_base']) }}</td>
+                                    <td width="20%" class="p5 taR bRS1">{{ Numbers::invoiceFormat($Tax['pctje_iva']) .'%'}}</td>
+                                    <td width="20%" class="p5 taR">{{ Numbers::invoiceFormat($Tax['vr_iva']) }}</td>
                                 </tr>
+                            @endforeach 
+
                             </table>
                         </div>
                     </td>

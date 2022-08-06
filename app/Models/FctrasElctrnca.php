@@ -120,6 +120,10 @@ class FctrasElctrnca extends Model
 		public function docsSoporteRetenciones() {
 			return $this->hasMany(DcmntosSprteWithholdingTaxTotal::class, 'id_fact_elctrnca');
 		}
+		
+		public function taxes() {
+			return $this->hasMany(FctrasElctrncasTax::class, 'id_fact_elctrnca');
+		}
  
 		public function docsSoporteResponse() {
 			return $this->hasMany(FctrasElctrncasSoportDocumentResponse::class, 'id_fact_elctrnca');

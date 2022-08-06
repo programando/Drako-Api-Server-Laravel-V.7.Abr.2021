@@ -18,56 +18,107 @@ class FctrasElctrncasEventsController extends Controller
     private $jsonObject = [] , $jsonResponse = []; 
 
 
+
+    public function documentStatus ( request $FormData) {
+        $partUrl  = 'receptions/' . "$FormData->uuid";
+        $response        = $this->ApiSoenac->postRequest( $partUrl, '' ) ;
+        return   $response  ;        
+    }
+    
+    public function documentosRecepcionados(  ){
+        $partUrl  = 'receptions';
+        $response        = $this->ApiSoenac->postRequest( $partUrl, '' ) ;
+        return   $response  ;
+    }
+
+
     public function acuseRecibo(request $FormData) {
         $response = '';
         $partUrl  = 'event/030';
         $Number   = FctrasElctrncasEvent::maxId();
         $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
         $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
-        $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid  );
+        $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid,'030'  );
+        return   $response  ;
+    }
+
+
+    public function rechazoReclamo(request $FormData) {
+        $response = '';
+        $partUrl  = 'event/031';
+        $Number   = FctrasElctrncasEvent::maxId();
+        $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
+        $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
+        $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid, '031'  );
         return   $response['expedition_date'] ;
     }
 
-    private function processEventResponse ( $response, $UUID) {
+    public function reciboBienServicio(request $FormData) {
+        $response = '';
+        $partUrl  = 'event/032';
+        $Number   = FctrasElctrncasEvent::maxId();
+        $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
+        $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
+        $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid, '032'  );
+        return   $response ;
+    }
+
+    public function aceptacionExpresa(request $FormData) {
+        $response = '';
+        $partUrl  = 'event/033';
+        $Number   = FctrasElctrncasEvent::maxId();
+        $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
+        $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
+        $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid, '033'  );
+        return   $response ;
+    }
+
+
+    private function processEventResponse ( $response, $UUID, $CodeEvent ) {
        if ( array_key_exists('is_valid',$response) && $response['is_valid'] == true) {
-            $this->_030AcuseReciboUpdateValidResponse   ( $response);
+            $this->saveNewResponse   ( $response, $UUID,$CodeEvent );
         } else {
             return "eeror";
         }
     }
 
 
-    private function _030AcuseReciboUpdateValidResponse ( $response) {    
-        $UUID = $response['uuid'];
-        $EventExists = FctrasElctrncasEvent::where('uuid', "$UUID")->where('event_030_acse_rbo','1')->first();
-       if ( $EventExists)      return ;
-
-       $FctrasElctrncasEvent                     = new FctrasElctrncasEvent;
-       $FctrasElctrncasEvent->uuid               = $UUID;
-       $FctrasElctrncasEvent->event_030_acse_rbo = true ;
-       $FctrasElctrncasEvent->event_030_fcha     = $response['expedition_date'] ;
-       $FctrasElctrncasEvent->fcha_rgstro        = Carbon::now(); ;
+    private function saveNewResponse ( $response, $UUIDDoc, $CodeEvent) {    
+       $FctrasElctrncasEvent                        = new FctrasElctrncasEvent;
+       $FctrasElctrncasEvent->fcha_rgstro           = Carbon::now(); ;
+       $FctrasElctrncasEvent->event_code            = $CodeEvent;
+       $FctrasElctrncasEvent->event_expedition_date = $response['expedition_date'] ;
+       $FctrasElctrncasEvent->event_status_message  = $response['status_message'] ;
+       $FctrasElctrncasEvent->uuid_document         = $UUIDDoc;
+       $FctrasElctrncasEvent->uud_response          = $response['uuid'];  
        $FctrasElctrncasEvent->save();
     }
 
 
+   
+
 
     private function getJsonAcuse( $UUID, $Number ) {
-        $Person      = [
-            "type_document_identification_id" => '3',
-            "identification_number"           => '94491178',
-            "first_name"                      => 'JHON',
-            "family_name"                     => "JAMES",
-            "job_title"                       => "N/A",
-            "organization_department"         => "N/A"
-        ];
+
         $jsonData= [
             'number'      => $Number,
             'uuid'        => $UUID,
             'sync'        => true,
-            'person'      => $Person
+            'person'      => $this->getPersonObject ()
           ] ;
         $this->jsonObject = $jsonData;
+    }
+
+    private function getPersonObject() {
+        return  [
+            "type_document_identification_id" => '3',
+            "identification_number"           => '34599831',
+            "first_name"                      => 'MARÍA',
+            "family_name"                     => "MARTÍNEZ",
+            "job_title"                       => "N/A",
+            "organization_department"         => "N/A"
+        ];
+
     }
 
 

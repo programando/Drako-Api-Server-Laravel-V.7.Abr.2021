@@ -118,7 +118,7 @@ class FctrasElctrncasInvoicesController
 
 
         private function invoiceSendGetData ( $id_fact_elctrnca ) {
-            $Factura = FctrasElctrnca::with('customer','total', 'products', 'emails','additionals', 'serviceResponse')->where('id_fact_elctrnca','=', $id_fact_elctrnca)->get();
+            $Factura = FctrasElctrnca::with('customer','total', 'products', 'emails','additionals', 'serviceResponse', 'taxes')->where('id_fact_elctrnca','=', $id_fact_elctrnca)->get();
             $Factura = $Factura[0];
             $this->getNameFilesTrait($Factura );
             $this->invoiceCreateFilesToSend  ( $id_fact_elctrnca,  $Factura  );
@@ -148,10 +148,11 @@ class FctrasElctrncasInvoicesController
             $Products        = $Factura['products'];
             $Totals          = $Factura['total'];
             $Additionals     = $Factura['additionals'];
+            $Taxes            = $Factura['taxes'];
             $ServiceResponse = $Factura['serviceResponse'];
             $CantProducts    = $Products->count();         
             $CodigoQR        = $this->QrCodeGenerateTrait( $ServiceResponse['qr_data'] );
-            $Data            = compact('Resolution', 'Fechas', 'Factura','Customer', 'Products','CantProducts', 'Totals','CodigoQR', 'Additionals' );
+            $Data            = compact('Resolution', 'Fechas', 'Factura','Customer', 'Products','CantProducts', 'Totals','CodigoQR', 'Additionals','Taxes' );
             $PdfContent      = $this->pdfCreateFileTrait('pdfs.invoice', $Data);
             Storage::disk('Files')->put( $this->PdfFile, $PdfContent);
         }
