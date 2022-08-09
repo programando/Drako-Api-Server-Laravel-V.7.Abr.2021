@@ -11,6 +11,10 @@ Route::group(['prefix'=>'docsoporte', 'namespace'=>'Api'], function() {
 });
 
 
+Route::group(['prefix'=>'proveedores', 'namespace'=>'Api'], function() {
+    $localController = 'FctrasElctrncasPrvdresController@';
+    Route:: get('/facturas/recibidas'          , $localController.'getFacturasProveedores');
+});
 
 
 

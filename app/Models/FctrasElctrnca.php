@@ -113,9 +113,9 @@ class FctrasElctrnca extends Model
 			return $this->hasOne(FctrasElctrncasDataResponse::class, 'id_fact_elctrnca');
 		}
  
-		public function eventsResponse030() {
+		/*public function eventsResponse030() {
 			return $this->hasOne(FctrasElctrncasEventsResponse::class, 'id_fact_elctrnca')->where('cod_event','030');
-		}
+		}*/
 		
 		public function docsSoporteRetenciones() {
 			return $this->hasMany(DcmntosSprteWithholdingTaxTotal::class, 'id_fact_elctrnca');
