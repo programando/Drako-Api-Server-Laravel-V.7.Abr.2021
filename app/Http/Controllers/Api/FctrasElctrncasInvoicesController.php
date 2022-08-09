@@ -46,7 +46,7 @@ class FctrasElctrncasInvoicesController
             $response     = $this->ApiSoenac->postRequest( $partUrl, $this->jsonResponse ) ;   
             $Documento    = FctrasElctrnca::where('prfjo_dcmnto', "$prfjo_dcmnto")
                                             ->where('nro_dcmnto',$nro_dcmnto  ) ->first();
-            
+             
             $this->documentsProcessReponse( $Documento, $response[0] ) ;
         }
 
@@ -119,6 +119,7 @@ class FctrasElctrncasInvoicesController
 
         private function invoiceSendGetData ( $id_fact_elctrnca ) {
             $Factura = FctrasElctrnca::with('customer','total', 'products', 'emails','additionals', 'serviceResponse', 'taxes')->where('id_fact_elctrnca','=', $id_fact_elctrnca)->get();
+            
             $Factura = $Factura[0];
             $this->getNameFilesTrait($Factura );
             $this->invoiceCreateFilesToSend  ( $id_fact_elctrnca,  $Factura  );
@@ -142,15 +143,17 @@ class FctrasElctrncasInvoicesController
             $this->saveInvoiceXmlFile   ( $Factura              );
         }
 
-        private function saveInvoicePfdFile  ( $Resolution, $Factura   ){           
+        private function saveInvoicePfdFile  ( $Resolution, $Factura   ){  
+                
             $Fechas          = $this->FechasFacturaTrait ( $Factura['fcha_dcmnto'], $Factura['due_date'] );
             $Customer        = $Factura['customer'];
             $Products        = $Factura['products'];
             $Totals          = $Factura['total'];
             $Additionals     = $Factura['additionals'];
-            $Taxes            = $Factura['taxes'];
+            $Taxes           = $Factura['taxes'];
             $ServiceResponse = $Factura['serviceResponse'];
-            $CantProducts    = $Products->count();         
+    
+            $CantProducts    = $Products->count();
             $CodigoQR        = $this->QrCodeGenerateTrait( $ServiceResponse['qr_data'] );
             $Data            = compact('Resolution', 'Fechas', 'Factura','Customer', 'Products','CantProducts', 'Totals','CodigoQR', 'Additionals','Taxes' );
             $PdfContent      = $this->pdfCreateFileTrait('pdfs.invoice', $Data);

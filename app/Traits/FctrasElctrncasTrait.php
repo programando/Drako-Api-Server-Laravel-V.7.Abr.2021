@@ -12,7 +12,7 @@ use App\Helpers\GeneralHelper  ;
 use App\Helpers\NumbersHelper as Numbers;
 use App\Helpers\StringsHelper as Strings;
 use App\Models\FctrasElctrncasDataResponse;
-use App\Models\FctrasElctrncasEvent;
+ 
 use App\Models\FctrasElctrncasErrorsMessage;
 
 use Carbon;
@@ -179,7 +179,7 @@ trait FctrasElctrncasTrait {
             //$Registro['cstmer_token']                      = Str::random(60); 
             $Registro->save();
 
-            $this->traitFctrasEventsNewRecord($id_factelctrnca  );
+   
         }
 
         protected function traitFctrasDataReponseNewRecord( $id_fact_elctrnca, $dataResponse) {
@@ -188,20 +188,12 @@ trait FctrasElctrncasTrait {
             $FctrasDataReponse->id_fact_elctrnca                   = $id_fact_elctrnca;
             $FctrasDataReponse->qr_data                            = $dataResponse['qr_data'];
             $FctrasDataReponse->attached_document_base64_bytes     = $dataResponse['attached_document_base64_bytes'];
-
             $FctrasDataReponse->application_response_base64_bytes  = '' ;
             $FctrasDataReponse->pdf_base64_bytes                   = '' ;
             $FctrasDataReponse->save(); 
         }
 
-        protected function traitFctrasEventsNewRecord ( $id_fact_elctrnca) {
-            $EventExists = FctrasElctrncasEvent::where('id_fact_elctrnca', $id_fact_elctrnca)->first();
-            if ( $EventExists)      return ;
-            $FctrasElctrncasEvent = new FctrasElctrncasEvent;
-            $FctrasElctrncasEvent->id_fact_elctrnca              = $id_fact_elctrnca;
-            $FctrasElctrncasEvent->fcha_rgstro                   = Carbon::now();
-            $FctrasElctrncasEvent->save(); 
-        }
+ 
 
         protected function traitdocumentErrorResponse ( $id_fact_elctrnca, $dataResponse ){ 
             FctrasElctrncasErrorsMessage::where('id_fact_elctrnca', $id_fact_elctrnca)->delete();
