@@ -40,7 +40,7 @@ class FctrasElctrncasEventsController extends Controller
         $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
         $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
         $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid,'030'  );
-        //
+      
         $this->eventUpdate('030',$FormData->uuid  );
 
         return   $response  ;
@@ -82,9 +82,9 @@ class FctrasElctrncasEventsController extends Controller
     }
 
     public function allEvents( request $FormData) {
-        $this->acuseRecibo (  $FormData);
+        $this->acuseRecibo        ( $FormData );
         $this->reciboBienServicio ( $FormData );
-        $this->aceptacionExpresa ( $FormData ); 
+        $this->aceptacionExpresa  ( $FormData ); 
     }
 
     private function eventUpdate ( $Event, $UUID) {
