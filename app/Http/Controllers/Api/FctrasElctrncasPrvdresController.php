@@ -11,7 +11,7 @@ class FctrasElctrncasPrvdresController extends Controller
 {
     
     public function getFacturasProveedores() {
-        return FacturasProveedores::all();
+        return FacturasProveedores::orderBy('fecha')->get();
     }
 
 }

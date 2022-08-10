@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiSoenac;
 use App\Traits\FctrasElctrncasTrait;
 use App\Models\FctrasElctrncasEvent   ;
+use App\Models\FctrasElctrncasPrvdre;
 
 use Storage;
 use Carbon;
@@ -39,9 +40,11 @@ class FctrasElctrncasEventsController extends Controller
         $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
         $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
         $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid,'030'  );
+        //
+        $this->eventUpdate('030',$FormData->uuid  );
+
         return   $response  ;
     }
-
 
     public function rechazoReclamo(request $FormData) {
         $response = '';
@@ -60,6 +63,9 @@ class FctrasElctrncasEventsController extends Controller
         $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
         $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
         $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid, '032'  );
+
+        $this->eventUpdate('032',$FormData->uuid  );
+
         return   $response ;
     }
 
@@ -70,7 +76,24 @@ class FctrasElctrncasEventsController extends Controller
         $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
         $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
         $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid, '033'  );
+
+        $this->eventUpdate('033',$FormData->uuid  );
         return   $response ;
+    }
+
+    public function allEvents( request $FormData) {
+        $this->acuseRecibo (  $FormData);
+        $this->reciboBienServicio ( $FormData );
+        $this->aceptacionExpresa ( $FormData ); 
+    }
+
+    private function eventUpdate ( $Event, $UUID) {
+        $Factura                                       = FctrasElctrncasPrvdre::where('cufe',"$UUID")->first();
+        if ( $Event ==='030') $Factura->acuse_030      = true;
+        if ( $Event ==='032') $Factura->recibo_032     = true;
+        if ( $Event ==='033') $Factura->aceptacion_033 = true;
+        $Factura->update();
+       
     }
 
 
