@@ -18,6 +18,10 @@ class FctrasElctrncasEventsController extends Controller
     use FctrasElctrncasTrait, ApiSoenac ;
     private $jsonObject = [] , $jsonResponse = []; 
 
+    public function getFacturasProveedores() {
+        return FctrasElctrncasPrvdre::orderBy('fecha')->get();
+    }
+
 
 
     public function documentStatus ( request $FormData) {

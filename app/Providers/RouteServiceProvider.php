@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiTercerosUsuarios();
         $this->mapFacturaElectronica();
         $this->mapWebRoutes();
-        $this->mapDocsSoporte ();
+        $this->facturasProveedorEventos ();
         
     }
 
@@ -116,10 +116,10 @@ class RouteServiceProvider extends ServiceProvider
            ->group(base_path('routes/api/facuraElectronica.php'));
         }
         
-    protected function mapDocsSoporte(){
+    protected function facturasProveedorEventos(){
         Route::middleware('api')
            ->namespace($this->namespaceApi)
-           ->prefix('events-fact-proveedor')
+           ->prefix('proveedores')
            ->group(base_path('routes/api/factruaProveedorEventos.php'));
         }
  

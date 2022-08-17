@@ -56,12 +56,12 @@ class DcmntosSprteController extends Controller {
 
     private function errorResponse ( $response, $IdFactElctrnca) {
         if ( $response['is_valid'] == false ) {
-            $Erors   = $response['errors_messages'] ;
-            foreach ($erors as $Error) {
+            $Errors   = $response['errors_messages'] ;
+            foreach ($Errors as $Error) {
                  $NewError                   = new ErrorResponse ;
                  $NewError->id_fact_elctrnca = $IdFactElctrnca;
                  $NewError->error_message    = $Error;
-                 $NewError->fecha            = $Carbon::now();
+                 $NewError->fecha            = Carbon::now();
                  $NewError->save();
             }
         }
