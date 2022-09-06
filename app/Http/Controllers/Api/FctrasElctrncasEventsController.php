@@ -19,7 +19,12 @@ class FctrasElctrncasEventsController extends Controller
     private $jsonObject = [] , $jsonResponse = []; 
 
     public function getFacturasProveedores() {
-        return FctrasElctrncasPrvdre::orderBy('fecha')->get();
+        return FctrasElctrncasPrvdre::orderBy('fecha')
+        ->where('acuse_030','0')
+        ->where('rechazo_031','0')
+        ->orWhere('recibo_032','0')
+        ->orWhere('aceptacion_033','0')
+        ->get();
     }
 
 
@@ -32,8 +37,17 @@ class FctrasElctrncasEventsController extends Controller
     
     public function documentosRecepcionados(  ){
         $partUrl  = 'receptions';
-        $response        = $this->ApiSoenac->postRequest( $partUrl, '' ) ;
-        return   $response  ;
+        $response = $this->ApiSoenac->postRequest( $partUrl, '' ) ;
+        $datas    = $response['data'];
+        $newData  = [];
+        foreach($datas as $data) {
+            if ( $data['is_valid']=== true ) {
+                unset($data['attachments']);
+                $newData[] = $data;
+            }
+        }
+        $response['data'] = $newData;
+        return   $response ; 
     }
 
 
@@ -41,6 +55,7 @@ class FctrasElctrncasEventsController extends Controller
         $response = '';
         $partUrl  = 'event/030';
         $Number   = FctrasElctrncasEvent::maxId();
+        
         $this->getJsonAcuse ( $FormData->uuid, $Number  ) ;
         $response        = $this->ApiSoenac->postRequest( $partUrl, $this->jsonObject ) ;
         $isValidResponse = $this->processEventResponse ( $response, $FormData->uuid,'030'  );
