@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Route;
 
 $localController = 'FctrasElctrncasEventsController@';
 
-Route:: get('/facturas/recibidas'          , $localController.'getFacturasProveedores');
+Route:: get('/facturas/recibidas'                  , $localController.'getFacturasProveedores');
 
 Route:: post('set/030/acuse'                       , $localController.'acuseRecibo')                   ;
 Route:: post('set/031/rechazo'                     , $localController.'rechazoReclamo')                ;
 Route:: post('set/032/recibo-bien-servicio'        , $localController.'reciboBienServicio')            ;
 Route:: post('set/033/aceptacion-expresa'          , $localController.'aceptacionExpresa')             ;
 Route:: post('set/all'                             , $localController.'aceptacionExpresa')             ;
-Route:: post('recibidas'                       , $localController.'documentosRecepcionados')       ;
-Route:: post('consulta'                        , $localController.'allEvents')                     ;
+Route:: post('recibidas'                           , $localController.'getFacturasProveedores')       ;
+Route:: post('consulta'                            , $localController.'allEvents')                     ;
 
 
 
