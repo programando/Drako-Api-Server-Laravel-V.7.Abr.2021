@@ -29,6 +29,8 @@ class FctrasElctrncasNotesCrController
 
 
     public function notes( $TipoNota ) {
+          FctrasElctrnca::notesBillingReferenceGetUuid();       // VERIFICAR SI 
+
           $URL = $this->getNotesUrl($TipoNota );
            
           if ( $URL == 'NoUrl') return ;

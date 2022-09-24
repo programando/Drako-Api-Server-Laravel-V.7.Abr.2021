@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/reset/password'   , 'TercerosUserController@resetPassword')->name('reset-password'); 
     Route::post('/update/password'  , 'TercerosUserController@updatePassword')->name('update-password'); 
     Route::post('/registro'          , 'TercerosUserController@registroNuevoUsuario'); 
+    Route::post('/contacto'          , 'TercerosUserController@contacto'); 
 
 //});
 

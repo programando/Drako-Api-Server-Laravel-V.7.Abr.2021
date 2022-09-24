@@ -14,14 +14,19 @@ class TercerosContactosEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $formDataContact ;
-    public $email, $comentario;
-
-    public function __construct( $email, $comentario)
+  
+     
+    public $nombre,  $telefono,$celular  , $comentario ,  $empresa;
+    public function __construct( $formDataContact  )
     {
-        //$this->formDataContact       = $formDataContact ;
-        $this->email = $email;
-        $this->comentario = $comentario;
+        $this->celular    = $formDataContact->celular;
+        $this->comentario = $formDataContact->comentario;
+        $this->empresa    = $formDataContact->empresa;
+        $this->nombre     = $formDataContact->nombre;
+        $this->telefono   = $formDataContact->telefono;
+
         
+         
     }  
 }
+//

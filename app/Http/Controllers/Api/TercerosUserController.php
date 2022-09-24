@@ -15,12 +15,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use App\Events\UserPasswordResetEvent;
+use App\Events\TercerosContactosEvent;
+
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\TercerosUserLoginRequest;
 
 class TercerosUserController extends Controller
 {
     
+
+    public function contacto ( Request $FormData ) {
+        TercerosContactosEvent::dispatch( $FormData);
+    }
+
 
 
     public function buscarEmail ( Request $FormData ) {

@@ -11,27 +11,24 @@ class TercerosContactosMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $nombre, $email,$telefono,$celular  , $comentario ,  $empresa, $ciudad ; 
-    public function __construct( $email, $comentario  )
+    public $nombre,  $telefono,$celular  , $comentario ,  $empresa ; 
+    public function __construct( $nombre,  $telefono,$celular  , $comentario ,  $empresa)
     {
-/*         $this->nombre     = $formDataContact['nombre'];
-        $this->email      = $formDataContact['email'];
-        $this->telefono   = $formDataContact['telefono'];
-        $this->celular    = $formDataContact['celular'];
-        $this->comentario = $formDataContact['comentario'];
-        $this->empresa    = $formDataContact['empresa'];  */ 
-        $this->email      =  $email;
-        $this->comentario      = $comentario;
-         
+        
+        $this->nombre     = $nombre;
+        $this->telefono   = $telefono;
+        $this->celular    = $celular;
+        $this->comentario = $comentario;
+        $this->empresa    = $empresa;   
     }
-    
-
+   
+ 
     public function build()
     {   
-        $customerName   = 'Contactar a : James'  ;
+        $customerName   = 'Contactar a :' . $this->nombre  ;
         $subject        = 'Contacto comercial';
         return $this->view('mails.terceros.contactos')
-                ->from( $this->email , 'Contactar a : James' )
+                ->from( config('company.EMAILS_EMPRESA') )
                 ->subject($subject) ;
     }
 }
