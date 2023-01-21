@@ -20,6 +20,8 @@ class UserPasswordResetEvent
     {
         $this->Email = $Email ;
         $this->Token = $Token;
+
+       
          
     }
 

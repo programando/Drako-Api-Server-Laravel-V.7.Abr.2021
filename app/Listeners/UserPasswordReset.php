@@ -15,7 +15,7 @@ class UserPasswordReset
     
     public function handle(UserPasswordResetEvent $event)    {
        
-         
+        
          Mail::to( $event->Email)
             ->queue( new UserPaswordResetMail (  $event->Email, $event->Token  ));
     }

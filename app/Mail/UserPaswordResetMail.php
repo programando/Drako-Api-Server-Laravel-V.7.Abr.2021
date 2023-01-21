@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-
+ 
 class UserPaswordResetMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -18,8 +18,9 @@ class UserPaswordResetMail extends Mailable
     {
         $this->Email = $Email;
         $this->Token = $Token;
-        $this->from = ['address'=> env('EMAIL_SISTEMAS'), 'name' => config('company.NOMBRE' )];
-        $this->urlClient = env('APP_URL_CLIENT') . env('URL_USER_PASSWORD_RESET').$Token;
+        $this->from = ['address'=> config('company.EMAIL_SISTEMAS'), 'name' => config('company.NOMBRE' )];
+        $this->urlClient = config('campany.URL_SPA_NUXT') . config('company.URL_USER_PASSWORD_RESET').$Token;
+   
     }
 
   

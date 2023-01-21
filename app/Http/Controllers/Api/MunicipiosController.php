@@ -9,7 +9,7 @@ use App\Models\Municipio as Municipios;
 class MunicipiosController extends Controller {
     
     public function listadoActivos () {
-        return Municipios::where('inactivo','1')->get();
+        return Municipios::where('inactivo','0')->get();
     }
 
 

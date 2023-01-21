@@ -25,6 +25,7 @@ class EventServiceProvider extends ServiceProvider
        'App\Events\PedidoWasCreateEvent'                     => ['App\Listeners\PedidoWasCreateListener', ],
        'App\Events\InvoiceEvent030AcuseReciboWasCreateEvent' => ['App\Listeners\InvoiceEvent030AcuseReciboWasCreateListener', ],
        'App\Events\TercerosContactosEvent'                    => ['App\Listeners\TercerosContactosListener', ],
+       'App\Events\UserPasswordResetEvent'                    => ['App\Listeners\UserPasswordReset', ],
     ];
 
  
