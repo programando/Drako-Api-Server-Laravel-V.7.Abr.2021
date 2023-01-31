@@ -20,6 +20,7 @@ class UserPaswordResetMail extends Mailable
         $this->Token = $Token;
         $this->from = ['address'=> config('company.EMAIL_SISTEMAS'), 'name' => config('company.NOMBRE' )];
         $this->urlClient = config('campany.URL_SPA_NUXT') . config('company.URL_USER_PASSWORD_RESET').$Token;
+  
    
     }
 

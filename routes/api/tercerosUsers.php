@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
- //Route::group(['prefix'=>'usuarios' ], function() {
+//  Route::group(['prefix'=>'usuarios' ], function() {
     Route::post('/buscar/email'     , 'TercerosUserController@buscarEmail');
     Route::post('/login'            , 'TercerosUserController@login')->name('login');
     Route::post('/logout'           , 'TercerosUserController@logout')->name('logout'); 
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/registro'          , 'TercerosUserController@registroNuevoUsuario'); 
     Route::post('/contacto'          , 'TercerosUserController@contacto'); 
 
- //});
+//  });
 
 Route::middleware('auth:sanctum')->get('/autenticado', function (Request $request) {
     return $request->user();
