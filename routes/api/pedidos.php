@@ -9,3 +9,4 @@ Route::post('/nuevo/registro'          , $localController.'pedidoNuevoRegistro')
 Route::post('/producto/{idproducto}'          , $localController.'saldoVefiricarExistencias');
 
  
+Route:: post('/sendPedido'                      , $localController.'sendEmailPedido');

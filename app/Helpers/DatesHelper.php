@@ -20,6 +20,10 @@ class DatesHelper {
       return Carbon::createFromFormat('Y-m-d H:i:s', $Value);  
     }
 
+    public static function HumanDate ( $Value ){
+      return Carbon::parse( $Value )->format('d-m-Y H:m:s A');  
+    }
+
     private function checkStringDate(  $value){
       if (date('d-m-Y', strtotime( $value )) == $value ) {
         $this->Fecha = $value;

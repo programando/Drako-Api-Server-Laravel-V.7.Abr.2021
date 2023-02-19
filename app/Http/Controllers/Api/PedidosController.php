@@ -20,14 +20,11 @@ class PedidosController extends Controller
              return response()->json(['message' => 'Inventario-NO-Disponible'], 422);
         }
          
-
-
-
         $Pedido = new Pedido;
         $Pedido->idtercero        = $FormData->idtercero ;
-        $Pedido->fcha_pedido      = Carbon::now('UTC');
+        $Pedido->fcha_pedido      = Carbon::now();
         $Pedido->horas_reserva    = $FormData->horas_reserva ;
-        $Pedido->fcha_fin_reserva = Carbon::now('UTC')->addHours( $FormData->horas_reserva);
+        $Pedido->fcha_fin_reserva = Carbon::now()->addHours( $FormData->horas_reserva);
         $Pedido->subtotal         = $FormData->subtotal ;
         $Pedido->iva              = $FormData->iva ;
         $Pedido->flete            = $FormData->flete ;
@@ -53,9 +50,14 @@ class PedidosController extends Controller
         }
 
          /*-------------ENVIAR CORREO AL CLIENTE CON INFORMACIÓN DEL PEDIDO CREADO------------------*/
-        PedidoWasCreateEvent::dispatch ( $Pedido );   // Pendeinte por desarrollar
+         $this->sendEmailPedido ($Pedido->idpedido) ;
 
         return $Pedido;
+    }
+
+    public function sendEmailPedido ( $IdPedido ) {   
+       $Pedido = Pedido::with('detallePedido','cliente','detallePedido.producto')->where('idpedido',  $IdPedido )->first() ;
+       PedidoWasCreateEvent::dispatch ( $Pedido );   // TO DO
     }
 
     private function updateSaldoyReservaProducto ( $IdProducto, $Cantidad ) {
@@ -64,13 +66,14 @@ class PedidosController extends Controller
         $Producto->cant_reservada          = $Producto->cant_reservada + $Cantidad ;
         $Producto->cant_reservada_in_drako = 0 ;
         $Producto->update();
+        return  $Producto ;
     }
 
  
 
     public function saldoVefiricarExistencias( $DetallePedido ) {
          
-
+       
         foreach ( $DetallePedido as $Registro=>$PedidosDt ) {
             $Producto = Producto::saldoPorIdProducto( $PedidosDt['idproducto'] );
             if ( (int)$Producto['saldo']  < (int)$PedidosDt['cantidad'] ) return "Inventario-NO-Disponible";

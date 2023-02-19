@@ -47,4 +47,5 @@ class PedidosDt extends Model
 	{
 		return $this->belongsTo(Producto::class, 'idproducto', 'idproducto');
 	}
+	
 }

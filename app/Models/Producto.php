@@ -70,8 +70,8 @@ protected $appends  = ['cantidad', 'precio_base_format','precio_oferta_format'];
 	}
 
 	public   function scopesaldoPorIdProducto ( $query, $idproducto ) {
-		$response = $query->where('idproducto',$idproducto)->get();
-		$response = $response->shift();
+		$response = $query->where('idproducto',$idproducto)->first();
+		//$response = $response->shift();
 		return $response ;
 	}
 	//************************/

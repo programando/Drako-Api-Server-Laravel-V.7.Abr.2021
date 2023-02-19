@@ -14,11 +14,18 @@ class PedidoWasCreateEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $Pedido;
+    public   $EmailCliente, $Pedido, $PedidoDetalle, $Cliente;
     public function __construct( $Pedido )
     {
-        $this->Pedido = $Pedido;
+
+        $this->EmailCliente = $Pedido->cliente['email'];
+        $this->Cliente       = $Pedido->cliente;
+        $this->Pedido        = $Pedido;
+        $this->PedidoDetalle = $Pedido->detallePedido;
+         
     }
 
-    
+
+ 
+
 }

@@ -42,8 +42,14 @@ class Pedido extends Model
 		'total'
 	];
 
-	public function pedidos_dts()
+	public function detallePedido()
 	{
 		return $this->hasMany(PedidosDt::class, 'idpedido');
 	}
+
+		public function cliente()
+	{
+		return $this->belongsTo(TercerosUser::class, 'idtercero', 'idtercero_web');
+	}
+
 }
