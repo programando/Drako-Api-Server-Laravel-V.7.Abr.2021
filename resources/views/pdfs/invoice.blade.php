@@ -296,6 +296,7 @@
             <small>
                 Factura electrónica generada por DRAKO AUTOPARTES Nit: 10.485.950-1  <br>
                 Envío facturación directa a través de servicio Web dispuesto por la DIAN. ( No aplica proveedor tecnológico)
+                Terminal: 192.168.1.144
                 </small>
             </div>
         </div>
