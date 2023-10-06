@@ -47,13 +47,13 @@
   </head>
   <body>
  
-  
+ 
 <div>
     <div class="pagion">
         <table width="100%" class="mb40">
             <tr>
                 <td width="40%">
-                   <img src="https://drako.api.plusoft.co/storage/images/drako/logo.jpg" alt="">              
+                   <img src="https://api.drako.com.co/storage/images/drako/logo.jpg" alt="">              
                 </td>
               
                 <td width="60%" class="taC">
