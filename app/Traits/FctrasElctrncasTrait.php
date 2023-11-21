@@ -244,6 +244,7 @@ trait FctrasElctrncasTrait {
                 'FactDia'   => $FechaFactura->day,
                 'FactMes'   => GeneralHelper::nameOfMonth( $FechaFactura->month),
                 'Factyear'  => $FechaFactura->year,
+                'FactHour'  => $FechaFactura,
                 'VenceDia'  => $FechaVcmto->day,
                 'VenceMes'  => GeneralHelper::nameOfMonth( $FechaVcmto->month),
                 'VenceYear' => $FechaVcmto->year

@@ -92,9 +92,8 @@
                     <div class="bS1 bRad2">
                         <table width="100%" class="taC">
                             <tr>
-                                <td width="33%" class="p5 bRS1">{{ $Fechas['FactDia'] }}</td>
-                                <td width="33%" class="p5 bRS1">{{ $Fechas['FactMes'] }}</td>
-                                <td width="34%" class="p5 bRS1">{{ $Fechas['Factyear'] }}</td>
+                                
+                                <td width="34%" class="p5 bRS1">{{  $Fechas['FactHour'] }}</td>
                             </tr>
                         </table>
                     </div>
@@ -148,7 +147,7 @@
                     <td width="10%" class="p5 tB">Email :</td>
                     <td width="25%" class="p5">{{ $Customer['email'] }}</td>
                     <td width="10%" class="p5 tB">Forma Pago:</td>
-                    <td width="25%" class="p5">{{ $Additionals['frma_pgo'] }}</td>
+                    <td width="25%" class="p5">{{ $Additionals['frma_pgo']==='EFECTIVO' ? 'CONTADO' : $Additionals['frma_pgo'] }}</td>
 
                 </tr>
 
