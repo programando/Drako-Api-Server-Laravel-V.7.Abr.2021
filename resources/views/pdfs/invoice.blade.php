@@ -142,13 +142,15 @@
                     <td width="25%" class="p5">{{ $Additionals['mcipio'] . ' - '. $Additionals['dpto'] }}</td>
                     <td width="10%" class="p5 tB">Teléfono :</td>
                     <td width="20%" class="p5">{{ $Additionals['nro_tlfno'] }}</td>
+                    
                 </tr>
                 <tr>
                     <td width="10%" class="p5 tB">Email :</td>
                     <td width="25%" class="p5">{{ $Customer['email'] }}</td>
                     <td width="10%" class="p5 tB">Forma Pago:</td>
                     <td width="25%" class="p5">{{ $Additionals['frma_pgo']==='EFECTIVO' ? 'CONTADO' : $Additionals['frma_pgo'] }}</td>
-
+                    <td width="10%" class="p5 tB">Medio pago:</td>
+                    <td width="25%" class="p5">{{ $Additionals['medio_pgo'] }}</td>
                 </tr>
 
             </table>
@@ -266,7 +268,7 @@
                             <table width="100%">
                             @foreach($Taxes as $Tax )
                                 <tr>
-                                    <td width="40%" class="p5 bRS1">IVA</td>
+                                    <td width="40%" class="p5 bRS1">{{ $Tax['pctje_iva'] ==0 ? 'IMPUESTO AL CONSUMO' : 'IVA' }}</td>
                                     <td width="20%" class="p5 taR bRS1">{{ Numbers::invoiceFormat($Tax['vr_base']) }}</td>
                                     <td width="20%" class="p5 taR bRS1">{{ Numbers::invoiceFormat($Tax['pctje_iva']) .'%'}}</td>
                                     <td width="20%" class="p5 taR">{{ Numbers::invoiceFormat($Tax['vr_iva']) }}</td>
