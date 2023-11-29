@@ -25,7 +25,7 @@ trait DocsSoporteTrait {
             'number'            => $Document["number"],
             'type_document_id'  => $Document["type_document_id"],
             'type_operation_id' => $Document["type_operation_id"],
-             'resolution_id'    => 11,
+             'resolution_id'    => 14,
             'sync'              => true,
             'date'              => Fecha::YMD( $FechaTransacion) 
             ] ;
@@ -37,7 +37,7 @@ trait DocsSoporteTrait {
         ]; 
     }
 
-    protected function DocSoporteResolutionTrait ( &$jsonObject ) {
+    protected function DocSoporteResolutionTrait ( &$jsonObject ) {     // Noviembre 29 2023.... No utilzado.
          
         $jsonObject['resolution']=[
                 'prefix'          => 'SETP',                                   
