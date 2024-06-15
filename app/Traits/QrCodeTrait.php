@@ -6,11 +6,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 trait QrCodeTrait {
 
-   public function QrCodeGenerateTrait ( $DataCode ){
+   public function QrCodeGenerateTrait ( $DataCode, $Size=330 ){
       if ( empty($DataCode )) {
          $DataCode ='QrCode is empty';
       }
-      return  QrCode::format('png')->size(330)->encoding('UTF-8')->generate( $DataCode );
+      return  QrCode::format('png')->size($Size)->encoding('UTF-8')->generate( $DataCode );
 
    }
 

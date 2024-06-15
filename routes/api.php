@@ -11,6 +11,10 @@ Route::group(['prefix'=>'docsoporte', 'namespace'=>'Api'], function() {
 });
 
 
+Route::group(['prefix'=>'impresion' ], function() {
+    Route:: get('/pos'          , 'PrintController@printExample');
+});
+
 
 
 
