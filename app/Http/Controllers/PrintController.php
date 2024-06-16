@@ -54,17 +54,17 @@ class PrintController extends Controller
             // Generar y imprimir código QR
             // $url = 'https://example.com/qrcode';  // Reemplaza con la URL deseada
             // $qrCode = QrCode::encoding('UTF-8')->size(200)->generate($url);
-            $CodigoQR        = $this->QrCodeGenerateTrait( 'https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey=3cd361c83687833f87b3541e758c76ca102670faba6a5a72fb218dd1e8f780f5bb8512f36e47e37a1095e6d19c98bf7b', 300 );
+            // $CodigoQR        = $this->QrCodeGenerateTrait( 'https://catalogo-vpfe.dian.gov.co/document/searchqr?documentkey=3cd361c83687833f87b3541e758c76ca102670faba6a5a72fb218dd1e8f780f5bb8512f36e47e37a1095e6d19c98bf7b', 300 );
 
-            Storage::disk('Files')->put( 'qr.png' , $CodigoQR  );
-            $fileContent = Storage::disk('Files')->get('qr.png');
+            // Storage::disk('Files')->put( 'qr.png' , $CodigoQR  );
+            // $fileContent = Storage::disk('Files')->get('qr.png');
 
             
-            $filePath = Storage::disk('Files')->path('qr.png');
-            //dd (  $filePath);
-            $tux = EscposImage::load( $filePath, false);
-            //  $printer->bitImage($qrCodeData);
-            $printer->bitImage($tux );
+            // $filePath = Storage::disk('Files')->path('qr.png');
+            // //dd (  $filePath);
+            // $tux = EscposImage::load( $filePath, false);
+            // //  $printer->bitImage($qrCodeData);
+            // $printer->bitImage($tux );
 
             // Cortar papel (opcional, depende de la configuración de la impresora)
             $printer->cut();
