@@ -61,7 +61,7 @@ class PrintController extends Controller
 
             
             $filePath = Storage::disk('Files')->path('qr.png');
-            
+            dd (  $filePath);
             $tux = EscposImage::load( $filePath, false);
             //  $printer->bitImage($qrCodeData);
             $printer->bitImage($tux );
