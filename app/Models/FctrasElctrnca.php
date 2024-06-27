@@ -154,6 +154,10 @@ class FctrasElctrnca extends Model
 				return     DB::select(' call fctras_elctrncas_list');
 			}
 
+			public static function FacturasPosUltimos3Dias() {
+				return     DB::select(' call fctras_elctrncas_list_pos');
+			}
+
 			public function getPrfjoDcmntoAttribute( $value ){
 				return trim($value);
 			}
