@@ -25,7 +25,7 @@ return [
                     'https://drako.com.co', 
                     'https://drako.facturas.plusoft.co', 
                     'https://facturas.drako.com.co', 
-                    'https://pos.drako.com.co/'
+                    'https://pos.drako.com.co'
                 ],
     'allowed_origins_patterns' => [],
     'allowed_headers'          => ['*'],
