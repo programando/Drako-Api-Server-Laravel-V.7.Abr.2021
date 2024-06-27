@@ -117,7 +117,7 @@ class FctrasElctrncasInvoicesController
 
     public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
         $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
-        //--InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
+        InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
         return "ok";
     }
 
@@ -170,6 +170,7 @@ class FctrasElctrncasInvoicesController
         
         Storage::disk('Files')->put( $this->PdfFile, $PdfContent);
         
+        
     }
 
     private function saveInvoicePfdFile  ( $Resolution, $Factura   ){  
@@ -197,9 +198,11 @@ class FctrasElctrncasInvoicesController
 
         
     public function PrintPosDocument ( request $FormData ) {
-
         $Factura      = $this->invoiceSendGetData ( $FormData->id_fact_elctrnca, true) ; 
-        return 'Ok';
+
+        $filePath = 'public/documents/' . $this->PdfFile; // Asegúrate de que esta ruta sea correcta
+         
+        return response()->json(['url' => url(Storage::url($filePath))]);
     }
 
     public function invoiceAccepted ( $Token ) {          
