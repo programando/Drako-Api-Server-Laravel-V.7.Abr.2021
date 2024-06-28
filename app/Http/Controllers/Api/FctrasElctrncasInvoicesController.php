@@ -116,7 +116,7 @@ class FctrasElctrncasInvoicesController
     }
 
     public function invoiceSendToCustomer ( $id_fact_elctrnca ) {
-        $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca) ; 
+        $Factura      = $this->invoiceSendGetData ( $id_fact_elctrnca, false) ; 
         InvoiceWasCreatedEvent::dispatch          ( $Factura ) ; 
         return "ok";
     }
