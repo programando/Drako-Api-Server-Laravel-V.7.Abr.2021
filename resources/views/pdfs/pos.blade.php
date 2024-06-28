@@ -107,14 +107,14 @@
             </tr>  
             
             <tr>
-                <td width="100%" class="taL t10 "><br><br>
+                <td width="100%" class="taL t11 "><br><br>
                     <div class="tB">CLIENTE</div>
-                    <div class="t10 ml5 p1">Nombre: {{ $Customer['name'] }} </div>
-                    <div class="t10 ml5 p1">Identf.: {{ $Customer['identification_number'] }}</div>      
-                    <div class="t10 ml5 p1">{{ $Customer['address'] }}</div>  
-                    <div class="t10 ml5 p1">{{ $Customer['email'] }}</div>     
-                    <div class="t10 ml5 p1">{{ $Additionals['mcipio'] . ' - '. $Additionals['dpto'] }}</div>      
-                    <div class="t10 ml5 p1">{{ $Additionals['nro_tlfno'] }}</div>      
+                    <div class="t11 ml5 p1 tB">Nombre: {{ $Customer['name'] }} </div>
+                    <div class="t11 ml5 p1 tB">Identf.: {{ $Customer['identification_number'] }}</div>      
+                    <div class="t11 ml5 p1 tB">{{ $Customer['address'] }}</div>  
+                    <div class="t11 ml5 p1 tB">{{ $Customer['email'] }}</div>     
+                    <div class="t11 ml5 p1 tB">{{ $Additionals['mcipio'] . ' - '. $Additionals['dpto'] }}</div>      
+                    <div class="t11 ml5 p1 tB">{{ $Additionals['nro_tlfno'] }}</div>      
                          
                 </td>                    
             </tr>
@@ -131,9 +131,9 @@
         <table width="90%">
             @foreach($Products as $Product )
                 <tr>
-                    <td class="t10 ml7">      {{ $Product['invoiced_quantity'] }} </td>
-                    <td  class="t9 p2">     {{ $Product['code'] }}  -  {{ $Product['description']  }} </td>
-                    <td class="t10 taR p2">  {{ Numbers::invoiceFormat($Product['line_extension_amount'])   }}</td>
+                    <td class="t10 tB ml7">      {{ $Product['invoiced_quantity'] }} </td>
+                    <td  class="t10 tB p2">     {{ $Product['code'] }}  -  {{ $Product['description']  }} </td>
+                    <td class="t10  tB taR p2">  {{ Numbers::invoiceFormat($Product['line_extension_amount'])   }}</td>
                 </tr>
             @endforeach
         </table> 
@@ -142,16 +142,16 @@
         <table width="100%" >
             <tr>
                 <td  class="t11 tB">SUBTOTAL :</td>
-                <td  class="t11 taR">{{ Numbers::invoiceFormat($Totals['line_extension_amount']) }}</td>
+                <td  class="t11 tB taR">{{ Numbers::invoiceFormat($Totals['line_extension_amount']) }}</td>
             </tr>
              <tr>
                 <td  class="t11 tB">IVA :</td>
-                <td  class="t11 taR">{{ Numbers::invoiceFormat($Additionals['vr_iva']) }}</td>
+                <td  class="t11 tB   taR">{{ Numbers::invoiceFormat($Additionals['vr_iva']) }}</td>
                 
             </tr>  
               <tr>
                 <td  class="t11 tB">TOTAL :</td>
-                <td  class="t11 taR">{{ Numbers::invoiceFormat($Totals['payable_amount']) }}</td>
+                <td  class="t11 tB  taR">{{ Numbers::invoiceFormat($Totals['payable_amount']) }}</td>
             </tr>                                 
         </table>
 
@@ -168,9 +168,9 @@
 
             @foreach($Taxes as $Tax )
                 <tr>
-                    <td class="t10">{{ $Tax['texto']  }}</td>
-                    <td  class="t10 ">{{ Numbers::invoiceFormat($Tax['vr_base']) }}</td>
-                    <td  class="t10 taR">{{ Numbers::invoiceFormat($Tax['vr_iva']) }}</td>
+                <td class="t10 tB ">{{ trim($Tax['texto']) === 'IMPUESTO A LA BOLSA' ? 'IMPTO. BOLSA' : $Tax['texto'] }}</td>
+                    <td  class="t10 tB ">{{ Numbers::invoiceFormat($Tax['vr_base']) }}</td>
+                    <td  class="t10 tB taR">{{ Numbers::invoiceFormat($Tax['vr_iva']) }}</td>
                 </tr>
             @endforeach 
              
@@ -183,33 +183,33 @@
         </div>
         <div>
             <p class="taC t10 tB">CUFE</p>
-            <p class="taC t11">{{ Str::substr($Factura['uuid'], 0, 20) }}</p>
-            <p class="taC t11">{{ Str::substr($Factura['uuid'], 21, 40) }}</p>
-            <p class="taC t11">{{ Str::substr($Factura['uuid'], 41, 60) }}</p>
-            <p class="taC t11">{{ Str::substr($Factura['uuid'], 61, 80) }}</p>
-            <p class="taC t11">{{ Str::substr($Factura['uuid'], 81, 100) }}</p>
+            <p class="taC t10 tB">{{ Str::substr($Factura['uuid'], 0, 20) }}</p>
+            <p class="taC t10 tB">{{ Str::substr($Factura['uuid'], 21, 40) }}</p>
+            <p class="taC t10 tB">{{ Str::substr($Factura['uuid'], 41, 60) }}</p>
+            <p class="taC t10 tB">{{ Str::substr($Factura['uuid'], 61, 80) }}</p>
+            <p class="taC t10 tB">{{ Str::substr($Factura['uuid'], 81, 100) }}</p>
         </div>
             
         <br> 
         <div>
-            <p class="t10 taC">TODA GARANTÍA SE DA CON LA PRESENTACIÓN DE LA FACTURA.</p>
-            <p class="t10 taC"> EL SERVICIO ELÉCTRICO NO </p>
-            <p class="t10 taC">TIENE CAMBIO NI GARANTÍA </p>
+            <p class="t10 tB taC">TODA GARANTÍA SE DA CON LA PRESENTACIÓN DE LA FACTURA.</p>
+            <p class="t10 tB taC"> EL SERVICIO ELÉCTRICO NO </p>
+            <p class="t10 tB taC">TIENE CAMBIO NI GARANTÍA </p>
         </div>
         <br>
         <div>
-            <p class="t10 taC">ESTA FACTURA SE ASIMILA, PARA</p>
-            <p class="t10 taC">TODOS SUS EFECTOS, A LA LETRA DE CAMBIO DE CONFORMIDAD</p>
-            <p class="t10 taC">CON EL ARTÍCULO 774 DEL</p>
-            <p class="t10 taC">CÓDIGO DE COMERCIO</p>
+            <p class="t10 tB taC">ESTA FACTURA SE ASIMILA, PARA</p>
+            <p class="t10 tB taC">TODOS SUS EFECTOS, A LA LETRA DE CAMBIO DE CONFORMIDAD</p>
+            <p class="t10 tB taC">CON EL ARTÍCULO 774 DEL</p>
+            <p class="t10 tB taC">CÓDIGO DE COMERCIO</p>
         </div>
         <br>
         <div>
-            <p class="t10 taC">FACTURA ELECTRÓNICA GENERADA POR </p>
-            <p class="t10 taC">DRAKO AUTOPARTES Nit.: 10.485.950-1</p>
+            <p class="t10 tB taC">FACTURA ELECTRÓNICA GENERADA POR </p>
+            <p class="t10 tB taC">DRAKO AUTOPARTES Nit.: 10.485.950-1</p>
             <br>
-            <p class="t10 taC">Envío facturación directa a través de servicio Web dispuesto por la DIAN.( No aplica proveedor tecnológico )</p>
-            <p class="t10 taC">Terminal: 192.168.1.144</p>
+            <p class="t10 tB taC">Envío facturación directa a través de servicio Web dispuesto por la DIAN.( No aplica proveedor tecnológico )</p>
+            <p class="t10 tB taC">Terminal: 192.168.1.144</p>
         </div>
         <div><p></p></div>
         <div><p></p></div>
