@@ -162,10 +162,10 @@
         <table width="100%">
  
             <tr>
-                <td class="t11 tB">Impuesto</td>
-                <td class="t11 tB">Tarifa</td>
-                <td  class="t11  tB">Base</td>
-                <td  class="t11 taR tB">Valor</td>
+                <td class="t11 tB">IMPUESTO</td>
+                <td class="t11 tB">TARIFA</td>
+                <td  class="t11  tB">BASE</td>
+                <td  class="t11 taR tB">VALOR</td>
             </tr> 
 
             @foreach($Taxes as $Tax )
