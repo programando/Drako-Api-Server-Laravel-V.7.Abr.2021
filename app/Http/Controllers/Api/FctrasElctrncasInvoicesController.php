@@ -128,7 +128,7 @@ class FctrasElctrncasInvoicesController
         $Factura = $Factura[0];
         $this->getNameFilesTrait($Factura );
         $this->invoiceCreateFilesToSend  ( $id_fact_elctrnca,  $Factura, $IsFacturaPos   );
-        return $this->PdfFile;
+        return $Factura;
     }
 
         
