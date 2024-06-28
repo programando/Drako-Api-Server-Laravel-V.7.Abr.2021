@@ -78,6 +78,7 @@
         <table width="100%" class="mt12 ml5">
             <tr>
                 <td width="100%" class="taC">
+
                     <div class="t17 tB">DRAKO AUTOPARTES</div>
                     <br>
                     <div class="t13 tB">EDGAR CALVO GARCÍA</div>
@@ -161,6 +162,7 @@
         <table width="100%">
  
             <tr>
+                <td class="t11 tB">Impuesto</td>
                 <td class="t11 tB">Tarifa</td>
                 <td  class="t11  tB">Base</td>
                 <td  class="t11 taR tB">Valor</td>
@@ -168,9 +170,10 @@
 
             @foreach($Taxes as $Tax )
                 <tr>
-                <td class="t10 tB ">{{ trim($Tax['texto']) === 'IMPUESTO A LA BOLSA' ? 'IMPTO. BOLSA' : $Tax['texto'] }}</td>
-                    <td  class="t10 tB ">{{ Numbers::invoiceFormat($Tax['vr_base']) }}</td>
-                    <td  class="t10 tB taR">{{ Numbers::invoiceFormat($Tax['vr_iva']) }}</td>
+                    <td class="t10 tB p1 ">{{ trim($Tax['texto']) === 'IMPUESTO A LA BOLSA' ? 'IMPTO. BOLSA' : $Tax['texto'] }}</td>
+                    <td  class="t10 tB p1 ">{{ Numbers::invoiceFormat($Tax['pctje_iva']) .'%'}}</td>
+                    <td  class="t10 tB p1 ">{{ Numbers::invoiceFormat($Tax['vr_base']) }}</td>
+                    <td  class="t10 tB p1 taR">{{ Numbers::invoiceFormat($Tax['vr_iva']) }}</td>
                 </tr>
             @endforeach 
              
