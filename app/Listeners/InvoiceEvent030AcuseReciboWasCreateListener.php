@@ -15,7 +15,7 @@ class InvoiceEvent030AcuseReciboWasCreateListener
     public function handle(InvoiceEvent030AcuseReciboWasCreateEvent $event)
     {
         $NumFact      = $event->Factura['prfjo_dcmnto'] .$event->Factura['nro_dcmnto'].";" ;
-        $Company      = config('company.NIT').";".config('company.NOMBRE').";" ;
+        $Company      = config('company.EMPRESA_NIT').";".config('company.EMPRESA_NOMBRE').";" ;
         $Event        = $event->EventNumber . ';' . $event->EventId .";" ;
         $EmailSubject = 'EVENTO;'. $NumFact .   $Company   . $Event ;
 

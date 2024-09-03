@@ -13,8 +13,8 @@ class NoteSendXmlPdfToCustomer
      
     public function handle(NoteWasCreatedEvent $event) {
         
-        $EmailSubject   = config('company.NIT').";".config('company.NOMBRE').";".$event->Note['prfjo_dcmnto'] .$event->Note['nro_dcmnto'] ;
-        $EmailSubject  .= ';91;'.config('company.NOMBRE');
+        $EmailSubject   = config('companyEMPRESA_.NIT').";".config('company.EMPRESA_NOMBRE').";".$event->Note['prfjo_dcmnto'] .$event->Note['nro_dcmnto'] ;
+        $EmailSubject  .= ';91;'.config('company.EMPRESA_NOMBRE');
 
         $Emails =   $event->Note['emails']->unique('email')  ;     
         $when   = now()->addSeconds(5);

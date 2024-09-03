@@ -14,8 +14,8 @@ class InvoiceSendXmlPdfToCustomer
     public function handle(InvoiceWasCreatedEvent $event) {
         
         $NumFact      = $event->Factura['prfjo_dcmnto'] .$event->Factura['nro_dcmnto'].";" ;;
-        $Company      = config('company.NIT').";".config('company.NOMBRE').";" ;
-        $EmailSubject = $Company  . $NumFact . ';01;'.config('company.NOMBRE');
+        $Company      = config('company.EMPRESA_NIT').";".config('company.EMPRESA_NOMBRE').";" ;
+        $EmailSubject = $Company  . $NumFact . ';01;'.config('company.EMPRESA_NOMBRE');
         $Emails       = $event->Factura['emails']->unique('email')  ;
         $when         = now()->addSeconds(5);
         
