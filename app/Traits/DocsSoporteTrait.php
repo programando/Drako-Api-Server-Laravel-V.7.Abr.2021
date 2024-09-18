@@ -25,7 +25,7 @@ trait DocsSoporteTrait {
             'number'            => $Document["number"],
             'type_document_id'  => $Document["type_document_id"],
             'type_operation_id' => $Document["type_operation_id"],
-             'resolution_id'    => 16,
+             'resolution_id'    => 23,
             'sync'              => true,
             'date'              => Fecha::YMD( $FechaTransacion) 
             ] ;
@@ -72,7 +72,7 @@ trait DocsSoporteTrait {
 
     protected function DocSoporteLegalMonetaryTotalsTrait ( $Totals, &$jsonObject, $key  ) {
         $jsonObject[$key] =[
-            'line_extension_amount'  => Numbers::jsonFormat($Totals['line_extension_amount'],2),        // Total Valor Bruto (Antes de tributos)
+            'line_extension_amount'  => Numbers::jsonFormat($Totals  ['line_extension_amount'],2),        // Total Valor Bruto (Antes de tributos)
             'tax_exclusive_amount'   => Numbers::jsonFormat($Totals  ['tax_exclusive_amount'],2),       // Total Valor Base Imponible (Base imponible para el cálculo de los tributos)
             'tax_inclusive_amount'   => Numbers::jsonFormat($Totals  ['tax_inclusive_amount'],2),       // Total de Valor Bruto más tributos
             'payable_amount'         => Numbers::jsonFormat($Totals  ['payable_amount'],2),             // Valor de la Factura
