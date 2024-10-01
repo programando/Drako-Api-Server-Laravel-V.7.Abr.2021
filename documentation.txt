@@ -32,3 +32,5 @@ php artisan config:cache
 
 
  
+facturas.drako.com.co
+pos.drako.com.co
